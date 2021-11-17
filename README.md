@@ -31,7 +31,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Sistem Treatment PreAlpha 1.0.21.11.16</h3>
+  <h3 align="center">SPK SSB Penilaian Pemain PreAlpha 1.0.21.11.16</h3>
 
   <p align="center">
    Sistem Treatment Klinik kecantikan Scincare
