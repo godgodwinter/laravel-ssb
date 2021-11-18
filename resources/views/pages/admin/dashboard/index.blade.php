@@ -13,7 +13,7 @@ Beranda
 
 @if((Auth::user()->tipeuser)=='admin')
 
-@include('pages.admin.dashboard.dashboard_admin')
+{{-- @include('pages.admin.dashboard.dashboard_admin') --}}
 
 @else
 @include('pages.admin.dashboard.dashboard_member')

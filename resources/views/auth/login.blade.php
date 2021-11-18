@@ -1,71 +1,62 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.defaultlanding')
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Admin Login - {{ Fungsi::app_nama() }}</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='{{ asset('/') }}assets/css/kopekstylesheet.css'>
+@section('title')
+Beranda
+@endsection
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;1,300;1,400&display=swap"
-        rel="stylesheet">
-    <!-- <script src='main.js'></script> -->
-    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
-</head>
+@push('before-script')
 
-<body>
-    <div id="container">
-        <div id="wrapper">
-            <div id="loginForm">
-                <form action="{{ route('login') }}" method="POST" >
-                    @csrf
+@if (session('status'))
+<x-sweetalertsession tipe="{{session('tipe')}}" status="{{session('status')}}"/>
+@endif
+@endpush
 
-                    <h1>Login</h1>
-                    <div id="inputField">
-                        <input type="text" placeholder="Username" autocomplete="nope" name="identity">
-                    </div>
-                    @error('identity')
-                        <p id="wrong" class="wrong">
-                            {{ $message }}
-                        </p>
-                    @enderror
-                    <div id="inputField">
-                        <input type="password" placeholder="Password" autocomplete="nope" name="password">
-                    </div>
+@section('content')
 
-                    @error('password')
-                        <p id="wrong" class="wrong">
-                            {{ $message }}
-                        </p>
-                    @enderror
+<section class="py-8">
+    <div class="container">
+      <div class="row">
+        <div class="bg-holder bg-size" style="background-image:url(assets/img/gallery/dot-bg.png);background-position:bottom right;background-size:auto;">
+        </div>
+        <!--/.bg-holder-->
 
-                    <div id="inputSignIn">
-                        <input type="submit" value="Login">
-                    </div>
-                </form>
-            </div>
-            <div id="logoCompany">
-                <div id="opacity">
-                    <a href="#" id="linkLogo">
-                        <img src='{{asset('/assets/img/kopek/cosmetics.png')}}' alt="Your Logo">
-                    </a>
-                    <p>
-                        {{ Fungsi::app_nama() }}
-                    </p>
+        <div class="col-lg-6 z-index-2 mb-5"><img class="w-100" src="{{url('/')}}/assets/img/undraw_junior_soccer.svg" alt="..." /></div>
+        <div class="col-lg-6 z-index-2">
+          <form class="row g-3" action="{{ route('login') }}" method="POST" >
+            @csrf
+            <div class="col-md-12">
+              <label  for="inputName">Username :</label>
+              <input class="form-control form-livedoc-contro @error('identity')
+              is-invalid
+              @enderror" id="inputName"  placeholder="Username" autocomplete="nope" name="identity" />
+                @error('identity')
+                <div class="invalid-feedback text-danger">
+                    {{ $message }}
                 </div>
+                @enderror
             </div>
+            <div class="col-md-12">
+              <label  for="inputPhone">Password :</label>
+              <input class="form-control form-livedoc-control @error('password')
+              is-invalid
+              @enderror" type="password" placeholder="Password" autocomplete="nope" name="password" />
+              @error('password')
+              <div class="invalid-feedback text-danger">
+                  {{ $message }}
+              </div>
+              @enderror
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <button class="btn btn-primary rounded-pill" type="submit">Login</button>
+            </div>
+          </form>
         </div>
-        <div id="credit">
-            <p>
-                Demo : user = admin // pass = admin
-                <br>
-                Demo : member = (gunakan username seeder) // passdefault = 123
-            </p>
-        </div>
+      </div>
     </div>
-</body>
+  </section>
 
-</html>
+
+
+
+@endsection
+

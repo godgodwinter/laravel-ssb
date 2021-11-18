@@ -20,17 +20,10 @@ class admindashboardcontroller extends Controller
     public function index(){
 
         $pages='dashboard';
-        $produkJml=produk::count();
-        $treatmentJml=treatment::count();
-        $transaksiSuccessJml=transaksi::where('status','Success')->count();
-        $transaksiTotalJml=transaksi::count();
-        $perawatanJml=perawatan::count();
-        $laki=member::where('jk','Laki-laki')->count();
-        $perempuan=member::where('jk','Perempuan')->count();
         // dd($laki,$perempuan);
         if((Auth::user()->tipeuser)=='admin'){
 
-            return view('pages.admin.dashboard.index',compact('pages','produkJml','laki','perempuan','treatmentJml','transaksiSuccessJml','transaksiTotalJml','perawatanJml'));
+            return view('pages.admin.dashboard.index',compact('pages'));
         }
         if((Auth::user()->tipeuser)=='member'){
 
