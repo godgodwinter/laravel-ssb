@@ -12,7 +12,7 @@
 
 @if((Auth::user()->tipeuser)=='admin')
 
-{{-- @include('includes.sidebar_admin') --}}
+@include('includes.sidebar_admin')
 
 @elseif((Auth::user()->tipeuser)=='member')
 

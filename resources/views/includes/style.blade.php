@@ -8,6 +8,8 @@
   <!-- CSS Libraries -->
 
   <!-- Template CSS -->
+  {{-- <link href="{{ asset('/') }}assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <link href="{{ asset('/') }}assets/css/bootstrap.min.css" rel="stylesheet" /> --}}
   <link rel="stylesheet" href="{{ asset('/') }}assets/css/style.css">
   <link rel="stylesheet" href="{{ asset('/') }}assets/css/components.css">
 

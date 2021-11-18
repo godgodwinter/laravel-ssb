@@ -23,6 +23,7 @@ class CreatePelatihTable extends Migration
             $table->string('spesialis')->nullable();
             $table->string('photo')->nullable();
             $table->string('ket')->nullable();
+            $table->string('users_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

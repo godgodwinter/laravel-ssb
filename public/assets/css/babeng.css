@@ -3,6 +3,26 @@
     BUTTON ON TOP
   -----------------------------------------*/
 
+  textarea.babeng-form-control {
+    max-width: 100%;
+    max-height: 80px;
+    padding: 10px 10px 0 0;
+    resize: none;
+    border: none;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px;
+    line-height: 2; }
+
+  .babeng hr {
+    margin: 5px 15px 15px; }
+
+.babeng-btn-round {
+    border-width: 1px;
+    border-radius: 30px;
+    padding-right: 23px;
+    padding-left: 23px; }
+    .babeng-btn-round.babeng-btn-simple {
+      padding: 10px 22px; }
 
   .rounded-circle {
     border-radius: 50% !important

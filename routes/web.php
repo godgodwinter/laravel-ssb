@@ -104,7 +104,13 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datakriteria/multidel', [adminkriteriacontroller::class, 'multidel'])->name('kriteria.multidel');
 
 
-
+    //seeder
+    Route::post('/admin/seeder/pemain', [adminseedercontroller::class, 'pemain'])->name('seeder.pemain');
+    Route::post('/admin/seeder/pelatih', [adminseedercontroller::class, 'pelatih'])->name('seeder.pelatih');
+    Route::post('/admin/seeder/kriteria', [adminseedercontroller::class, 'kriteria'])->name('seeder.kriteria');
+    Route::post('/admin/seeder/hard', [adminseedercontroller::class, 'hard'])->name('seeder.hard');
+    //proseslainlain
+    Route::post('/admin/proses/cleartemp', [adminprosescontroller::class, 'cleartemp'])->name('cleartemp');
 
 });
 

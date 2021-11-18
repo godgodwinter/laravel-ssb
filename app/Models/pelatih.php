@@ -22,6 +22,7 @@ class pelatih extends Model
             'ket',
             'spesialis',
             'photo',
+            'users_id',
         ];
 
 
@@ -35,4 +36,8 @@ class pelatih extends Model
         return $this->hasMany('App\Models\penilaian');
     }
 
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
