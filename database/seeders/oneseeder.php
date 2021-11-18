@@ -34,11 +34,11 @@ class oneseeder extends Seeder
 
           //settings SEEDER
         DB::table('settings')->insert([
-            'app_nama' => 'Ramdani Skincare',
-            'app_namapendek' => 'KRS',
+            'app_nama' => 'SSB Tulusrejo FC',
+            'app_namapendek' => 'SSB',
             'paginationjml' => '10',
-            'lembaga_nama' => 'Klinik Kecantikan Ramdani Skincare',
-            'lembaga_jalan' => 'Jl. Raya Jatikerto No. 78, Kec. Kromengan, Kab. Malang',
+            'lembaga_nama' => 'SSB Tulusrejo FC',
+            'lembaga_jalan' => 'Jl. Raya Kromengan No. 11, Kec. Kromengan, Kab. Malang',
             'lembaga_telp' => '0341-123456',
             'lembaga_kota' => 'Malang',
             'lembaga_logo' => 'assets/upload/logo.png',

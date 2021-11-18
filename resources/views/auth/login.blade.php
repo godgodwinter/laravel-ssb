@@ -14,14 +14,15 @@ Beranda
 @section('content')
 
 <section class="py-8">
+    <div class="bg-holder bg-size" style="background-image:url({{asset('/')}}assets/img/bg/hero-bg.png);background-position:top center;background-size:cover;">
+    </div>
     <div class="container">
-      <div class="row">
-        <div class="bg-holder bg-size" style="background-image:url(assets/img/gallery/dot-bg.png);background-position:bottom right;background-size:auto;">
+      <div class="row d-flex flex-md-row-reverse">
+        <div class="bg-holder bg-size" style="background-image:url({{asset('/')}}assets/img/bg/dot-bg.png);background-position:bottom right;background-size:auto;">
         </div>
         <!--/.bg-holder-->
 
-        <div class="col-lg-6 z-index-2 mb-5"><img class="w-100" src="{{url('/')}}/assets/img/undraw_junior_soccer.svg" alt="..." /></div>
-        <div class="col-lg-6 z-index-2">
+        <div class="col-lg-5 z-index-2">
           <form class="row g-3" action="{{ route('login') }}" method="POST" >
             @csrf
             <div class="col-md-12">
@@ -51,6 +52,8 @@ Beranda
             </div>
           </form>
         </div>
+        <div class="col-lg-7 z-index-2 mb-5"><img class="w-100" src="{{url('/')}}/assets/img/undraw_junior_soccer.svg" alt="..." /></div>
+
       </div>
     </div>
   </section>
