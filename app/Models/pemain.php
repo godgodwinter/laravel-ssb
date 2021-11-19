@@ -22,6 +22,7 @@ class pemain extends Model
             'tgldaftar',
             'ket',
             'photo',
+            'users_id',
         ];
 
 
@@ -33,6 +34,10 @@ class pemain extends Model
     public function penilaian()
     {
         return $this->hasMany('App\Models\penilaian');
+    }
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
 }

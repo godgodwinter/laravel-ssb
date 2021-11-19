@@ -53,7 +53,8 @@
 /* 2. Mixin */
 /* 3. Bootstrap Override */
 /* 3.1 Misc */
-@import url("//fonts.googleapis.com/css?family=Nunito:400,600,700,800");
+/* @import url("//fonts.googleapis.com/css?family=Nunito:400,600,700,800"); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 .btn:focus,
 .btn:active,
 .btn:active:focus,
@@ -601,7 +602,7 @@ select.form-control:not([size]):not([multiple]) {
 .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 12px;
   border: none;
   position: relative;
   margin-bottom: 30px; }

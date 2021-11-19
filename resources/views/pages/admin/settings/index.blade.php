@@ -184,20 +184,18 @@ Pengaturan
                 </div>
                 <div class="card-body">
 
-                    <form action="{{route('seeder.dokter')}}" method="post" class="d-inline">
+                    <form action="{{route('seeder.pemain')}}" method="post" class="d-inline">
                         @csrf
-                        <button class="btn btn-info">Seeder Data Produk, Dokter dan Treatment</button>
+                        <button class="btn btn-info">Seeder Pemain</button>
                     </form>
 
-                    <form action="{{route('seeder.jadwaltreatment')}}" method="post" class="d-inline">
+                    <form action="{{route('seeder.pelatih')}}" method="post" class="d-inline">
                         @csrf
-                        <button class="btn btn-info">Seeder Data Mastering Jadwal Treatment</button>
+                        <button class="btn btn-info">Seeder Pelatih</button>
                     </form>
-
-
-                    <form action="{{route('seeder.member')}}" method="post" class="d-inline">
+                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
                         @csrf
-                        <button class="btn btn-info">Seeder Data Member dan testimoni</button>
+                        <button class="btn btn-info">Seeder Kriteria</button>
                     </form>
 
 
