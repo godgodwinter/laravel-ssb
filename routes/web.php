@@ -1,35 +1,13 @@
 <?php
 
-use App\Http\Controllers\adminapicontroller;
 use App\Http\Controllers\admindashboardcontroller;
-use App\Http\Controllers\admindoktercontroller;
-use App\Http\Controllers\adminjadwaltreatmentcontroller;
 use App\Http\Controllers\adminkriteriacontroller;
-use App\Http\Controllers\adminmembercontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
-use App\Http\Controllers\adminpenjadwalancontroller;
-use App\Http\Controllers\adminperawatancontroller;
-use App\Http\Controllers\adminprodukcontroller;
-use App\Http\Controllers\adminprosescontroller;
-use App\Http\Controllers\adminruangancontroller;
-use App\Http\Controllers\adminseedercontroller;
 use App\Http\Controllers\adminsettingscontroller;
-use App\Http\Controllers\adminsynccontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
-use App\Http\Controllers\admintestimonicontroller;
-use App\Http\Controllers\admintransaksicontroller;
-use App\Http\Controllers\admintreatmentcontroller;
 use App\Http\Controllers\adminuserscontroller;
-use App\Http\Controllers\invoicecontroller;
 use App\Http\Controllers\landingcontroller;
-use App\Http\Controllers\memberchatcontroller;
-use App\Http\Controllers\memberinvoicecontroller;
-use App\Http\Controllers\memberjadwalcontroller;
-use App\Http\Controllers\memberkeranjangcontroller;
-use App\Http\Controllers\membertestimonicontroller;
-use App\Http\Controllers\membertransaksicontroller;
-use App\Http\Controllers\smscontroller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 // use Facades\Yugo\SMSGateway\Interfaces\SMS;
@@ -60,7 +38,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datausers/multidel', [adminuserscontroller::class, 'multidel'])->name('users.multidel');
 
 
-    //USER
+    //pemain
     Route::get('/admin/pemain', [adminpemaincontroller::class, 'index'])->name('pemain');
     Route::get('/admin/pemain/{id}', [adminpemaincontroller::class, 'edit'])->name('pemain.edit');
     Route::put('/admin/pemain/{id}', [adminpemaincontroller::class, 'update'])->name('pemain.update');
@@ -71,7 +49,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datapemain/multidel', [adminpemaincontroller::class, 'multidel'])->name('pemain.multidel');
 
 
-    //USER
+    //pelatih
     Route::get('/admin/pelatih', [adminpelatihcontroller::class, 'index'])->name('pelatih');
     Route::get('/admin/pelatih/{id}', [adminpelatihcontroller::class, 'edit'])->name('pelatih.edit');
     Route::put('/admin/pelatih/{id}', [adminpelatihcontroller::class, 'update'])->name('pelatih.update');
@@ -82,7 +60,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datapelatih/multidel', [adminpelatihcontroller::class, 'multidel'])->name('pelatih.multidel');
 
 
-    //USER
+    //tahunpenilaian
     Route::get('/admin/tahunpenilaian', [admintahunpenilaiancontroller::class, 'index'])->name('tahunpenilaian');
     Route::get('/admin/tahunpenilaian/{id}', [admintahunpenilaiancontroller::class, 'edit'])->name('tahunpenilaian.edit');
     Route::put('/admin/tahunpenilaian/{id}', [admintahunpenilaiancontroller::class, 'update'])->name('tahunpenilaian.update');
@@ -93,7 +71,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datatahunpenilaian/multidel', [admintahunpenilaiancontroller::class, 'multidel'])->name('tahunpenilaian.multidel');
 
 
-    //USER
+    //kriteria
     Route::get('/admin/kriteria', [adminkriteriacontroller::class, 'index'])->name('kriteria');
     Route::get('/admin/kriteria/{id}', [adminkriteriacontroller::class, 'edit'])->name('kriteria.edit');
     Route::put('/admin/kriteria/{id}', [adminkriteriacontroller::class, 'update'])->name('kriteria.update');
