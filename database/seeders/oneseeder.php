@@ -48,7 +48,32 @@ class oneseeder extends Seeder
          ]);
 
 
+        //ADMIN kriteria
+        DB::table('kriteria')->insert([
+            'nama' => 'Fisik',
+            'bobot' => '40',
+            'kode' => 'fisik',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+         ]);
 
+        //ADMIN kriteria
+        DB::table('kriteria')->insert([
+            'bobot' => '50',
+            'nama' => 'Bobot',
+            'kode' => 'bobot',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+         ]);
+
+         //ADMIN kriteria
+         DB::table('kriteria')->insert([
+             'bobot' => '10',
+             'nama' => 'Taktik',
+             'kode' => 'taktik',
+             'created_at' => Carbon::now(),
+             'updated_at' => Carbon::now()
+          ]);
 
 
     }
