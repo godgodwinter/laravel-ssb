@@ -87,7 +87,7 @@ Kriteria
                                     {{$data->tipe}}
                                 </td> --}}
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="{{route('kriteriadetail',[$tahunpenilaian->id,$data->id])}}">
+                                    <a class="btn btn-info btn-sm" href="{{route('kriteriadetail',[$data->id])}}">
                                         <i class="fas fa-angle-double-right"></i>
                                     </a>
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}

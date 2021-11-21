@@ -189,17 +189,24 @@ Pengaturan
                         <button class="btn btn-info">Seeder Tahun Seleksi</button>
                     </form>
 
-                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
-                        @csrf
-                        <button class="btn btn-info">Seeder Posisi Pemain</button>
-                    </form>
-
 
 
                     <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
                         @csrf
-                        <button class="btn btn-info">Seeder Kriteria dan Sub</button>
+                        <button class="btn btn-info">Seeder Kriteria</button>
                     </form>
+
+                    <form action="{{route('seeder.kriteriadetail')}}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-info">Seeder Kriteria detail</button>
+                    </form>
+
+                    <form action="{{route('seeder.posisi')}}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-info">Seeder Posisi</button>
+                    </form>
+
+
 
                     <form action="{{route('seeder.pemain')}}" method="post" class="d-inline">
                         @csrf

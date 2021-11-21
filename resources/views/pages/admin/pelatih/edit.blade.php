@@ -55,8 +55,8 @@ Pelatih
                                 @endif
                             @endif
                                 <option>Teknik</option>
-                                <option>Stamina</option>
-                                <option>Striker</option>
+                                <option>Taktik</option>
+                                <option>Fisik</option>
                                 <option>Umum</option>
                             </select>
                             @error('spesialis')<div class="invalid-feedback"> {{$message}}</div>
