@@ -11,7 +11,7 @@
     </ul>
 </li>
 <li
-    class="nav-item dropdown {{ $pages == 'pemain' || $pages == 'pelatih' || $pages == 'kriteria' || $pages == 'penilaian' || $pages == 'users' ? 'active' : '' }}">
+    class="nav-item dropdown {{ $pages == 'pemain' || $pages == 'pelatih' || $pages == 'kriteria' || $pages == 'penilaian' || $pages == 'users' || $pages == 'posisipemain' ? 'active' : '' }}">
     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-dumpster"></i>
         <span>Mastering</span></a>
     <ul class="dropdown-menu">
@@ -22,7 +22,7 @@
 
         <li {{ $pages == 'kriteria' ? 'class=active' : '' }}><a class="nav-link" href="{{route('kriteria')}}"><i
                     class="fas fa-passport"></i> <span>Kriteria</span></a></li>
-        <li {{ $pages == 'posisipemain' ? 'class=active' : '' }}><a class="nav-link" href="#"><i class="fas fa-arrows-alt"></i><span>Posisi Pemain</span></a></li>
+        <li {{ $pages == 'posisipemain' ? 'class=active' : '' }}><a class="nav-link" href="{{route('posisipemain')}}"><i class="fas fa-arrows-alt"></i><span>Posisi Pemain</span></a></li>
 
         <li {{ $pages == 'users' ? 'class=active' : '' }}><a class="nav-link" href="{{ route('users') }}"><i class="fas fa-user"></i> <span>User</span></a></li>
 

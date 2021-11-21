@@ -4,6 +4,7 @@ use App\Http\Controllers\admindashboardcontroller;
 use App\Http\Controllers\adminkriteriacontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
+use App\Http\Controllers\adminposisipemaincontroller;
 use App\Http\Controllers\adminsettingscontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
 use App\Http\Controllers\adminuserscontroller;
@@ -47,6 +48,18 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/admin/datapemain/create', [adminpemaincontroller::class, 'create'])->name('pemain.create');
     Route::post('/admin/datapemain', [adminpemaincontroller::class, 'store'])->name('pemain.store');
     Route::delete('/admin/datapemain/multidel', [adminpemaincontroller::class, 'multidel'])->name('pemain.multidel');
+
+
+    //posisipemain
+    Route::get('/admin/posisipemain', [adminposisipemaincontroller::class, 'index'])->name('posisipemain');
+    Route::get('/admin/posisipemain/{id}', [adminposisipemaincontroller::class, 'edit'])->name('posisipemain.edit');
+    Route::put('/admin/posisipemain/{id}', [adminposisipemaincontroller::class, 'update'])->name('posisipemain.update');
+    Route::delete('/admin/posisipemain/{id}', [adminposisipemaincontroller::class, 'destroy'])->name('posisipemain.destroy');
+    Route::get('/admin/dataposisipemain/cari', [adminposisipemaincontroller::class, 'cari'])->name('posisipemain.cari');
+    Route::get('/admin/dataposisipemain/create', [adminposisipemaincontroller::class, 'create'])->name('posisipemain.create');
+    Route::post('/admin/dataposisipemain', [adminposisipemaincontroller::class, 'store'])->name('posisipemain.store');
+    Route::delete('/admin/dataposisipemain/multidel', [adminposisipemaincontroller::class, 'multidel'])->name('posisipemain.multidel');
+
 
 
     //pelatih
