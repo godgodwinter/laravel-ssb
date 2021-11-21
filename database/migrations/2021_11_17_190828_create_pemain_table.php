@@ -24,6 +24,7 @@ class CreatePemainTable extends Migration
             $table->string('photo')->nullable();
             $table->string('ket')->nullable();
             $table->string('users_id')->nullable();
+            $table->string('tahunpenilaian_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

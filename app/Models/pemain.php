@@ -23,6 +23,7 @@ class pemain extends Model
             'ket',
             'photo',
             'users_id',
+            'tahunpenilaian_id',
         ];
 
 
@@ -38,6 +39,10 @@ class pemain extends Model
     public function users()
     {
         return $this->belongsTo('App\Models\User');
+    }
+    public function tahunpenilaian()
+    {
+        return $this->belongsTo('App\Models\tahunpenilaian');
     }
 
 }

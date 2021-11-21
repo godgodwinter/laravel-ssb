@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
 use App\Models\pemain;
+use App\Models\tahunpenilaian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,17 +24,17 @@ class adminpemaincontroller extends Controller
 
         });
     }
-    public function index(Request $request)
+    public function index(tahunpenilaian $tahunpenilaian,Request $request)
     {
         #WAJIB
         $pages='pemain';
         $datas=pemain
-        ::with('users')->paginate(Fungsi::paginationjml());
+        ::with('users')->where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
 
-        return view('pages.admin.pemain.index',compact('datas','request','pages'));
+        return view('pages.admin.pemain.index',compact('datas','request','pages','tahunpenilaian'));
     }
-    public function cari(Request $request)
+    public function cari(tahunpenilaian $tahunpenilaian,Request $request)
     {
 
         $cari=$request->cari;
@@ -42,7 +43,7 @@ class adminpemaincontroller extends Controller
         $datas=pemain::where('nama','like',"%".$cari."%")
         ->paginate(Fungsi::paginationjml());
 
-        return view('pages.admin.pemain.index',compact('datas','request','pages'));
+        return view('pages.admin.pemain.index',compact('datas','request','pages','tahunpenilaian'));
     }
     public function create()
     {

@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Kriteria
+Tahun Penilaian
 @endsection
 
 @push('before-script')
@@ -31,7 +31,7 @@ Kriteria
 
                     <div class="p-2 bd-highlight">
 
-                        <form action="{{ route('kriteria.cari') }}" method="GET">
+                        <form action="{{ route('tahunpenilaian.cari') }}" method="GET">
                             <input type="text" class="babeng babeng-select  ml-0" name="cari">
                         </div>
                         <div class="p-2 bd-highlight">
@@ -42,7 +42,7 @@ Kriteria
                         </div>
 
                         <div class="ml-auto p-2 bd-highlight">
-                            <x-button-create link="{{route('kriteria.create')}}"></x-button-create>
+                            <x-button-create link="{{route('tahunpenilaian.create')}}"></x-button-create>
                         </form>
 
                     </div>
@@ -55,16 +55,14 @@ Kriteria
                     <x-jsdatatable/>
                 @endif
 
-                <x-jsmultidel link="{{route('kriteria.multidel')}}" />
+                <x-jsmultidel link="{{route('tahunpenilaian.multidel')}}" />
 
                 <table id="example" class="table table-striped table-bordered mt-1 table-sm" style="width:100%">
                     <thead>
                         <tr style="background-color: #F1F1F1">
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
-                            <th >Kode </th>
-                            <th >Bobot</th>
-                            {{-- <th >Tipe</th> --}}
+                            <th >Status </th>
                             <th >Aksi</th>
                         </tr>
                     </thead>
@@ -78,16 +76,10 @@ Kriteria
                                     {{$data->nama}}
                                 </td>
                                 <td>
-                                    {{$data->kode}}
+                                    {{$data->status}}
                                 </td>
-                                <td>
-                                    {{$data->bobot}}
-                                </td>
-                                {{-- <td>
-                                    {{$data->tipe}}
-                                </td> --}}
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="{{route('kriteriadetail',$data->id)}}">
+                                    <a class="btn btn-info btn-sm" href="{{route('tahunpenilaian.detail',$data->id)}}">
                                         <i class="fas fa-angle-double-right"></i>
                                     </a>
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}

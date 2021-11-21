@@ -19,11 +19,16 @@ class kriteria extends Model
             'kode',
             'tipe',
             'ket',
+            'tahunpenilaian_id',
         ];
 
         public function kriteria()
         {
             return $this->hasMany('App\Models\kriteria');
+        }
+        public function tahunpenilaian()
+        {
+            return $this->belongsTo('App\Models\tahunpenilaian');
         }
 
 

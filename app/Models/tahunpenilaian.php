@@ -25,5 +25,13 @@ class tahunpenilaian extends Model
             return $this->hasMany('App\Models\penilaian');
         }
 
+        public function pemain()
+        {
+            return $this->hasMany('App\Models\pemain');
+        }
+        public function kriteria()
+        {
+            return $this->hasMany('App\Models\kriteria');
+        }
 
 }
