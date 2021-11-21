@@ -31,7 +31,7 @@ Kriteria
 
                     <div class="p-2 bd-highlight">
 
-                        <form action="{{ route('kriteria.cari') }}" method="GET">
+                        <form action="{{ route('kriteria.cari',$tahunpenilaian->id) }}" method="GET">
                             <input type="text" class="babeng babeng-select  ml-0" name="cari">
                         </div>
                         <div class="p-2 bd-highlight">
@@ -42,7 +42,7 @@ Kriteria
                         </div>
 
                         <div class="ml-auto p-2 bd-highlight">
-                            <x-button-create link="{{route('kriteria.create')}}"></x-button-create>
+                            <x-button-create link="{{route('kriteria.create',$tahunpenilaian->id)}}"></x-button-create>
                         </form>
 
                     </div>
@@ -55,7 +55,7 @@ Kriteria
                     <x-jsdatatable/>
                 @endif
 
-                <x-jsmultidel link="{{route('kriteria.multidel')}}" />
+                <x-jsmultidel link="{{route('kriteria.multidel',$tahunpenilaian->id)}}" />
 
                 <table id="example" class="table table-striped table-bordered mt-1 table-sm" style="width:100%">
                     <thead>
@@ -87,12 +87,12 @@ Kriteria
                                     {{$data->tipe}}
                                 </td> --}}
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="{{route('kriteriadetail',$data->id)}}">
+                                    <a class="btn btn-info btn-sm" href="{{route('kriteriadetail',[$tahunpenilaian->id,$data->id])}}">
                                         <i class="fas fa-angle-double-right"></i>
                                     </a>
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}
-                                    <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
-                                    <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
+                                    <x-button-edit link="{{route('kriteria.edit',[$tahunpenilaian->id,$data->id])}}" />
+                                    <x-button-delete link="{{route('kriteria.destroy',[$tahunpenilaian->id,$data->id])}}" />
                                 </td>
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\adminkriteriadetailcontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
 use App\Http\Controllers\adminposisipemaincontroller;
+use App\Http\Controllers\adminseedercontroller;
 use App\Http\Controllers\adminsettingscontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
 use App\Http\Controllers\admintahunpenilaiandetailcontroller;
@@ -42,14 +43,14 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
 
     //pemain
-    Route::get('/admin/pemain/{tahunpenilaian}', [adminpemaincontroller::class, 'index'])->name('pemain');
-    Route::get('/admin/pemain/{tahunpenilaian}/{id}', [adminpemaincontroller::class, 'edit'])->name('pemain.edit');
-    Route::put('/admin/pemain/{tahunpenilaian}/{id}', [adminpemaincontroller::class, 'update'])->name('pemain.update');
-    Route::delete('/admin/pemain/{tahunpenilaian}/{id}', [adminpemaincontroller::class, 'destroy'])->name('pemain.destroy');
-    Route::get('/admin/datapemain/{tahunpenilaian}/cari', [adminpemaincontroller::class, 'cari'])->name('pemain.cari');
-    Route::get('/admin/datapemain/{tahunpenilaian}/create', [adminpemaincontroller::class, 'create'])->name('pemain.create');
-    Route::post('/admin/datapemain/{tahunpenilaian}', [adminpemaincontroller::class, 'store'])->name('pemain.store');
-    Route::delete('/admin/datapemain/{tahunpenilaian}/multidel', [adminpemaincontroller::class, 'multidel'])->name('pemain.multidel');
+    Route::get('/admin/pemain', [adminpemaincontroller::class, 'index'])->name('pemain');
+    Route::get('/admin/pemain/{id}', [adminpemaincontroller::class, 'edit'])->name('pemain.edit');
+    Route::put('/admin/pemain/{id}', [adminpemaincontroller::class, 'update'])->name('pemain.update');
+    Route::delete('/admin/pemain/{id}', [adminpemaincontroller::class, 'destroy'])->name('pemain.destroy');
+    Route::get('/admin/datapemain/cari', [adminpemaincontroller::class, 'cari'])->name('pemain.cari');
+    Route::get('/admin/datapemain/create', [adminpemaincontroller::class, 'create'])->name('pemain.create');
+    Route::post('/admin/datapemain', [adminpemaincontroller::class, 'store'])->name('pemain.store');
+    Route::delete('/admin/datapemain/multidel', [adminpemaincontroller::class, 'multidel'])->name('pemain.multidel');
 
 
     //posisipemain
@@ -88,14 +89,14 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
 
     //kriteria
-    Route::get('/admin/kriteria', [adminkriteriacontroller::class, 'index'])->name('kriteria');
-    Route::get('/admin/kriteria/{id}', [adminkriteriacontroller::class, 'edit'])->name('kriteria.edit');
-    Route::put('/admin/kriteria/{id}', [adminkriteriacontroller::class, 'update'])->name('kriteria.update');
-    Route::delete('/admin/kriteria/{id}', [adminkriteriacontroller::class, 'destroy'])->name('kriteria.destroy');
-    Route::get('/admin/datakriteria/cari', [adminkriteriacontroller::class, 'cari'])->name('kriteria.cari');
-    Route::get('/admin/datakriteria/create', [adminkriteriacontroller::class, 'create'])->name('kriteria.create');
-    Route::post('/admin/datakriteria', [adminkriteriacontroller::class, 'store'])->name('kriteria.store');
-    Route::delete('/admin/datakriteria/multidel', [adminkriteriacontroller::class, 'multidel'])->name('kriteria.multidel');
+    Route::get('/admin/kriteria/{tahunpenilaian}', [adminkriteriacontroller::class, 'index'])->name('kriteria');
+    Route::get('/admin/kriteria/{tahunpenilaian}/{id}', [adminkriteriacontroller::class, 'edit'])->name('kriteria.edit');
+    Route::put('/admin/kriteria/{tahunpenilaian}/{id}', [adminkriteriacontroller::class, 'update'])->name('kriteria.update');
+    Route::delete('/admin/kriteria/{tahunpenilaian}/{id}', [adminkriteriacontroller::class, 'destroy'])->name('kriteria.destroy');
+    Route::get('/admin/datakriteria/{tahunpenilaian}/cari', [adminkriteriacontroller::class, 'cari'])->name('kriteria.cari');
+    Route::get('/admin/datakriteria/{tahunpenilaian}/create', [adminkriteriacontroller::class, 'create'])->name('kriteria.create');
+    Route::post('/admin/datakriteria/{tahunpenilaian}', [adminkriteriacontroller::class, 'store'])->name('kriteria.store');
+    Route::delete('/admin/datakriteria/{tahunpenilaian}/multidel', [adminkriteriacontroller::class, 'multidel'])->name('kriteria.multidel');
 
     //kriteriadetail
     Route::get('/admin/kriteriadetail/{kriteria}', [adminkriteriadetailcontroller::class, 'index'])->name('kriteriadetail');
@@ -109,6 +110,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
     //seeder
     Route::post('/admin/seeder/pemain', [adminseedercontroller::class, 'pemain'])->name('seeder.pemain');
+    Route::post('/admin/seeder/tahunpenilaian', [adminseedercontroller::class, 'tahunpenilaian'])->name('seeder.tahunpenilaian');
     Route::post('/admin/seeder/pelatih', [adminseedercontroller::class, 'pelatih'])->name('seeder.pelatih');
     Route::post('/admin/seeder/kriteria', [adminseedercontroller::class, 'kriteria'])->name('seeder.kriteria');
     Route::post('/admin/seeder/hard', [adminseedercontroller::class, 'hard'])->name('seeder.hard');

@@ -184,6 +184,23 @@ Pengaturan
                 </div>
                 <div class="card-body">
 
+                    <form action="{{route('seeder.tahunpenilaian')}}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-info">Seeder Tahun Seleksi</button>
+                    </form>
+
+                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-info">Seeder Posisi Pemain</button>
+                    </form>
+
+
+
+                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-info">Seeder Kriteria dan Sub</button>
+                    </form>
+
                     <form action="{{route('seeder.pemain')}}" method="post" class="d-inline">
                         @csrf
                         <button class="btn btn-info">Seeder Pemain</button>
@@ -192,10 +209,6 @@ Pengaturan
                     <form action="{{route('seeder.pelatih')}}" method="post" class="d-inline">
                         @csrf
                         <button class="btn btn-info">Seeder Pelatih</button>
-                    </form>
-                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
-                        @csrf
-                        <button class="btn btn-info">Seeder Kriteria</button>
                     </form>
 
 

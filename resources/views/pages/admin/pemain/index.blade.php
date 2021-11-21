@@ -31,7 +31,7 @@ Pemain
 
                     <div class="p-2 bd-highlight">
 
-                        <form action="{{ route('pemain.cari',$tahunpenilaian->id) }}" method="GET">
+                        <form action="{{ route('pemain.cari') }}" method="GET">
                             <input type="text" class="babeng babeng-select  ml-0" name="cari">
                         </div>
                         <div class="p-2 bd-highlight">
@@ -42,7 +42,7 @@ Pemain
                         </div>
 
                         <div class="ml-auto p-2 bd-highlight">
-                            <x-button-create link="{{route('pemain.create',$tahunpenilaian->id)}}"></x-button-create>
+                            <x-button-create link="{{route('pemain.create')}}"></x-button-create>
                         </form>
 
                     </div>
@@ -55,7 +55,7 @@ Pemain
                     <x-jsdatatable/>
                 @endif
 
-                <x-jsmultidel link="{{route('pemain.multidel',$tahunpenilaian->id)}}" />
+                <x-jsmultidel link="{{route('pemain.multidel')}}" />
 
                 <table id="example" class="table table-striped table-bordered mt-1 table-sm" style="width:100%">
                     <thead>
@@ -103,8 +103,8 @@ Pemain
 
                                 <td class="text-center babeng-min-row">
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}
-                                    <x-button-edit link="{{route('pemain.edit',[$tahunpenilaian->id,$data->id])}}" />
-                                    <x-button-delete link="{{route('pemain.destroy',[$tahunpenilaian->id,$data->id])}}" />
+                                    <x-button-edit link="{{route('pemain.edit',[$data->id])}}" />
+                                    <x-button-delete link="{{route('pemain.destroy',[$data->id])}}" />
                                 </td>
 
 

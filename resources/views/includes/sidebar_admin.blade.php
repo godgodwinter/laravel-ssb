@@ -16,7 +16,7 @@
         <span>Mastering</span></a>
     <ul class="dropdown-menu">
 
-        {{-- <li {{ $pages == 'pemain' ? 'class=active' : '' }}><a class="nav-link" href="{{route('pemain')}}"><i class="fas fa-user-tie"></i> <span>Pemain</span></a></li> --}}
+        <li {{ $pages == 'pemain' ? 'class=active' : '' }}><a class="nav-link" href="{{route('pemain')}}"><i class="fas fa-user-tie"></i> <span>Pemain</span></a></li>
 
         <li {{ $pages == 'pelatih' ? 'class=active' : '' }}><a class="nav-link" href="{{route('pelatih')}}"><i class="fas fa-user-astronaut"></i> <span>Pelatih</span></a></li>
 

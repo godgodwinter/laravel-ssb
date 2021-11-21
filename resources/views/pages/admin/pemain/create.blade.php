@@ -18,7 +18,7 @@ Pemain
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('dashboard')}}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="{{route('pemain')}}">@yield('title')</a></div>
+            <div class="breadcrumb-item"><a href="{{route('pemain',)}}">@yield('title')</a></div>
             <div class="breadcrumb-item">Tambah</div>
         </div>
     </div>
@@ -30,7 +30,7 @@ Pemain
             </div>
             <div class="card-body">
 
-                <form action="{{route('pemain.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('pemain.store',)}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">

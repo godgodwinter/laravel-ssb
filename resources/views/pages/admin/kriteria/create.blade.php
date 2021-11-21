@@ -18,7 +18,7 @@ Kriteria
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('dashboard')}}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="{{route('kriteria')}}">@yield('title')</a></div>
+            <div class="breadcrumb-item"><a href="{{route('kriteria',$tahunpenilaian->id)}}">@yield('title')</a></div>
             <div class="breadcrumb-item">Tambah</div>
         </div>
     </div>
@@ -30,7 +30,7 @@ Kriteria
             </div>
             <div class="card-body">
 
-                <form action="{{route('kriteria.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('kriteria.store',$tahunpenilaian->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">

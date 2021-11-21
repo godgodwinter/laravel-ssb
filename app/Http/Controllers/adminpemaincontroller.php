@@ -24,17 +24,17 @@ class adminpemaincontroller extends Controller
 
         });
     }
-    public function index(tahunpenilaian $tahunpenilaian,Request $request)
+    public function index(Request $request)
     {
         #WAJIB
         $pages='pemain';
         $datas=pemain
-        ::with('users')->where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
+        ::with('users')->where('tahunpenilaian_id')->paginate(Fungsi::paginationjml());
         // dd($datas);
 
-        return view('pages.admin.pemain.index',compact('datas','request','pages','tahunpenilaian'));
+        return view('pages.admin.pemain.index',compact('datas','request','pages'));
     }
-    public function cari(tahunpenilaian $tahunpenilaian,Request $request)
+    public function cari(Request $request)
     {
 
         $cari=$request->cari;
@@ -43,13 +43,12 @@ class adminpemaincontroller extends Controller
         $datas=pemain::where('nama','like',"%".$cari."%")
         ->paginate(Fungsi::paginationjml());
 
-        return view('pages.admin.pemain.index',compact('datas','request','pages','tahunpenilaian'));
+        return view('pages.admin.pemain.index',compact('datas','request','pages'));
     }
     public function create()
     {
         $pages='pemain';
-        $walipemain=DB::table('pemain')->whereNull('deleted_at')->get();
-        return view('pages.admin.pemain.create',compact('pages','walipemain'));
+        return view('pages.admin.pemain.create',compact('pages'));
     }
 
     public function store(Request $request)

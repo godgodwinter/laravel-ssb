@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
 use App\Models\kriteria;
+use App\Models\tahunpenilaian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,17 +24,17 @@ class adminkriteriacontroller extends Controller
 
         });
     }
-    public function index(Request $request)
+    public function index(tahunpenilaian $tahunpenilaian,Request $request)
     {
         #WAJIB
         $pages='kriteria';
         $datas=kriteria
-        ::paginate(Fungsi::paginationjml());
+        ::where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
 
-        return view('pages.admin.kriteria.index',compact('datas','request','pages'));
+        return view('pages.admin.kriteria.index',compact('datas','request','pages','tahunpenilaian'));
     }
-    public function cari(Request $request)
+    public function cari(tahunpenilaian $tahunpenilaian,Request $request)
     {
 
         $cari=$request->cari;
@@ -42,16 +43,15 @@ class adminkriteriacontroller extends Controller
         $datas=kriteria::where('nama','like',"%".$cari."%")
         ->paginate(Fungsi::paginationjml());
 
-        return view('pages.admin.kriteria.index',compact('datas','request','pages'));
+        return view('pages.admin.kriteria.index',compact('datas','request','pages','tahunpenilaian'));
     }
-    public function create()
+    public function create(tahunpenilaian $tahunpenilaian)
     {
         $pages='kriteria';
-        $walikriteria=DB::table('kriteria')->whereNull('deleted_at')->get();
-        return view('pages.admin.kriteria.create',compact('pages','walikriteria'));
+        return view('pages.admin.kriteria.create',compact('pages','tahunpenilaian'));
     }
 
-    public function store(Request $request)
+    public function store(tahunpenilaian $tahunpenilaian,Request $request)
     {
 
             $request->validate([
@@ -90,6 +90,7 @@ class adminkriteriacontroller extends Controller
                     'nama'     =>   $request->nama,
                     'bobot'     =>   $request->bobot,
                     'kode'     =>   $request->kode,
+                    'tahunpenilaian_id'     =>   $tahunpenilaian->id,
                     'tipe'     =>   $request->tipe,
                        'created_at'=>date("Y-m-d H:i:s"),
                        'updated_at'=>date("Y-m-d H:i:s")
@@ -100,17 +101,17 @@ class adminkriteriacontroller extends Controller
 
 
 
-    return redirect()->route('kriteria')->with('status','Data berhasil tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
+    return redirect()->route('kriteria',$tahunpenilaian->id)->with('status','Data berhasil tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
 
     }
 
-    public function edit(kriteria $id)
+    public function edit(tahunpenilaian $tahunpenilaian,kriteria $id)
     {
         $pages='kriteria';
 
-        return view('pages.admin.kriteria.edit',compact('pages','id'));
+        return view('pages.admin.kriteria.edit',compact('pages','id','tahunpenilaian'));
     }
-    public function update(kriteria $id,Request $request)
+    public function update(tahunpenilaian $tahunpenilaian,kriteria $id,Request $request)
     {
 
 
@@ -144,16 +145,16 @@ class adminkriteriacontroller extends Controller
         ]);
 
 
-    return redirect()->route('kriteria')->with('status','Data berhasil diubah!')->with('tipe','success')->with('icon','fas fa-feather');
+    return redirect()->route('kriteria',$tahunpenilaian->id)->with('status','Data berhasil diubah!')->with('tipe','success')->with('icon','fas fa-feather');
     }
-    public function destroy(kriteria $id){
+    public function destroy(tahunpenilaian $tahunpenilaian,kriteria $id){
 
         kriteria::destroy($id->id);
-        return redirect()->route('kriteria')->with('status','Data berhasil dihapus!')->with('tipe','warning')->with('icon','fas fa-feather');
+        return redirect()->route('kriteria',$tahunpenilaian->id)->with('status','Data berhasil dihapus!')->with('tipe','warning')->with('icon','fas fa-feather');
 
     }
 
-    public function multidel(Request $request)
+    public function multidel(tahunpenilaian $tahunpenilaian,Request $request)
     {
 
         $ids=$request->ids;
@@ -163,10 +164,10 @@ class adminkriteriacontroller extends Controller
         #WAJIB
         $pages='kriteria';
         $datas=kriteria
-        ::paginate(Fungsi::paginationjml());
+        ::where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
 
-        return view('pages.admin.kriteria.index',compact('datas','request','pages'));
+        return view('pages.admin.kriteria.index',compact('datas','request','pages','tahunpenilaian'));
 
     }
 }
