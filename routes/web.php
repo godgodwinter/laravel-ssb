@@ -7,6 +7,7 @@ use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
 use App\Http\Controllers\adminpemainseleksicontroller;
 use App\Http\Controllers\adminposisipemaincontroller;
+use App\Http\Controllers\adminposisiseleksicontroller;
 use App\Http\Controllers\adminseedercontroller;
 use App\Http\Controllers\adminsettingscontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
@@ -56,7 +57,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
     //pemainseleksi
     Route::get('/admin/pemainseleksi/{tahunpenilaian}', [adminpemainseleksicontroller::class, 'index'])->name('pemainseleksi');
-    Route::get('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'edit'])->name('pemainseleksi.edit');
+    // Route::get('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'edit'])->name('pemainseleksi.edit');
     Route::put('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'update'])->name('pemainseleksi.update');
     Route::delete('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'destroy'])->name('pemainseleksi.destroy');
     Route::get('/admin/datapemainseleksi/{tahunpenilaian}/cari', [adminpemainseleksicontroller::class, 'cari'])->name('pemainseleksi.cari');
@@ -64,6 +65,19 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::post('/admin/datapemainseleksi/{tahunpenilaian}', [adminpemainseleksicontroller::class, 'store'])->name('pemainseleksi.store');
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/multidel', [adminpemainseleksicontroller::class, 'multidel'])->name('pemainseleksi.multidel');
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/detail/{id}', [adminpemainseleksicontroller::class, 'detail'])->name('pemainseleksi.detail
+    detail');
+
+
+    //posisiseleksi
+    Route::get('/admin/posisiseleksi/{tahunpenilaian}', [adminposisiseleksicontroller::class, 'index'])->name('posisiseleksi');
+    // Route::get('/admin/posisiseleksi/{tahunpenilaian}/{id}', [adminposisiseleksicontroller::class, 'edit'])->name('posisiseleksi.edit');
+    Route::put('/admin/posisiseleksi/{tahunpenilaian}/{id}', [adminposisiseleksicontroller::class, 'update'])->name('posisiseleksi.update');
+    Route::delete('/admin/posisiseleksi/{tahunpenilaian}/{id}', [adminposisiseleksicontroller::class, 'destroy'])->name('posisiseleksi.destroy');
+    Route::get('/admin/dataposisiseleksi/{tahunpenilaian}/cari', [adminposisiseleksicontroller::class, 'cari'])->name('posisiseleksi.cari');
+    Route::get('/admin/dataposisiseleksi/{tahunpenilaian}/create', [adminposisiseleksicontroller::class, 'create'])->name('posisiseleksi.create');
+    Route::post('/admin/dataposisiseleksi/{tahunpenilaian}', [adminposisiseleksicontroller::class, 'store'])->name('posisiseleksi.store');
+    Route::delete('/admin/dataposisiseleksi/{tahunpenilaian}/multidel', [adminposisiseleksicontroller::class, 'multidel'])->name('posisiseleksi.multidel');
+    Route::delete('/admin/dataposisiseleksi/{tahunpenilaian}/detail/{id}', [adminposisiseleksicontroller::class, 'detail'])->name('posisiseleksi.detail
     detail');
 
 

@@ -76,7 +76,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                       </div>
                       <div class="card-stats-item col-6">
                         <div class="card-stats-item-count">12</div>
-                        <div class="card-stats-item-label">Posisi</div>
+                        <div class="card-stats-item-label"><a class="btn btn-sm btn-info" href="{{route('posisiseleksi',$tahunpenilaian->id)}}">Posisi</a></div>
                       </div>
                     </div>
                   </div>
