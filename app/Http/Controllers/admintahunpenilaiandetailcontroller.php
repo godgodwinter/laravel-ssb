@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\kriteria;
+use App\Models\kriteriadetail;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +28,16 @@ class admintahunpenilaiandetailcontroller extends Controller
         $pages='tahunpenilaian';
         $datas=tahunpenilaian
         ::paginate(Fungsi::paginationjml());
-        // dd($datas);
 
-        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian'));
+        $jmlkriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        $ambilkriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+        $jmlkriteriadetail=0;
+        foreach($ambilkriteria as $data){
+            $jmlkriteriadetail+=kriteriadetail::where('kriteria_id',$data->id)->count();
+        }
+
+        // dd($jml);
+
+        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail'));
     }
 }

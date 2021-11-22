@@ -39,11 +39,11 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                 <div class="row">
                     <div class="card-stats-item col-6">
-                      <div class="card-stats-item-count">24</div>
+                      <div class="card-stats-item-count">{{$jmlkriteria}}</div>
                       <div class="card-stats-item-label">Kriteria</div>
                     </div>
                     <div class="card-stats-item col-6">
-                      <div class="card-stats-item-count">12</div>
+                      <div class="card-stats-item-count">{{$jmlkriteriadetail}}</div>
                       <div class="card-stats-item-label">Sub Kriteria</div>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                     </div>
                   </div>
                 <div class="text-right pt-4 pb-1 mr-2 mb-2">
-                  <a href="#" class="btn btn-primary btn-lg btn-round">
+                  <a href="{{route('pemainseleksi',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
                     Lihat Selengkapnya
                   </a>
                 </div>

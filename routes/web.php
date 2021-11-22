@@ -5,6 +5,7 @@ use App\Http\Controllers\adminkriteriacontroller;
 use App\Http\Controllers\adminkriteriadetailcontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
+use App\Http\Controllers\adminpemainseleksicontroller;
 use App\Http\Controllers\adminposisipemaincontroller;
 use App\Http\Controllers\adminseedercontroller;
 use App\Http\Controllers\adminsettingscontroller;
@@ -51,6 +52,19 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/admin/datapemain/create', [adminpemaincontroller::class, 'create'])->name('pemain.create');
     Route::post('/admin/datapemain', [adminpemaincontroller::class, 'store'])->name('pemain.store');
     Route::delete('/admin/datapemain/multidel', [adminpemaincontroller::class, 'multidel'])->name('pemain.multidel');
+
+
+    //pemainseleksi
+    Route::get('/admin/pemainseleksi/{tahunpenilaian}', [adminpemainseleksicontroller::class, 'index'])->name('pemainseleksi');
+    Route::get('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'edit'])->name('pemainseleksi.edit');
+    Route::put('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'update'])->name('pemainseleksi.update');
+    Route::delete('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'destroy'])->name('pemainseleksi.destroy');
+    Route::get('/admin/datapemainseleksi/{tahunpenilaian}/cari', [adminpemainseleksicontroller::class, 'cari'])->name('pemainseleksi.cari');
+    Route::get('/admin/datapemainseleksi/{tahunpenilaian}/create', [adminpemainseleksicontroller::class, 'create'])->name('pemainseleksi.create');
+    Route::post('/admin/datapemainseleksi/{tahunpenilaian}', [adminpemainseleksicontroller::class, 'store'])->name('pemainseleksi.store');
+    Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/multidel', [adminpemainseleksicontroller::class, 'multidel'])->name('pemainseleksi.multidel');
+    Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/detail/{id}', [adminpemainseleksicontroller::class, 'detail'])->name('pemainseleksi.detail
+    detail');
 
 
     //posisipemain

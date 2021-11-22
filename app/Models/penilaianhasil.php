@@ -6,19 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class penilaian extends Model
+class penilaianhasil extends Model
 {
-        public $table = "penilaian";
+        public $table = "penilaianhasil";
 
         use SoftDeletes;
         use HasFactory;
 
         protected $fillable = [
             'pemainseleksi_id',
-            'posisiseleksidetail_id',
-            'nilai',
-            'pelatih_id',
-            'ket',
+            'posisiseleksi_id',
+            'total',
         ];
 
 
@@ -27,15 +25,11 @@ class penilaian extends Model
             return $this->belongsTo('App\Models\pemainseleksi');
         }
 
-        public function posisiseleksidetail()
+        public function posisiseleksi()
         {
-            return $this->belongsTo('App\Models\posisiseleksidetail');
+            return $this->belongsTo('App\Models\posisiseleksi');
         }
 
-        public function pelatih()
-        {
-            return $this->belongsTo('App\Models\pelatih');
-        }
 
 
 }
