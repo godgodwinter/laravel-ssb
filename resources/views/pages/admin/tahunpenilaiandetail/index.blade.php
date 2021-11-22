@@ -231,7 +231,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                   selectku+=`</select>
                   `;
-                                        console.log(data.output);
+                                        // console.log(data.output);
                                         // console.log(data.datas);
                                         $('#dataKriteriadetail').html(selectku);
                                         // $('#tk').prop('class',data.warna);

@@ -157,6 +157,7 @@ class admintahunpenilaiandetailcontroller extends Controller
         }
         $datas=$kriteriadetail;
         // dd($datas,$this->th);
+        $output='Data berhasil di muat!';
         // $output=$request->posisiseleksi_id;
         return response()->json([
             'success' => true,
