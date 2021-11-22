@@ -115,6 +115,10 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datatahunpenilaian/multidel', [admintahunpenilaiancontroller::class, 'multidel'])->name('tahunpenilaian.multidel');
     Route::get('/admin/datatahunpenilaian/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'index'])->name('tahunpenilaian.detail');
 
+    //API
+    Route::get('/admin/api/kriteriadetail/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'apikriteriadetail'])->name('api.kriteriadetail');
+
+
 
     //kriteria
     Route::get('/admin/kriteria/{tahunpenilaian}', [adminkriteriacontroller::class, 'index'])->name('kriteria');

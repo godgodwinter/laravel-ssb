@@ -159,7 +159,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                     @endforelse
                                 </td>
                                 <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info">
+                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Fisik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
                                         <i class="fas fa-plus-square"></i>
                                     </button>
                                 </td>
@@ -172,7 +172,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                                 </td>
                                 <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info">
+                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Teknik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
                                         <i class="fas fa-plus-square"></i>
                                     </button>
                                 </td>
@@ -185,10 +185,67 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                                 </td>
                                 <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info">
+                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Taktik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
                                         <i class="fas fa-plus-square"></i>
                                     </button>
                                 </td>
+
+                                @push('before-script')
+                                    <script>
+                                        $(document).on("click", ".open-Modal", function () {
+                                        var myNama = $(this).data('nama');
+                                        var myJudul = $(this).data('judul');
+                                        var posisiseleksi_id = $(this).data('posisiseleksi_id');
+                                        $(".modal-body #namaKriteria").val( myNama );
+                                        $(".modal-body #posisiseleksi_id").val( posisiseleksi_id );
+                                        document.getElementById("modalJudul").innerHTML = myJudul;
+                                        // As pointed out in comments,
+                                        // it is unnecessary to have to manually call the modal.
+                                        // $('#addBookDialog').modal('show');
+                                        ambildata(myNama,posisiseleksi_id);
+                                    });
+
+                            // fungsi kirim data periksa
+                            function ambildata(myNama = null,posisiseleksi_id=null) {
+                            // console.log(datapertanyaan);
+                                $.ajax({
+                                    url: "{{ route('api.kriteriadetail',$tahunpenilaian->id) }}",
+                                    method: 'GET',
+                                    data: {
+                                        "_token": "{{ csrf_token() }}",
+                                        kriteria:myNama,
+                                        posisiseleksi_id:posisiseleksi_id,
+                                    },
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        let selectku=`
+                    <select class="js-example-basic-single form-control-sm @error('kriteriadetail_id')
+                    is-invalid
+                @enderror" name="kriteriadetail_id"  style="width: 75%" required>`;
+                // for (var item in data.datas) {
+                //         selectku+=`<option value="${item}">${item}</option>`;
+                // }
+                data.datas.forEach(function(item){
+                        selectku+=`<option value="${item.id}">${item.nama}</option>`;
+                });
+
+                  selectku+=`</select>
+                  `;
+                                        console.log(data.output);
+                                        // console.log(data.datas);
+                                        $('#dataKriteriadetail').html(selectku);
+                                        // $('#tk').prop('class',data.warna);
+
+                                        // switalert('success',data.output);
+                                        // console.log(data.output);
+                                        // $("#datasiswa").html(data.output);
+                                        // console.log(data.output);
+                                        // console.log(data.datas);
+                                    }
+                                })
+                            }
+                                    </script>
+                                @endpush
                             </tr>
                         @empty
 
@@ -209,5 +266,51 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
 
 @section('containermodal')
+<!-- Import Excel -->
+<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="modalJudul" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalJudul">Modal</h5>
+          </div>
+          <div class="modal-body">
+
+
+                        <input type="hidden" class="form-control " required name="idProduk" id="idProduk">
+                        {{-- <input  type="hidden" class="form-control " required name="stokProduk" id="stokProduk"> --}}
+
+                <div class="form-group col-md-12 col-12 mt-0">
+                    <label>Nama </label>
+                    <div class="input-group">
+                        <input type="text" class="form-control " required name="namaKriteria" id="namaKriteria" readonly>
+                        <input type="text" class="form-control " required name="posisiseleksi_id" id="posisiseleksi_id" readonly>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-12 col-12 mt-0" id="dataKriteriadetail">
+                    <select class="js-example-basic-single form-control-sm @error('kriteriadetail_id')
+                    is-invalid
+                @enderror" name="kriteriadetail_id"  style="width: 75%" required>
+                    @if($kriteriadetail!=null)
+                    @foreach ($kriteriadetail as $t)
+                        <option value="{{ $t->id }}"> {{ $t->nama }}</option>
+                    @endforeach
+                    @endif
+                  </select>
+                </div>
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" id="BtnSimpanKeKeranjang">Simpan</button>
+          </div>
+
+        </div>
+    </div>
+  </div>
 
 @endsection

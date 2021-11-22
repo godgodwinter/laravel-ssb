@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class admintahunpenilaiandetailcontroller extends Controller
 {
     protected $th;
+    protected $request;
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -34,6 +35,8 @@ class admintahunpenilaiandetailcontroller extends Controller
         $pages='tahunpenilaian';
         $datas=tahunpenilaian
         ::paginate(Fungsi::paginationjml());
+
+        $kriteriadetail=null;
 
         //ambiljumlah
         $jmlkriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
@@ -112,12 +115,54 @@ class admintahunpenilaiandetailcontroller extends Controller
         }
 
 
+        $kriteriadetail=kriteriadetail::select('*')
+        ->whereIn('kriteria_id',function($query) {
+            $query->select('id')->from('kriteria')->where('deleted_at',null)->where('tahunpenilaian_id',$this->th);
+        })
+        ->get();
 
 
+        // dd($kriteriadetail,$dataakhir);
 
+        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail','dataakhir','jmlposisi','jmlpemain','kriteriadetail'));
+    }
 
-        // dd($dataakhir);
+    public function apikriteriadetail(tahunpenilaian $tahunpenilaian, Request $request)
+    {
+        $this->th=$tahunpenilaian->id;
+        $datas=null;
+        if($request->kriteria!=null){
+            $this->request=$request;
+            // $datas='Fisik';
+            $kriteriadetail=kriteriadetail::select('*')
+            ->whereIn('kriteria_id',function($query) {
+                $query->select('id')->from('kriteria')->where('deleted_at',null)
+                ->where('tahunpenilaian_id',$this->th)
+                ->where('nama',$this->request->kriteria);
+            })
+            ->whereNotIn('id',function($query) {
+                $query->select('kriteriadetail_id')->from('posisiseleksidetail')
+                ->where('posisiseleksi_id',$this->request->posisiseleksi_id)
+                ->where('deleted_at',null);
+            })
+            ->get();
 
-        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail','dataakhir','jmlposisi','jmlpemain'));
+        }else{
+            $kriteriadetail=kriteriadetail::select('*')
+            ->whereIn('kriteria_id',function($query) {
+                $query->select('id')->from('kriteria')->where('deleted_at',null)->where('tahunpenilaian_id',$this->th);
+            })
+            ->get();
+
+        }
+        $datas=$kriteriadetail;
+        // dd($datas,$this->th);
+        // $output=$request->posisiseleksi_id;
+        return response()->json([
+            'success' => true,
+            'message' => 'success',
+            'output' => $output,
+            'datas' => $datas,
+        ], 200);
     }
 }
