@@ -62,18 +62,18 @@ class adminkriteriacontroller extends Controller
                 'nama.nama'=>'Nama harus diisi',
             ]);
 
-            $cek=DB::table('kriteria')
-            ->where('nama',$request->nama)
-            ->count();
-                if($cek>0){
-                        $request->validate([
-                        'nama'=>'required|unique:kriteria,nama',
-                        ],
-                        [
-                            'nama.unique'=>'nama sudah digunakan',
-                        ]);
+            // $cek=DB::table('kriteria')
+            // ->where('nama',$request->nama)
+            // ->count();
+            //     if($cek>0){
+            //             $request->validate([
+            //             'nama'=>'required|unique:kriteria,nama',
+            //             ],
+            //             [
+            //                 'nama.unique'=>'nama sudah digunakan',
+            //             ]);
 
-                }
+            //     }
 
                 $request->validate([
                     'nama'=>'required',

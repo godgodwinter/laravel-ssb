@@ -127,7 +127,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
 
         <div class="card">
-            <div class="card-body">
+            <div class="card-body"  id="babengcardDate" >
 
 
 
@@ -153,7 +153,15 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                 <td>{{$data->nama}}</td>
                                 <td class="babeng-min-row">
                                     @forelse ($data->fisik as $fisik)
-                                        <button class="btn btn-light">{{$fisik->nama}}</button>
+                                        {{-- <button class="btn btn-light">{{$fisik->nama}}</button> --}}
+
+                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$fisik->id]) }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-light btn-sm"
+                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
+                                                    class="pcoded-micon">{{$fisik->nama}}</span></button>
+                                        </form>
                                     @empty
                                     <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
                                     @endforelse
@@ -165,7 +173,15 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                 </td>
                                 <td class="babeng-min-row">
                                     @forelse ($data->teknik as $teknik)
-                                        <button class="btn btn-light">{{$teknik->nama}}</button>
+                                        {{-- <button class="btn btn-light">{{$teknik->nama}}</button> --}}
+
+                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$teknik->id]) }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-light btn-sm"
+                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
+                                                    class="pcoded-micon">{{$teknik->nama}}</span></button>
+                                        </form>
                                     @empty
                                     <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
                                     @endforelse
@@ -178,14 +194,22 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                 </td>
                                 <td class="babeng-min-row">
                                     @forelse ($data->taktik as $taktik)
-                                        <button class="btn btn-light">{{$taktik->nama}}</button>
+                                        {{-- <button class="btn btn-light">{{$taktik->nama}}</button> --}}
+
+                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$taktik->id]) }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-light btn-sm"
+                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
+                                                    class="pcoded-micon">{{$taktik->nama}}</span></button>
+                                        </form>
                                     @empty
                                     <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
                                     @endforelse
 
                                 </td>
                                 <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Taktik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
+                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Taktik" data-judul="Pilih Sub Kriteria"  href="#modalDialog">
                                         <i class="fas fa-plus-square"></i>
                                     </button>
                                 </td>
@@ -273,19 +297,21 @@ Proses Penilaian {{$tahunpenilaian->nama}}
           <div class="modal-header">
             <h5 class="modal-title" id="modalJudul">Modal</h5>
           </div>
+          <form action="{{route('tahunpenilaian.detail.store',$tahunpenilaian->id)}}" method="POST" >
+              @csrf
           <div class="modal-body">
 
 
                         <input type="hidden" class="form-control " required name="idProduk" id="idProduk">
                         {{-- <input  type="hidden" class="form-control " required name="stokProduk" id="stokProduk"> --}}
 
-                <div class="form-group col-md-12 col-12 mt-0">
+                {{-- <div class="form-group col-md-12 col-12 mt-0">
                     <label>Nama </label>
-                    <div class="input-group">
-                        <input type="text" class="form-control " required name="namaKriteria" id="namaKriteria" readonly>
-                        <input type="text" class="form-control " required name="posisiseleksi_id" id="posisiseleksi_id" readonly>
-                    </div>
-                </div>
+                    <div class="input-group"> --}}
+                        <input type="hidden" class="form-control " required name="namaKriteria" id="namaKriteria" readonly>
+                        <input type="hidden" class="form-control " required name="posisiseleksi_id" id="posisiseleksi_id" readonly>
+                    {{-- </div>
+                </div> --}}
 
 
                 <div class="form-group col-md-12 col-12 mt-0" id="dataKriteriadetail">
@@ -308,6 +334,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button class="btn btn-primary" id="BtnSimpanKeKeranjang">Simpan</button>
           </div>
+        </form>
 
         </div>
     </div>

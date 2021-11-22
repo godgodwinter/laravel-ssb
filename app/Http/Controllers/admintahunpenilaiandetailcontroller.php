@@ -12,6 +12,7 @@ use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class admintahunpenilaiandetailcontroller extends Controller
 {
@@ -125,6 +126,27 @@ class admintahunpenilaiandetailcontroller extends Controller
         // dd($kriteriadetail,$dataakhir);
 
         return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail','dataakhir','jmlposisi','jmlpemain','kriteriadetail'));
+    }
+
+
+    public function store(tahunpenilaian $tahunpenilaian,Request $request)
+    {
+            $data_id=DB::table('posisiseleksidetail')->insertGetId(
+                array(
+                    'posisiseleksi_id'     =>   $request->posisiseleksi_id,
+                    'kriteriadetail_id'     =>   $request->kriteriadetail_id,
+                       'created_at'=>date("Y-m-d H:i:s"),
+                       'updated_at'=>date("Y-m-d H:i:s")
+                ));
+
+    return redirect()->route('tahunpenilaian.detail',$tahunpenilaian->id)->with('status','Data berhasil tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
+
+    }
+    public function destroy(tahunpenilaian $tahunpenilaian,posisiseleksidetail $id){
+
+        posisiseleksidetail::destroy($id->id);
+        return redirect()->route('tahunpenilaian.detail',$tahunpenilaian->id)->with('status','Data berhasil dihapus!')->with('tipe','warning')->with('icon','fas fa-feather');
+
     }
 
     public function apikriteriadetail(tahunpenilaian $tahunpenilaian, Request $request)
