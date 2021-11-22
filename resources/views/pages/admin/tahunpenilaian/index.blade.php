@@ -63,6 +63,7 @@ Tahun Penilaian
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
                             <th >Status </th>
+                            <th >Kuota </th>
                             <th >Aksi</th>
                         </tr>
                     </thead>
@@ -77,6 +78,9 @@ Tahun Penilaian
                                 </td>
                                 <td>
                                     {{$data->status}}
+                                </td>
+                                <td>
+                                    {{$data->jml}}
                                 </td>
                                 <td class="text-center babeng-min-row">
                                     <a class="btn btn-info btn-sm" href="{{route('tahunpenilaian.detail',$data->id)}}">

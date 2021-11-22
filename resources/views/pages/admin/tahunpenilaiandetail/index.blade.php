@@ -71,11 +71,11 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                   <div class="row">
                       <div class="card-stats-item col-6">
-                        <div class="card-stats-item-count">24</div>
+                        <div class="card-stats-item-count">{{$jmlpemain}}</div>
                         <div class="card-stats-item-label">Pemain</div>
                       </div>
                       <div class="card-stats-item col-6">
-                        <div class="card-stats-item-count">12</div>
+                        <div class="card-stats-item-count">{{$jmlposisi}}</div>
                         <div class="card-stats-item-label"><a class="btn btn-sm btn-info" href="{{route('posisiseleksi',$tahunpenilaian->id)}}">Posisi</a></div>
                       </div>
                     </div>
@@ -103,8 +103,8 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
                 <div class="row">
                     <div class="card-stats-item col-6">
-                      <div class="card-stats-item-count">3</div>
-                      <div class="card-stats-item-label">Terbaik</div>
+                      <div class="card-stats-item-count">{{$tahunpenilaian->jml}}</div>
+                      <div class="card-stats-item-label">Kuota</div>
                     </div>
                     <div class="card-stats-item col-6">
                       <div class="card-stats-item-count">Proses</div>
@@ -136,17 +136,63 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                 <table id="example" class="table table-striped table-bordered mt-1 table-sm" style="width:100%">
                     <thead>
                         <tr style="background-color: #F1F1F1">
-                            <th colspan="5" class="text-center"> Kesimpulan Parameter Posisi</th>
+                            <th colspan="8" class="text-center"> Kesimpulan Parameter Posisi</th>
                         </tr>
                         <tr style="background-color: #F1F1F1">
-                            <th >No </th>
+                            <th class="babeng-min-row">No </th>
                             <th >Posisi </th>
-                            <th >Fisik</th>
-                            <th >Teknik</th>
-                            <th >Taktik</th>
+                            <th colspan="2" class="text-center">Fisik</th>
+                            <th  colspan="2" class="text-center">Teknik</th>
+                            <th  colspan="2" class="text-center">Taktik</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ($dataakhir as $data)
+                            <tr>
+                                <td>{{$loop->index+1}}</td>
+                                <td>{{$data->nama}}</td>
+                                <td class="babeng-min-row">
+                                    @forelse ($data->fisik as $fisik)
+                                        <button class="btn btn-light">{{$fisik->nama}}</button>
+                                    @empty
+                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
+                                    @endforelse
+                                </td>
+                                <td class="babeng-min-row">
+                                    <button class="btn btn-sm btn-info">
+                                        <i class="fas fa-plus-square"></i>
+                                    </button>
+                                </td>
+                                <td class="babeng-min-row">
+                                    @forelse ($data->teknik as $teknik)
+                                        <button class="btn btn-light">{{$teknik->nama}}</button>
+                                    @empty
+                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
+                                    @endforelse
+
+                                </td>
+                                <td class="babeng-min-row">
+                                    <button class="btn btn-sm btn-info">
+                                        <i class="fas fa-plus-square"></i>
+                                    </button>
+                                </td>
+                                <td class="babeng-min-row">
+                                    @forelse ($data->taktik as $taktik)
+                                        <button class="btn btn-light">{{$taktik->nama}}</button>
+                                    @empty
+                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
+                                    @endforelse
+
+                                </td>
+                                <td class="babeng-min-row">
+                                    <button class="btn btn-sm btn-info">
+                                        <i class="fas fa-plus-square"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @empty
+
+                        @endforelse
 
                     </tbody>
                 </table>

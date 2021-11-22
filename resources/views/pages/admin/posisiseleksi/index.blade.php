@@ -75,9 +75,9 @@ Pemain Seleksi
                                     {{$data->posisipemain!=null?$data->posisipemain->nama:'Data tidak ditemukan'}}
                                 </td>
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    {{-- <a class="btn btn-info btn-sm" href="#">
                                         <i class="fas fa-angle-double-right"></i>
-                                    </a>
+                                    </a> --}}
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}
                                     {{-- <x-button-edit link="{{route('posisiseleksi.edit',[$tahunpenilaian->id,$data->id])}}" /> --}}
                                     <x-button-delete link="{{route('posisiseleksi.destroy',[$tahunpenilaian->id,$data->id])}}" />

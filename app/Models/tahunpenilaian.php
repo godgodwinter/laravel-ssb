@@ -16,6 +16,7 @@ class tahunpenilaian extends Model
         protected $fillable = [
             'nama',
             'status',
+            'jml',
             'ket',
         ];
 

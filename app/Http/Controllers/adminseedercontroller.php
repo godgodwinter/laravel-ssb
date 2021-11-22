@@ -27,6 +27,7 @@ class adminseedercontroller extends Controller
             $tahun=$faker->numberBetween(2021,2040);
         $users_id=DB::table('tahunpenilaian')->insertGetId([
             'nama' => $tahun.' - '.$tahun+1,
+            'jml' => '3',
             'status' => $faker->randomElement(['Proses', 'Selesai']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

@@ -24,6 +24,11 @@ class posisiseleksi extends Model
             return $this->belongsTo('App\Models\posisipemain');
         }
 
+        public function posisiseleksidetail()
+        {
+            return $this->hasMany('App\Models\posisiseleksidetail');
+        }
+
         public function tahunpenilaian()
         {
             return $this->belongsTo('App\Models\tahunpenilaian');

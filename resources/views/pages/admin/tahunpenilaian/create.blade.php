@@ -36,7 +36,7 @@ Tahun Penilaian
                     <div class="row">
 
                     <div class="form-group col-md-5 col-5 mt-0 ml-5">
-                        <label for="nama">Nama  <code>*)</code></label>
+                        <label for="jml">Nama  <code>*)</code></label>
                         <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" required>
                         @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror
@@ -54,6 +54,12 @@ Tahun Penilaian
                         @enderror
                     </div>
 
+                    <div class="form-group col-md-5 col-5 mt-0 ml-5">
+                        <label for="jml">Kuota  <code>*)</code></label>
+                        <input type="number" min="1"  name="jml" id="jml" class="form-control @error('jml') is-invalid @enderror" value="{{old('jml')?old('jml'):'3'}}" required>
+                        @error('jml')<div class="invalid-feedback"> {{$message}}</div>
+                        @enderror
+                    </div>
 
                     </div>
 

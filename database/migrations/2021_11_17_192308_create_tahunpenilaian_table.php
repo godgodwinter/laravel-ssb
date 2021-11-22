@@ -17,6 +17,7 @@ class CreateTahunpenilaianTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('status')->nullable();
+            $table->string('jml')->nullable();
             $table->string('ket')->nullable();
             $table->softDeletes();
             $table->timestamps();

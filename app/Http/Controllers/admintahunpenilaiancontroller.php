@@ -87,6 +87,7 @@ class admintahunpenilaiancontroller extends Controller
                 array(
                     'nama'     =>   $request->nama,
                     'status'     =>   $request->status,
+                    'jml'     =>   $request->jml,
                        'created_at'=>date("Y-m-d H:i:s"),
                        'updated_at'=>date("Y-m-d H:i:s")
                 ));
@@ -134,6 +135,7 @@ class admintahunpenilaiancontroller extends Controller
         ->update([
             'nama'     =>   $request->nama,
             'status'     =>   $request->status,
+            'jml'     =>   $request->jml,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
