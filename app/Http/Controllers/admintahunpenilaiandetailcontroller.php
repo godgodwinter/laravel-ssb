@@ -188,6 +188,39 @@ class admintahunpenilaiandetailcontroller extends Controller
         ], 200);
     }
 
+    public function apiperiksaminimum(tahunpenilaian $tahunpenilaian, Request $request)
+    {
+        $kriteriastatus=null;
+        $posisistatus=null;
+        $pemainstatus=null;
+        $kriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        if($kriteria>2){
+            $kriteriastatus='ok';
+        }
+        $posisi=posisiseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        if($posisi>0){
+            $posisistatus='ok';
+        }
+        $pemain=pemainseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        if($pemain>2){
+            $pemainstatus='ok';
+        }
+        $output='';
+        $datas='';
+        return response()->json([
+            'success' => true,
+            'message' => 'success',
+            'output' => $output,
+            'datas' => $datas,
+            'kriteria' => $kriteria,
+            'kriteriastatus' => $kriteriastatus,
+            'posisi' => $posisi,
+            'posisistatus' => $posisistatus,
+            'pemain' => $pemain,
+            'pemainstatus' => $pemainstatus,
+        ], 200);
+    }
+
     public function index_old(tahunpenilaian $tahunpenilaian,Request $request)
     {
         $this->th=$tahunpenilaian->id;

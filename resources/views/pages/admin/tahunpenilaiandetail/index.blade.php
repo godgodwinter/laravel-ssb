@@ -125,9 +125,83 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                   </div>
                 </div>
               <div class="text-right pt-4 pb-1 mr-2 mb-2">
-                <a href="#" class="btn btn-warning btn-lg btn-round">
+                <button  class="btn btn-warning btn-lg btn-round modalProses" data-toggle="modal" data-target="#modalProses" >
                   Lanjutkan Proses
-                </a>
+                </button>
+
+                @push('before-script')
+                <script>
+                    $(document).on("click", ".modalProses", function () {
+                    // var myJudul = $(this).data('judul');
+                    // document.getElementById("modalJudulKuota").innerHTML = myJudul;
+                    periksaposes();
+                });
+
+                            // fungsi kirim data periksa
+                            function periksaposes(query = null) {
+                            // console.log(datapertanyaan);
+                                $.ajax({
+                                    url: "{{ route('api.periksaminimum',$tahunpenilaian->id) }}",
+                                    method: 'GET',
+                                    data: {
+                                        "_token": "{{ csrf_token() }}",
+                                        query:query,
+                                    },
+                                    dataType: 'json',
+                                    success: function (data) {
+                $('#btnLanjutProses').prop('disabled',true);
+                    if((data.pemainstatus !=null) && (data.kriteriastatus !=null) && (data.posisistatus!=null)){
+                        $('#btnLanjutProses').prop('disabled',false);
+                }
+
+                                        let warna='warning';
+                                        let status='Tidak Cukup';
+                                        if(data.kriteriastatus!=null){
+                                             warna='success';
+                                             status='Ok';
+                                        }
+
+                                        let warnaposisi='warning';
+                                        let statusposisi='Tidak Cukup';
+                                        if(data.posisistatus!=null){
+                                            warnaposisi='success';
+                                            statusposisi='Ok';
+                                        }
+
+                                        let warnapemain='warning';
+                                        let statuspemain='Tidak Cukup';
+                                        if(data.pemainstatus!=null){
+                                            warnapemain='success';
+                                            statuspemain='Ok';
+                                        }
+                    let divKriteria=`
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : ${data.kriteria}</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-${warna} btn-sm" href="#"><i class="far fa-check-circle"></i> ${status}</a></div>
+                    `;
+                    let divPosisi=`
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : ${data.posisi}</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-${warnaposisi} btn-sm" href="#"><i class="far fa-check-circle"></i> ${statusposisi}</a></div>
+                    `;
+                    let divPemain=`
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : ${data.pemain}</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-${warnapemain} btn-sm" href="#"><i class="far fa-check-circle"></i> ${statuspemain}</a></div>
+                    `;
+                                        // console.log(data.kriteria);
+                                        $('#divKriteria').html(divKriteria);
+                                        $('#divPosisi').html(divPosisi);
+                                        $('#divPemain').html(divPemain);
+
+                                    }
+                                })
+                            }
+                </script>
+                @endpush
               </div>
 
             </div>
@@ -199,65 +273,6 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                             <th class="text-center">Krtieria tidak ditemukan</th>
 
                             @endforelse
-                                {{-- <td class="babeng-min-row">
-                                    @forelse ($data->fisik as $fisik)
-
-                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$fisik->id]) }}" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-light btn-sm"
-                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
-                                                    class="pcoded-micon">{{$fisik->nama}}</span></button>
-                                        </form>
-                                    @empty
-                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
-                                    @endforelse
-                                </td>
-                                <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Fisik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
-                                        <i class="fas fa-plus-square"></i>
-                                    </button>
-                                </td>
-                                <td class="babeng-min-row">
-                                    @forelse ($data->teknik as $teknik)
-
-                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$teknik->id]) }}" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-light btn-sm"
-                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
-                                                    class="pcoded-micon">{{$teknik->nama}}</span></button>
-                                        </form>
-                                    @empty
-                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
-                                    @endforelse
-
-                                </td>
-                                <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Teknik" data-judul="Tambahkan Kriteria"  href="#modalDialog">
-                                        <i class="fas fa-plus-square"></i>
-                                    </button>
-                                </td>
-                                <td class="babeng-min-row">
-                                    @forelse ($data->taktik as $taktik)
-
-                                        <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$taktik->id]) }}" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-light btn-sm"
-                                                onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
-                                                    class="pcoded-micon">{{$taktik->nama}}</span></button>
-                                        </form>
-                                    @empty
-                                    <button class="btn btn-warning">Kriteria Penilaian Masih Kosong</button>
-                                    @endforelse
-
-                                </td>
-                                <td class="babeng-min-row">
-                                    <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Taktik" data-judul="Pilih Sub Kriteria"  href="#modalDialog">
-                                        <i class="fas fa-plus-square"></i>
-                                    </button>
-                                </td> --}}
 
                                 @push('before-script')
                                     <script>
@@ -425,4 +440,49 @@ Proses Penilaian {{$tahunpenilaian->nama}}
   </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalProses" tabindex="-1" role="dialog" aria-labelledby="modalProses" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Lanjutkan Proses</h5>
+          </div>
+          <form action="#" method="POST" id="formLanjutProses">
+              @csrf
+          <div class="modal-body">
+                <div class="row" id="divKriteria">
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : 3 (20)</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                </div>
+
+                <div class="row" id="divPosisi">
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : 3 (20)</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                </div>
+
+                <div class="row" id="divPemain">
+                    <div class="col-8">
+                        <p>Jumlah Kriteria : 3 (20)</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" id="btnLanjutProses" disabled>Proses</button>
+          </div>
+        </form>
+
+        </div>
+    </div>
+  </div>
 @endsection
