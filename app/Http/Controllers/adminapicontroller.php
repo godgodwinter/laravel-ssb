@@ -6,7 +6,9 @@ use App\Helpers\Fungsi;
 use App\Models\dataajar;
 use App\Models\inputnilai;
 use App\Models\kelas;
+use App\Models\penilaian;
 use App\Models\siswa;
+use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,15 +26,15 @@ class adminapicontroller extends Controller
 
         });
     }
-    public function inputnilaistore(dataajar $dataajar, Request $request)
+    public function pemainseleksi_inputnilai(tahunpenilaian $tahunpenilaian, Request $request)
     {
         // dd($request);
-        $cek=inputnilai::where('siswa_id',$request->siswa_id)
-        ->where('materipokok_id',$request->materipokok_id)
+        $cek=penilaian::where('pemainseleksi_id',$request->pemainseleksi_id)
+        ->where('kriteriadetail_id',$request->kriteriadetail_id)
         ->count();
         if($cek>0){
-            inputnilai::where('siswa_id',$request->siswa_id)
-            ->where('materipokok_id',$request->materipokok_id)
+            penilaian::where('pemainseleksi_id',$request->pemainseleksi_id)
+            ->where('kriteriadetail_id',$request->kriteriadetail_id)
             ->update([
                 'nilai'     =>   $request->nilai,
                'updated_at'=>date("Y-m-d H:i:s")
@@ -40,11 +42,11 @@ class adminapicontroller extends Controller
 
         }else{
 
-            DB::table('inputnilai')->insert(
+            DB::table('penilaian')->insert(
                 array(
                         'nilai'     =>   $request->nilai,
-                        'siswa_id'     =>   $request->siswa_id,
-                        'materipokok_id'     =>   $request->materipokok_id,
+                        'pemainseleksi_id'     =>   $request->pemainseleksi_id,
+                        'kriteriadetail_id'     =>   $request->kriteriadetail_id,
                        'created_at'=>date("Y-m-d H:i:s"),
                        'updated_at'=>date("Y-m-d H:i:s")
                 ));
@@ -59,50 +61,4 @@ class adminapicontroller extends Controller
         ], 200);
     }
 
-    public function siswaperkelas(kelas $kelas, Request $request)
-    {
-        $datas=siswa::with('kelas')->where('kelas_id',$kelas->id)
-        ->get();
-        $output='Data berhasil di ambil';
-        return response()->json([
-            'success' => true,
-            'message' => 'success',
-            'output' => $output,
-            'datas' => $datas,
-        ], 200);
-    }
-    public function periksatingkatkesulitan(Request $request)
-    {
-        $warna='form-control btn-info';
-        $output=Fungsi::periksatingkatkesulitan($request->pertanyaan);
-        // dd($request->pertanyaan,$output);
-        // $output='Data berhasil di ambil';
-        $datas=$request->pertanyaan;
-        if($output=='sulit'){
-            $warna='form-control btn-danger';
-        }else if($output=='sedang'){
-            $warna='form-control btn-warning';
-        }else{
-            $warna='form-control btn-info';
-
-        }
-        return response()->json([
-            'success' => true,
-            'message' => 'success',
-            'output' => $output,
-            'warna' => $warna,
-            'datas' => $datas,
-        ], 200);
-    }
-    public function kompetensidasargeneratekode(dataajar $dataajar, Request $request)
-    {
-        $output=1;
-        $output=Fungsi::kompetensidasargeneratekode($dataajar,$request->tipe);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'success',
-            'output' => $output,
-        ], 200);
-    }
 }

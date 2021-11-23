@@ -94,9 +94,122 @@ Pemain Seleksi
                                     {{$data->nama}}
                                 </td>
                                 @forelse ($data->kriteriadetail as $item)
-                                        <td>
+                                        <td id="inputnilai{{$data->id}}_{{$item->id}}" class="text-center">
                                             {{$item->nilai?$item->nilai:'Belum diisi'}}
+                                            {{-- <input class="babeng text-center text-info mb-2" type="text" value="10" type="number" min="1"> --}}
                                         </td>
+                                        @push('before-script')
+                                            <script>
+
+
+                                                $('#inputnilai{{$data->id}}_{{$item->id}}').click(function () {
+                                                        let datalama='{{$item!=null? $item->nilai : '0'}}';
+                                                        let td=$('#inputnilai{{$data->id}}_{{$item->id}}');
+                                                    // $(this).html(`{{$data->id}}_{{$item->id}}`);
+
+                                                    let inputan=`<input  class="babeng text-center text-info mb-2" id="inputan_{{$data->id}}_{{$item->id}}" value="{{$item->nilai?$item->nilai:'0'}}" type="number">`;
+                                                    $(this).html(inputan);
+                                                    let inputanobj=$('#inputan_{{$data->id}}_{{$item->id}}');
+                                                    inputanobj.focusTextToEnd();
+
+
+                                                    inputanobj.focusout(function (e) {
+                                                        $cek=cekperubahan(datalama,inputanobj.val());
+                                                        if($cek=='ok'){
+                                                            nilaiakhir=bulatkan(inputanobj.val());
+                                                            // console.log('kirim update');
+                                                            td.html(nilaiakhir);
+                                                            // switalert('success','Data berhasil diubah!');
+                                                        }else{
+                                                            // console.log('Data tidak berubah');
+                                                            td.html(`{{$item!=null? $item->nilai : ' Belum diisi '}}`);
+                                                        }
+                                                    });
+
+
+                                                    inputanobj.keypress(function (e) {
+                                                            // e.preventDefault(e);
+                                                            // ketika di enter
+                                                            if (e.which == 13) {
+                                                        $cek=cekperubahan(datalama,inputanobj.val());
+                                                        if($cek=='ok'){
+                                                                nilaiakhir=bulatkan(inputanobj.val());
+                                                                console.log('kirim update');
+                                                                let pemainseleksi_id={{$data->id}};
+                                                                let kriteriadetail_id={{$item->id}};
+                                                                let nilai=nilaiakhir;
+                                                                fetch_customer_data(pemainseleksi_id,kriteriadetail_id,nilai)
+                                                                $(this).html(nilaiakhir);
+                                                                // switalert('success','Data berhasil diubah!');
+                                                        }else{
+                                                                //  console.log('Data tidak berubah');
+                                                        }
+
+                                                            }
+                                                    });
+
+                                                });
+
+
+
+    function switalert(tipe='success',status='Berhasil!'){
+
+Swal.fire({
+    icon: tipe,
+    title: status,
+    // text: 'Something went wrong!',
+    showConfirmButton: true,
+    timer: 1000
+})
+}
+// fungsi cek apakah data berubah
+function cekperubahan(datalama='',databaru='') {
+    hasil='no';
+    if(datalama!=databaru){
+        hasil='ok';
+    }
+return hasil;
+}
+
+function bulatkan(databaru=0){
+if(databaru>100){
+    hasil=100;
+}else if(databaru<0){
+    hasil=0;
+}else if(databaru==null || databaru==''){
+    hasil=0;
+}else{
+    hasil=databaru;
+}
+return hasil;
+}
+
+    // fungsi kirim data perubahan
+    function fetch_customer_data(pemainseleksi_id = '',kriteriadetail_id='',nilai=0) {
+    console.log(pemainseleksi_id);
+        $.ajax({
+            url: "{{ route('api.pemainseleksi.inputnilai',$tahunpenilaian->id) }}",
+            method: 'GET',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                pemainseleksi_id:pemainseleksi_id,
+                kriteriadetail_id:kriteriadetail_id,
+            nilai:nilai,
+            },
+            dataType: 'json',
+            success: function (data) {
+                // console.log(query);
+
+                switalert('success',data.output);
+                // console.log(data.output);
+                // $("#datasiswa").html(data.output);
+                // console.log(data.output);
+                // console.log(data.datas);
+            }
+        })
+    }
+                                            </script>
+                                        @endpush
                                 @empty
                                        <td> Data Belum diisi</td>
                                 @endforelse

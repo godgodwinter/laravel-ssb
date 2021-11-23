@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminapicontroller;
 use App\Http\Controllers\admindashboardcontroller;
 use App\Http\Controllers\adminkriteriacontroller;
 use App\Http\Controllers\adminkriteriadetailcontroller;
@@ -122,6 +123,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     //API
     Route::get('/admin/api/kriteriadetail/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'apikriteriadetail'])->name('api.kriteriadetail');
     Route::get('/admin/api/periksaminimum/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'apiperiksaminimum'])->name('api.periksaminimum');
+    Route::get('/admin/api/pemainseleksi/inputnilai/{tahunpenilaian}', [adminapicontroller::class, 'pemainseleksi_inputnilai'])->name('api.pemainseleksi.inputnilai');
 
 
 
