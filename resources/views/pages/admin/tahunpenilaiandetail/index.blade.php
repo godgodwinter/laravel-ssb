@@ -104,7 +104,19 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                 <div class="row">
                     <div class="card-stats-item col-6">
                       <div class="card-stats-item-count">{{$tahunpenilaian->jml}}</div>
-                      <div class="card-stats-item-label">Kuota</div>
+                      <div class="card-stats-item-label">
+                        <button class="btn btn-light open-modalKuota" data-toggle="modal" data-target="#modalKuota" data-judul="Jumlah Kuota"  href="#modalDialog">Kuota</button>
+
+                        @push('before-script')
+                        <script>
+                            $(document).on("click", ".open-modalKuota", function () {
+                            var myJudul = $(this).data('judul');
+                            document.getElementById("modalJudulKuota").innerHTML = myJudul;
+                        });
+                        </script>
+                        @endpush
+
+                      </div>
                     </div>
                     <div class="card-stats-item col-6">
                       <div class="card-stats-item-count">Proses</div>
@@ -141,9 +153,17 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                         <tr style="background-color: #F1F1F1">
                             <th class="babeng-min-row">No </th>
                             <th >Posisi </th>
-                            <th colspan="2" class="text-center">Fisik</th>
+                            @forelse ($datakriteria as $kriteria)
+                                <th colspan="2" class="text-center">{{$kriteria->nama}}</th>
+
+                            @empty
+
+                            <th class="text-center">Krtieria tidak ditemukan</th>
+
+                            @endforelse
+                            {{-- <th colspan="2" class="text-center">Fisik</th>
                             <th  colspan="2" class="text-center">Teknik</th>
-                            <th  colspan="2" class="text-center">Taktik</th>
+                            <th  colspan="2" class="text-center">Taktik</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -151,9 +171,36 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$data->nama}}</td>
-                                <td class="babeng-min-row">
+
+                            @forelse ($data->kriteria as $kriteria)
+                                    <td class="babeng-min-row">
+                                    {{-- {{$kriteria->nama}} --}}
+                                    @forelse ($kriteria->posisiseleksidetail as $posisiseleksidetail)
+                                            {{-- {{$posisiseleksidetail->nama}} --}}
+                                            <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$posisiseleksidetail->id]) }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-light btn-sm"
+                                                    onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Data!"><span
+                                                        class="pcoded-micon">{{$posisiseleksidetail->nama}}</span></button>
+                                            </form>
+                                    @empty
+                                        Data tidak ditemukan
+                                    @endforelse
+                                    </td>
+                                    <td class="babeng-min-row">
+                                        <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="{{$kriteria->nama}}" data-judul="Tambahkan Kriteria {{$kriteria->nama}}"  href="#modalDialog">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                    </td>
+
+                            @empty
+
+                            <th class="text-center">Krtieria tidak ditemukan</th>
+
+                            @endforelse
+                                {{-- <td class="babeng-min-row">
                                     @forelse ($data->fisik as $fisik)
-                                        {{-- <button class="btn btn-light">{{$fisik->nama}}</button> --}}
 
                                         <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$fisik->id]) }}" method="post" class="d-inline">
                                             @method('delete')
@@ -173,7 +220,6 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                 </td>
                                 <td class="babeng-min-row">
                                     @forelse ($data->teknik as $teknik)
-                                        {{-- <button class="btn btn-light">{{$teknik->nama}}</button> --}}
 
                                         <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$teknik->id]) }}" method="post" class="d-inline">
                                             @method('delete')
@@ -194,7 +240,6 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                 </td>
                                 <td class="babeng-min-row">
                                     @forelse ($data->taktik as $taktik)
-                                        {{-- <button class="btn btn-light">{{$taktik->nama}}</button> --}}
 
                                         <form action="{{ route('tahunpenilaian.detail.destroy',[$tahunpenilaian->id,$taktik->id]) }}" method="post" class="d-inline">
                                             @method('delete')
@@ -212,7 +257,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                     <button class="btn btn-sm btn-info open-Modal" data-toggle="modal" data-posisiseleksi_id="{{$data->id}}"   data-nama="Taktik" data-judul="Pilih Sub Kriteria"  href="#modalDialog">
                                         <i class="fas fa-plus-square"></i>
                                     </button>
-                                </td>
+                                </td> --}}
 
                                 @push('before-script')
                                     <script>
@@ -290,7 +335,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
 
 
 @section('containermodal')
-<!-- Import Excel -->
+<!-- Modal -->
 <div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="modalJudul" aria-hidden="true">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -339,5 +384,45 @@ Proses Penilaian {{$tahunpenilaian->nama}}
         </div>
     </div>
   </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalKuota" tabindex="-1" role="dialog" aria-labelledby="modalKuota" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalJudulKuota">Modal</h5>
+        </div>
+        <form action="{{route('tahunpenilaiandetail.updatekuota',$tahunpenilaian->id)}}" method="POST" >
+            @csrf
+        <div class="modal-body">
+
+
+                      {{-- <input  type="hidden" class="form-control " required name="stokProduk" id="stokProduk"> --}}
+
+              {{-- <div class="form-group col-md-12 col-12 mt-0">
+                  <label>Nama </label>
+                  <div class="input-group"> --}}
+                  {{-- </div>
+              </div> --}}
+
+
+              <div class="form-group col-md-12 col-12 mt-0" id="dataKriteriadetail">
+                <input type="number" class="form-control " required name="jml" id="jml" min="1" value="{{$tahunpenilaian->jml?$tahunpenilaian->jml:'3'}}">
+              </div>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" id="BtnSimpanKeKeranjang">Simpan</button>
+        </div>
+      </form>
+
+      </div>
+  </div>
+</div>
 
 @endsection

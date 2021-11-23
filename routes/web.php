@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/admin/datatahunpenilaian/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'index'])->name('tahunpenilaian.detail');
 
     Route::post('/admin/datatahunpenilaian/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'store'])->name('tahunpenilaian.detail.store');
+    Route::post('/admin/datatahunpenilaian/{tahunpenilaian}/updatekuota', [admintahunpenilaiandetailcontroller::class, 'updatekuota'])->name('tahunpenilaiandetail.updatekuota');
     Route::delete('/admin/datatahunpenilaian/{tahunpenilaian}/{id}', [admintahunpenilaiandetailcontroller::class, 'destroy'])->name('tahunpenilaian.detail.destroy');
 
     //API
