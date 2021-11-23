@@ -15,7 +15,7 @@ class penilaian extends Model
 
         protected $fillable = [
             'pemainseleksi_id',
-            'posisiseleksidetail_id',
+            'kriteriadetail_id',
             'nilai',
             'pelatih_id',
             'ket',
@@ -27,9 +27,9 @@ class penilaian extends Model
             return $this->belongsTo('App\Models\pemainseleksi');
         }
 
-        public function posisiseleksidetail()
+        public function kriteriadetail()
         {
-            return $this->belongsTo('App\Models\posisiseleksidetail');
+            return $this->belongsTo('App\Models\kriteriadetail');
         }
 
         public function pelatih()

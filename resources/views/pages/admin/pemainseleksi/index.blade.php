@@ -25,7 +25,7 @@ Pemain Seleksi
 
     <div class="section-body">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body " id="babengcardDate">
 
                 <div class="d-flex bd-highlight mb-3 align-items-center">
 
@@ -61,8 +61,16 @@ Pemain Seleksi
                     <thead>
                         <tr style="background-color: #F1F1F1">
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
-                            <th >Nama </th>
                             <th >Aksi</th>
+
+                            <th >Nama </th>
+                            @forelse ($datakriteriadetail as $dkd)
+                                <th>
+                                    {{$dkd->nama}}
+                                </th>
+                            @empty
+
+                            @endforelse
                         </tr>
                     </thead>
                     <tbody>
@@ -70,18 +78,28 @@ Pemain Seleksi
                         <tr id="sid{{ $data->id }}">
                                 <td class="text-center">
                                     <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
-                                    {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-                                <td>
-                                    {{$data->pemain!=null?$data->pemain->nama:'Data tidak ditemukan'}}
+                                    {{-- {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }} --}}
+                                    {{$loop->index+1}}
                                 </td>
+
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    {{-- <a class="btn btn-info btn-sm" href="#">
                                         <i class="fas fa-angle-double-right"></i>
-                                    </a>
+                                    </a> --}}
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}
                                     {{-- <x-button-edit link="{{route('pemainseleksi.edit',[$tahunpenilaian->id,$data->id])}}" /> --}}
                                     <x-button-delete link="{{route('pemainseleksi.destroy',[$tahunpenilaian->id,$data->id])}}" />
                                 </td>
+                                <td>
+                                    {{$data->nama}}
+                                </td>
+                                @forelse ($data->kriteriadetail as $item)
+                                        <td>
+                                            {{$item->nilai?$item->nilai:'Belum diisi'}}
+                                        </td>
+                                @empty
+                                       <td> Data Belum diisi</td>
+                                @endforelse
 
 
                             </tr>
@@ -93,7 +111,7 @@ Pemain Seleksi
                     </tbody>
                 </table>
 
-@php
+{{-- @php
 $cari=$request->cari;
 @endphp
 <div class="d-flex justify-content-between flex-row-reverse mt-3">
@@ -101,7 +119,7 @@ $cari=$request->cari;
 {{ $datas->onEachSide(1)
     ->links() }}
     </div>
-    <div>
+    <div> --}}
 <a href="#" class="btn btn-sm  btn-danger mb-2" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"  data-toggle="tooltip" data-placement="top" title="Hapus Terpilih">
             <i class="fas fa-trash-alt mr-2"></i> Hapus Terpilih</i>

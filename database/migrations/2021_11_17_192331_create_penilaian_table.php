@@ -16,7 +16,7 @@ class CreatePenilaianTable extends Migration
         Schema::create('penilaian', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('pemainseleksi_id');
-            $table->string('posisiseleksidetail_id');
+            $table->string('kriteriadetail_id');
             $table->string('nilai');
             $table->string('pelatih_id')->nullable();
             $table->string('ket')->nullable();
