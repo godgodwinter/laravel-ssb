@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kriteria;
 use App\Models\kriteriadetail;
 use App\Models\pemainseleksi;
 use App\Models\penilaiandetail;
+use App\Models\penilaianhasil;
 use App\Models\posisiseleksi;
+use App\Models\posisiseleksidetail;
 use App\Models\prosespenilaian;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class adminprosesperhitungancontroller extends Controller
 {
@@ -55,7 +59,7 @@ class adminprosesperhitungancontroller extends Controller
                 })
                 ->where('prosespenilaian_id',$p->id)->first();
                 $nilai=$ambilnilai?$ambilnilai->nilai:0;
-
+                // dd($ambilnilai);
                 $prosespenilaian->push((object)[
                     'id'=> $p->id,
                     'nama'=> $p->nama,
@@ -64,26 +68,93 @@ class adminprosesperhitungancontroller extends Controller
             }
             $bobot=$prosespenilaian->avg('nilai')/100;
             // dd($prosespenilaian->avg('nilai'),$bobot);
+            $periksaposisiseleksidetail=posisiseleksidetail::where('kriteriadetail_id',$k->id)->first();
+            $posisiseleksi_id=$periksaposisiseleksidetail->posisiseleksi_id;
             $kriteriadetail->push((object)[
                 'id'=>$k->id,
+                // 'posisiseleksi_id'=>$posisiseleksi_id,
+                'pemain_id'=>$pemain->pemain?$pemain->id:'Data tidak ditemukan',
+                'pemain_nama'=>$pemain->pemain?$pemain->pemain->nama:'Data tidak ditemukan',
                 'nama'=>$k->nama?$k->nama:'Data tidak ditemukan',
+                'kriteria_id'=>$k->kriteria?$k->kriteria->id:'Data tidak ditemukan',
+                'kriteria_nama'=>$k->kriteria?$k->kriteria->nama:'Data tidak ditemukan',
                 'nilai'=>$prosespenilaian,
                 'avg'=>$prosespenilaian->avg('nilai'),
                 'bobot'=>$bobot,
             ]);
         }
-
+        // dd($kriteriadetail);
+        // dd($kriteriadetail->where('kriteria_nama','Taktik'));
+        // dd($kriteriadetail->where('kriteria_id','4')->where('pemain_id','1')->where('id','1')->sum('bobot'));
+        // dd($kriteriadetail->where('kriteria_nama','Fisik')->sum('bobot'));
+        // dd($kriteriadetail->where('kriteria_nama','Fisik')->count());
         //step2
         $posisiseleksi= new Collection();
         $ambildataposisiseleksi=posisiseleksi::with('posisipemain')->with('posisiseleksidetail')->where('tahunpenilaian_id',$tahunpenilaian->id)->get();
         foreach($ambildataposisiseleksi as $ps){
-                $nilaiakhir=0;
+
+
+        $kriteria= new Collection();
+        $ambildatakriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+        $nilaiakhir=0;
+        foreach($ambildatakriteria as $krit){
+            $jmldata=0;
+            $sumbobot=0;
+            $sumbobotperjmldata=0;
+            foreach($ps->posisiseleksidetail as $psd){
+
+                $sumbobot+=$kriteriadetail->where('id',$psd->kriteriadetail_id)->where('kriteria_id',$krit->id)->sum('bobot');
+                // dd($sumbobot);
+                if($kriteriadetail->where('id',$psd->kriteriadetail_id)->where('kriteria_id',$krit->id)->sum('bobot')!=null){
+                    $jmldata+=1;
+                };
+
+            }
+            // dd($ps->posisiseleksidetail,$sumbobot,$jmldata);
+            $weight=$krit->bobot/100;
+            if($jmldata>0){
+
+                $sumbobotperjmldata=number_format(($sumbobot/$jmldata),4);
+            }
+            $kriteria->push((object)[
+                'id'=>$krit->id,
+                'kriteria_nama'=>$krit->nama,
+                'kriteriadetail'=>$kriteriadetail->where('kriteria_id',$krit->id)->where('pemain_id',$pemain->id),
+                'evaluation'=>$sumbobotperjmldata,
+                'weight'=>$weight,
+                'weightevaluation'=>$sumbobotperjmldata*$weight,
+            ]);
+        }
+                $nilaiakhir=$kriteria->sum('weightevaluation');
                 $posisiseleksi->push((object)[
                     'id'=>$ps->id,
                     'nama'=>$ps->posisipemain?$ps->posisipemain->nama:'Data tidak ditemukan',
-                    'posisiseleksidetail'=>$ps->posisiseleksidetail,
+                    'kriteria'=>$kriteria,
                     'nilaiakhir'=> $nilaiakhir,
                 ]);
+
+            $cekhasil=penilaianhasil::where('posisiseleksi_id',$ps->id)
+                ->where('pemainseleksi_id',$pemain->id)
+                ->count();
+                if($cekhasil>0){
+
+                        penilaianhasil::where('posisiseleksi_id',$ps->id)
+                        ->where('pemainseleksi_id',$pemain->id)
+                        ->update([
+                            'total'     =>   $nilaiakhir,
+                        'updated_at'=>date("Y-m-d H:i:s")
+                        ]);
+
+                }else{
+                    $data_id=DB::table('penilaianhasil')->insertGetId(
+                        array(
+                            'total' => $nilaiakhir,
+                            'posisiseleksi_id'     =>   $ps->id,
+                            'pemainseleksi_id'     =>   $pemain->id,
+                               'created_at'=>date("Y-m-d H:i:s"),
+                               'updated_at'=>date("Y-m-d H:i:s")
+                        ));
+                }
         }
 
 
