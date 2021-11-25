@@ -49,6 +49,9 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                   </div>
                 </div>
               <div class="text-right pt-4 pb-1 mr-2 mb-2">
+                <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round">
+                  Seeder Kriteria dan Sub
+                </a>
                 <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
                   Lihat Selengkapnya
                 </a>
@@ -85,6 +88,17 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                     </div>
                   </div>
                 <div class="text-right pt-4 pb-1 mr-2 mb-2">
+                    <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                      Seeder Posisi
+                    </a>
+
+                    <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                    Seeder Proses Penilaian
+                  </a>
+
+                <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                    Seeder Random nilai Pemain
+                  </a>
                   <a href="{{route('pemainseleksi',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
                     Lihat Selengkapnya
                   </a>

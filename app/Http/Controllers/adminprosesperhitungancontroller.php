@@ -69,7 +69,7 @@ class adminprosesperhitungancontroller extends Controller
             $bobot=$prosespenilaian->avg('nilai')/100;
             // dd($prosespenilaian->avg('nilai'),$bobot);
             $periksaposisiseleksidetail=posisiseleksidetail::where('kriteriadetail_id',$k->id)->first();
-            $posisiseleksi_id=$periksaposisiseleksidetail->posisiseleksi_id;
+            // $posisiseleksi_id=$periksaposisiseleksidetail->posisiseleksi_id?$periksaposisiseleksidetail->posisiseleksi_id:0;
             $kriteriadetail->push((object)[
                 'id'=>$k->id,
                 // 'posisiseleksi_id'=>$posisiseleksi_id,
