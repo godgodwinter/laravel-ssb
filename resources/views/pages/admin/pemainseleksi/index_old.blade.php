@@ -97,7 +97,7 @@ Pemain Seleksi (Rata-rata dari Proses Penilaian)
                                             {{$item->nilai?$item->nilai:'Belum diisi'}}
                                             {{-- <input class="babeng text-center text-info mb-2" type="text" value="10" type="number" min="1"> --}}
                                         </td>
-                                        {{-- @push('before-script')
+                                        @push('before-script')
                                             <script>
 
 
@@ -208,7 +208,7 @@ return hasil;
         })
     }
                                             </script>
-                                        @endpush --}}
+                                        @endpush
                                 @empty
                                        <td> Data Belum diisi</td>
                                 @endforelse

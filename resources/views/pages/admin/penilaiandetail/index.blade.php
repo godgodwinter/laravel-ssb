@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Pemain Seleksi (Rata-rata dari Proses Penilaian)
+Pemain Seleksi {{$prosespenilaian->nama}}
 @endsection
 
 @push('before-script')
@@ -30,13 +30,15 @@ Pemain Seleksi (Rata-rata dari Proses Penilaian)
                 <div class="d-flex bd-highlight mb-3 align-items-center">
 
                     <div class="p-2 bd-highlight">
-                        @forelse ($prosespenilaian as $proses)
+                        @forelse ($datasprosespenilaian as $proses)
                         <a class="btn btn-md btn-round btn-info" href="{{route('penilaiandetail',[$tahunpenilaian->id,$proses->id])}}">{{$proses->nama}}</a>
 
                         @empty
                         <a class="btn btn-md btn-round btn-warning" href="{{route('prosespenilaian',[$tahunpenilaian->id])}}">Belum ada proses penilaian</a>
 
                         @endforelse
+                        <a class="btn btn-md btn-round btn-light" href="{{route('pemainseleksi',[$tahunpenilaian->id])}}">Kembali</a>
+
 
                         </div>
 
@@ -97,7 +99,7 @@ Pemain Seleksi (Rata-rata dari Proses Penilaian)
                                             {{$item->nilai?$item->nilai:'Belum diisi'}}
                                             {{-- <input class="babeng text-center text-info mb-2" type="text" value="10" type="number" min="1"> --}}
                                         </td>
-                                        {{-- @push('before-script')
+                                        @push('before-script')
                                             <script>
 
 
@@ -187,7 +189,7 @@ return hasil;
     function fetch_customer_data(pemainseleksi_id = '',kriteriadetail_id='',nilai=0) {
     console.log(pemainseleksi_id);
         $.ajax({
-            url: "{{ route('api.pemainseleksi.inputnilai',$tahunpenilaian->id) }}",
+            url: "{{ route('api.penilaiandetail.inputnilai',[$tahunpenilaian->id,$prosespenilaian->id]) }}",
             method: 'GET',
             data: {
                 "_token": "{{ csrf_token() }}",
@@ -208,7 +210,7 @@ return hasil;
         })
     }
                                             </script>
-                                        @endpush --}}
+                                        @endpush
                                 @empty
                                        <td> Data Belum diisi</td>
                                 @endforelse

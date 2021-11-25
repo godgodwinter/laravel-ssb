@@ -27,8 +27,8 @@ class adminpenilaiancontroller extends Controller
 
             #WAJIB
             $pages='tahunpenilaian';
-            $datas=prosespenilaian
-            ::paginate(Fungsi::paginationjml());
+            $datas=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)
+            ->paginate(Fungsi::paginationjml());
             // dd($datas);
 
             return view('pages.admin.prosespenilaian.index',compact('datas','request','pages','tahunpenilaian'));

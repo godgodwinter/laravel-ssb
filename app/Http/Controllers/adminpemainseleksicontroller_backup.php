@@ -8,8 +8,6 @@ use App\Models\kriteriadetail;
 use App\Models\pemain;
 use App\Models\pemainseleksi;
 use App\Models\penilaian;
-use App\Models\penilaiandetail;
-use App\Models\prosespenilaian;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -60,11 +58,11 @@ class adminpemainseleksicontroller extends Controller
 
         // dd($datas,$detaildatas,$item);
                     $ambildatapenilaian=penilaian::where('pemainseleksi_id',$data->id)->where('kriteriadetail_id',$item->id)->first();
-                    $nilai=penilaiandetail::where('penilaian_id',$ambildatapenilaian->id)->avg('nilai');
+
                     $detaildatas->push((object)[
                         'id'=> $item->id,
                         'nama'=> $item->nama,
-                        'nilai'=>number_format($nilai,2),
+                        'nilai'=>$ambildatapenilaian->nilai,
                     ]);
                     // dd($item->nama);
 
@@ -86,9 +84,8 @@ class adminpemainseleksicontroller extends Controller
             ]);
         }
         // dd($datas);
-        $prosespenilaian=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
 
-        return view('pages.admin.pemainseleksi.index',compact('datas','request','pages','tahunpenilaian','datakriteriadetail','prosespenilaian'));
+        return view('pages.admin.pemainseleksi.index',compact('datas','request','pages','tahunpenilaian','datakriteriadetail'));
     }
     public function cari(tahunpenilaian $tahunpenilaian,Request $request)
     {
