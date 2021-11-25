@@ -106,6 +106,9 @@ Pemain Seleksi {{$prosespenilaian->nama}}
                                                 $('#inputnilai{{$data->id}}_{{$item->id}}').click(function () {
                                                         let datalama='{{$item!=null? $item->nilai : '0'}}';
                                                         let td=$('#inputnilai{{$data->id}}_{{$item->id}}');
+
+                                                        let pemainseleksi_id={{$data->id}};
+                                                                let kriteriadetail_id={{$item->id}};
                                                     // $(this).html(`{{$data->id}}_{{$item->id}}`);
 
                                                     let inputan=`<input  class="babeng text-center text-info mb-2" id="inputan_{{$data->id}}_{{$item->id}}" value="{{$item->nilai?$item->nilai:'0'}}" type="number">`;
@@ -118,8 +121,11 @@ Pemain Seleksi {{$prosespenilaian->nama}}
                                                         $cek=cekperubahan(datalama,inputanobj.val());
                                                         if($cek=='ok'){
                                                             nilaiakhir=bulatkan(inputanobj.val());
+
+                                                                let nilai=nilaiakhir;
                                                             // console.log('kirim update');
                                                             td.html(nilaiakhir);
+                                                                fetch_customer_data(pemainseleksi_id,kriteriadetail_id,nilai)
                                                             // switalert('success','Data berhasil diubah!');
                                                         }else{
                                                             // console.log('Data tidak berubah');
@@ -136,8 +142,8 @@ Pemain Seleksi {{$prosespenilaian->nama}}
                                                         if($cek=='ok'){
                                                                 nilaiakhir=bulatkan(inputanobj.val());
                                                                 console.log('kirim update');
-                                                                let pemainseleksi_id={{$data->id}};
-                                                                let kriteriadetail_id={{$item->id}};
+                                                                // let pemainseleksi_id={{$data->id}};
+                                                                // let kriteriadetail_id={{$item->id}};
                                                                 let nilai=nilaiakhir;
                                                                 fetch_customer_data(pemainseleksi_id,kriteriadetail_id,nilai)
                                                                 $(this).html(nilaiakhir);
