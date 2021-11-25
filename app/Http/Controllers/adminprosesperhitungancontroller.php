@@ -158,10 +158,61 @@ class adminprosesperhitungancontroller extends Controller
         }
 
 
+        $dataakhir= new Collection();
+        $ambildataposisi=posisiseleksi::with('posisiseleksidetail')->where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+
+        foreach($ambildataposisi as $data){
+            // $fisik=[];
+            // $teknik=[];
+            // $taktik=[];
+            $datakrit= new Collection();
+            $ambilkrit=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+            foreach($ambilkrit as $item){
+                $this->item=$item->id;
+                $posisiseleksidetail= new Collection();
+                $ambilposisiseleksidetail=posisiseleksidetail::with('kriteriadetail')
+                ->where('posisiseleksi_id',$data->id)
+                ->whereIn('kriteriadetail_id',function($query) {
+                    $query->select('id')->from('kriteriadetail')->where('deleted_at',null)->where('kriteria_id',$this->item);
+                })
+                ->get();
+                foreach($ambilposisiseleksidetail as $posdet){
+                    if($posdet->kriteriadetail!=null){
+                            $posisiseleksidetail->push((object)[
+                               'id' => $posdet->id,
+                               'nama' => $posdet->kriteriadetail!=null?$posdet->kriteriadetail->nama:'Data tidak ditemukan',
+                           ]);
+
+                    }
+                }
+
+                $datakrit->push((object)[
+                    'id' => $item->id,
+                    'nama' => $item->nama!=null?$item->nama:'Data tidak ditemukan',
+                    'posisiseleksidetail' => $posisiseleksidetail,
+                ]);
+            }
+            // dd($datakrit);
+
+
+            // dd($ambilfisik,$kodefisik_id,$fisik,$taktik,$teknik);
+            // dd($ambilfisik,$kodefisik_id,$datafisik,$datataktik,$datateknik);
+
+
+             $dataakhir->push((object)[
+                'id' => $data->id,
+                'nama' => $data->posisipemain!=null?$data->posisipemain->nama:'Data tidak ditemukan',
+                'kriteria' => $datakrit,
+            ]);
+
+        }
+
+
         $koleksipemain->push((object)[
             'id'=> $pemain->id,
             'nama' => $pemain->pemain?$pemain->pemain->nama:'Data tidak ditemukan',
             'kriteriadetail' => $kriteriadetail,
+            'posisiseleksidetail' => $dataakhir,
             'posisiseleksi' => $posisiseleksi,
         ]);
         }
@@ -296,20 +347,171 @@ class adminprosesperhitungancontroller extends Controller
         }
 
 
+        $dataakhir= new Collection();
+        $ambildataposisi=posisiseleksi::with('posisiseleksidetail')->where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+
+        foreach($ambildataposisi as $data){
+            $datakrit= new Collection();
+            $ambilkrit=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+            foreach($ambilkrit as $item){
+                $this->item=$item->id;
+                $posisiseleksidetail= new Collection();
+                $ambilposisiseleksidetail=posisiseleksidetail::with('kriteriadetail')
+                ->where('posisiseleksi_id',$data->id)
+                ->whereIn('kriteriadetail_id',function($query) {
+                    $query->select('id')->from('kriteriadetail')->where('deleted_at',null)->where('kriteria_id',$this->item);
+                })
+                ->get();
+                $jmldata=0;
+                $total=0;
+                foreach($ambilposisiseleksidetail as $posdet){
+                    if($posdet->kriteriadetail!=null){
+                        $jmldata++;
+                        $total+=$kriteriadetail->where('id',$posdet->kriteriadetail->id)->where('pemain_id',$pemain->id)->sum('bobot');
+                            $posisiseleksidetail->push((object)[
+                               'id' => $posdet->id,
+                               'nama' => $posdet->kriteriadetail!=null?$posdet->kriteriadetail->nama:'Data tidak ditemukan',
+                               'nilai'=>$kriteriadetail->where('id',$posdet->kriteriadetail->id)->where('pemain_id',$pemain->id)->sum('bobot'),
+                           ]);
+
+                    }
+                }
+
+                $datakrit->push((object)[
+                    'id' => $item->id,
+                    'nama' => $item->nama!=null?$item->nama:'Data tidak ditemukan',
+                    'posisiseleksidetail' => $posisiseleksidetail,
+                    'total'=>$total,
+                    'avg'=>$total/$jmldata,
+                ]);
+            }
+            // dd($datakrit);
+
+
+            // dd($ambilfisik,$kodefisik_id,$fisik,$taktik,$teknik);
+            // dd($ambilfisik,$kodefisik_id,$datafisik,$datataktik,$datateknik);
+
+
+             $dataakhir->push((object)[
+                'id' => $data->id,
+                'nama' => $data->posisipemain!=null?$data->posisipemain->nama:'Data tidak ditemukan',
+                'kriteria' => $datakrit,
+            ]);
+
+        }
+
+
         $koleksipemain->push((object)[
             'id'=> $pemain->id,
             'nama' => $pemain->pemain?$pemain->pemain->nama:'Data tidak ditemukan',
             'kriteriadetail' => $kriteriadetail,
+            'posisiseleksidetail' => $dataakhir,
             'posisiseleksi' => $posisiseleksi,
         ]);
         }
         $datas=$koleksipemain;
+
+
+        $dataakhir= new Collection();
+        $ambildataposisi=posisiseleksi::with('posisiseleksidetail')->where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+
+        foreach($ambildataposisi as $data){
+            $datakrit= new Collection();
+            $ambilkrit=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+            foreach($ambilkrit as $item){
+                $this->item=$item->id;
+                $posisiseleksidetail= new Collection();
+                $ambilposisiseleksidetail=posisiseleksidetail::with('kriteriadetail')
+                ->where('posisiseleksi_id',$data->id)
+                ->whereIn('kriteriadetail_id',function($query) {
+                    $query->select('id')->from('kriteriadetail')->where('deleted_at',null)->where('kriteria_id',$this->item);
+                })
+                ->get();
+                foreach($ambilposisiseleksidetail as $posdet){
+                    if($posdet->kriteriadetail!=null){
+                            $posisiseleksidetail->push((object)[
+                               'id' => $posdet->id,
+                               'nama' => $posdet->kriteriadetail!=null?$posdet->kriteriadetail->nama:'Data tidak ditemukan',
+                           ]);
+
+                    }
+                }
+
+                $datakrit->push((object)[
+                    'id' => $item->id,
+                    'nama' => $item->nama!=null?$item->nama:'Data tidak ditemukan',
+                    'posisiseleksidetail' => $posisiseleksidetail,
+                ]);
+            }
+            // dd($datakrit);
+
+
+            // dd($ambilfisik,$kodefisik_id,$fisik,$taktik,$teknik);
+            // dd($ambilfisik,$kodefisik_id,$datafisik,$datataktik,$datateknik);
+
+
+             $dataakhir->push((object)[
+                'id' => $data->id,
+                'nama' => $data->posisipemain!=null?$data->posisipemain->nama:'Data tidak ditemukan',
+                'kriteria' => $datakrit,
+            ]);
+
+        }
+
+        $hasil= new Collection();
+        foreach($ambildatapemainseleksi as $pemain){
+            $posisiterbaik= new Collection();
+            $ambildatahasil=penilaianhasil::with('posisiseleksi')->where('pemainseleksi_id',$pemain->id)->skip(0)->take($tahunpenilaian->jml)->orderBy('total','desc')->get();
+            foreach($ambildatahasil as $h){
+                $posisiterbaik->push((object)[
+                    'id' => $h->id,
+                    // 'nama' => $pemain->pemain!=null?$pemain->pemain->nama:'Data tidak ditemukan',
+                    'nama' => $h->posisiseleksi->posisipemain->nama,
+                    'total' => $h->total,
+                ]);
+
+            }
+
+            $hasil->push((object)[
+                'id' => $pemain->id,
+                'nama' => $pemain->pemain!=null?$pemain->pemain->nama:'Data tidak ditemukan',
+                'posisiterbaik' => $posisiterbaik,
+            ]);
+        }
+
+
+        $hasil2= new Collection();
+        foreach($ambildataposisiseleksi as $item){
+
+            $pemainterbaik= new Collection();
+            $ambildatahasil=penilaianhasil::with('pemainseleksi')->where('posisiseleksi_id',$item->id)->skip(0)->take($tahunpenilaian->jml)->orderBy('total','desc')->get();
+            foreach($ambildatahasil as $h){
+                $pemainterbaik->push((object)[
+                    'id' => $h->id,
+                    // 'nama' => $pemain->pemain!=null?$pemain->pemain->nama:'Data tidak ditemukan',
+                    'nama' => $h->pemainseleksi->pemain->nama,
+                    'total' => $h->total,
+                ]);
+
+            }
+
+            $hasil2->push((object)[
+                'id' => $item->id,
+                'nama' => $item->posisipemain!=null?$item->posisipemain->nama:'Data tidak ditemukan',
+                'pemainterbaik' => $pemainterbaik,
+            ]);
+        }
+        // dd($hasil,$hasil2);
+
         $pages='tahunpenilaian';
         return view('pages.admin.prosesperhitungan.tampil',compact('datas'
         ,'koleksipemain'
+        ,'hasil'
+        ,'hasil2'
         ,'ambildatakriteriadetail'
         ,'ambilprosespenilaian'
         ,'ambildatakriteria'
+        ,'dataakhir'
         ,'ambildataposisiseleksi'
         ,'request','pages','tahunpenilaian','ambildatapemainseleksi'));
         // dd($koleksipemain,$ambildatapemainseleksi);
