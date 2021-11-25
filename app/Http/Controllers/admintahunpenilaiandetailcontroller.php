@@ -192,10 +192,14 @@ class admintahunpenilaiandetailcontroller extends Controller
 
     public function apiperiksaminimum(tahunpenilaian $tahunpenilaian, Request $request)
     {
+        $this->th=$tahunpenilaian->id;
         $kriteriastatus=null;
         $posisistatus=null;
         $pemainstatus=null;
-        $kriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        $prosesstatus=null;
+        $kriteria=kriteriadetail::whereIn('kriteria_id',function($query){
+            $query->select('id')->from('kriteria')->where('tahunpenilaian_id',$this->th);
+    })->count();
         if($kriteria>2){
             $kriteriastatus='ok';
         }
@@ -206,6 +210,10 @@ class admintahunpenilaiandetailcontroller extends Controller
         $pemain=pemainseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
         if($pemain>2){
             $pemainstatus='ok';
+        }
+        $proses=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        if($proses>0){
+            $prosesstatus='ok';
         }
         $output='';
         $datas='';
@@ -220,6 +228,8 @@ class admintahunpenilaiandetailcontroller extends Controller
             'posisistatus' => $posisistatus,
             'pemain' => $pemain,
             'pemainstatus' => $pemainstatus,
+            'proses' => $proses,
+            'prosesstatus' => $prosesstatus,
         ], 200);
     }
 

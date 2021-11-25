@@ -11,6 +11,7 @@ use App\Http\Controllers\adminpenilaiancontroller;
 use App\Http\Controllers\adminpenilaiandetailcontroller;
 use App\Http\Controllers\adminposisipemaincontroller;
 use App\Http\Controllers\adminposisiseleksicontroller;
+use App\Http\Controllers\adminprosesperhitungancontroller;
 use App\Http\Controllers\adminseedercontroller;
 use App\Http\Controllers\adminsettingscontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
@@ -70,6 +71,9 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/detail/{id}', [adminpemainseleksicontroller::class, 'detail'])->name('pemainseleksi.detail
     detail');
 
+
+//prosesperhitungan
+    Route::get('/admin/prosesperhitungan/{tahunpenilaian}', [adminprosesperhitungancontroller::class, 'index'])->name('prosesperhitungan');
 
 
     Route::get('/admin/prosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'prosespenilaian'])->name('prosespenilaian');

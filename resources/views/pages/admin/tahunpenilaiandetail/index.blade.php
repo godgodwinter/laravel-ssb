@@ -178,25 +178,39 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                                             warnapemain='success';
                                             statuspemain='Ok';
                                         }
+
+                                        let warnaproses='warning';
+                                        let statusproses='Tidak Cukup';
+                                        if(data.prosesstatus!=null){
+                                            warnaproses='success';
+                                            statusproses='Ok';
+                                        }
                     let divKriteria=`
                     <div class="col-8">
-                        <p>Jumlah Kriteria : ${data.kriteria}</p>
+                        <p>Jumlah Sub Kriteria : ${data.kriteria} - min(3)</p>
                     </div>
                     <div class="col-4"><a class="btn btn-${warna} btn-sm" href="#"><i class="far fa-check-circle"></i> ${status}</a></div>
                     `;
                     let divPosisi=`
                     <div class="col-8">
-                        <p>Jumlah Kriteria : ${data.posisi}</p>
+                        <p>Jumlah Posisi Pemain : ${data.posisi} - min (1)</p>
                     </div>
                     <div class="col-4"><a class="btn btn-${warnaposisi} btn-sm" href="#"><i class="far fa-check-circle"></i> ${statusposisi}</a></div>
                     `;
                     let divPemain=`
                     <div class="col-8">
-                        <p>Jumlah Kriteria : ${data.pemain}</p>
+                        <p>Jumlah Pemain : ${data.pemain} - min (3)</p>
                     </div>
                     <div class="col-4"><a class="btn btn-${warnapemain} btn-sm" href="#"><i class="far fa-check-circle"></i> ${statuspemain}</a></div>
                     `;
+                    let divProses=`
+                    <div class="col-8">
+                        <p>Jumlah Proses Penilaian : ${data.proses} - (1)</p>
+                    </div>
+                    <div class="col-4"><a class="btn btn-${warnaproses} btn-sm" href="#"><i class="far fa-check-circle"></i> ${statusproses}</a></div>
+                    `;
                                         // console.log(data.kriteria);
+                                        $('#divProses').html(divProses);
                                         $('#divKriteria').html(divKriteria);
                                         $('#divPosisi').html(divPosisi);
                                         $('#divPemain').html(divPemain);
@@ -453,29 +467,37 @@ Proses Penilaian {{$tahunpenilaian->nama}}
           <div class="modal-header">
             <h5 class="modal-title" >Lanjutkan Proses</h5>
           </div>
-          <form action="{{route('prosespenilaian',$tahunpenilaian->id)}}" method="GET" id="formLanjutProses">
+          <form action="{{route('prosesperhitungan',$tahunpenilaian->id)}}" method="GET" id="formLanjutProses">
               @csrf
           <div class="modal-body">
+            <div class="row" id="divProses">
+                <div class="col-8">
+                    <p>Jumlah Proses Penilaian : Error</p>
+                </div>
+                <div class="col-4"><a class="btn btn-warning btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+            </div>
                 <div class="row" id="divKriteria">
                     <div class="col-8">
-                        <p>Jumlah Kriteria : 3 (20)</p>
+                        <p>Jumlah Sub Kriteria :Error</p>
                     </div>
-                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                    <div class="col-4"><a class="btn btn-warning btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
                 </div>
 
                 <div class="row" id="divPosisi">
                     <div class="col-8">
-                        <p>Jumlah Kriteria : 3 (20)</p>
+                        <p>Jumlah Posisi : Error </p>
                     </div>
-                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                    <div class="col-4"><a class="btn btn-warning btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
                 </div>
 
                 <div class="row" id="divPemain">
                     <div class="col-8">
-                        <p>Jumlah Kriteria : 3 (20)</p>
+                        <p>Jumlah Pemain :Error</p>
                     </div>
-                    <div class="col-4"><a class="btn btn-success btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
+                    <div class="col-4"><a class="btn btn-warning btn-sm" href="#"><i class="far fa-check-circle"></i> Ok</a></div>
                 </div>
+
+
 
 
 
