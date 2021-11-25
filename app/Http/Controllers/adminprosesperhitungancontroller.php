@@ -166,7 +166,7 @@ class adminprosesperhitungancontroller extends Controller
         ]);
         }
 
-        dd($koleksipemain,$ambildatapemainseleksi);
+        // dd($koleksipemain,$ambildatapemainseleksi);
         return redirect()->route('prosesperhitungan.tampil',$tahunpenilaian->id)->with('status','Proses perhitungan berhasil!')->with('tipe','success');
     }
 
