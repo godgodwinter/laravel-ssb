@@ -7,6 +7,7 @@ use App\Http\Controllers\adminkriteriadetailcontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
 use App\Http\Controllers\adminpemainseleksicontroller;
+use App\Http\Controllers\adminpenilaiancontroller;
 use App\Http\Controllers\adminposisipemaincontroller;
 use App\Http\Controllers\adminposisiseleksicontroller;
 use App\Http\Controllers\adminseedercontroller;
@@ -68,6 +69,16 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/detail/{id}', [adminpemainseleksicontroller::class, 'detail'])->name('pemainseleksi.detail
     detail');
 
+
+
+    Route::get('/admin/prosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'prosespenilaian'])->name('prosespenilaian');
+    Route::get('/admin/prosespenilaian/{tahunpenilaian}/{id}', [adminpenilaiancontroller::class, 'edit'])->name('prosespenilaian.edit');
+    Route::get('/admin/prosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'prosespenilaian'])->name('prosespenilaian');
+    Route::put('/admin/prosespenilaian/{tahunpenilaian}/{id}', [adminpenilaiancontroller::class, 'update'])->name('prosespenilaian.update');
+    Route::delete('/admin/prosespenilaian/{tahunpenilaian}/{id}', [adminpenilaiancontroller::class, 'destroy'])->name('prosespenilaian.destroy');
+    Route::get('/admin/dataprosespenilaian/{tahunpenilaian}/create', [adminpenilaiancontroller::class, 'create'])->name('prosespenilaian.create');
+    Route::post('/admin/dataprosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'store'])->name('prosespenilaian.store');
+    Route::delete('/admin/dataprosespenilaian/{tahunpenilaian}/multidel', [adminpenilaiancontroller::class, 'multidel'])->name('prosespenilaian.multidel');
 
     //posisiseleksi
     Route::get('/admin/posisiseleksi/{tahunpenilaian}', [adminposisiseleksicontroller::class, 'index'])->name('posisiseleksi');

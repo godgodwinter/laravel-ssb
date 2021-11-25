@@ -8,6 +8,7 @@ use App\Models\kriteriadetail;
 use App\Models\pemainseleksi;
 use App\Models\posisiseleksi;
 use App\Models\posisiseleksidetail;
+use App\Models\prosespenilaian;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -44,6 +45,7 @@ class admintahunpenilaiandetailcontroller extends Controller
         $jmlkriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
         $jmlposisi=posisiseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
         $jmlpemain=pemainseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+        $jmprosespenilaian=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
 
         //ambilkode kriteria
         $ambilkriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
@@ -112,7 +114,7 @@ class admintahunpenilaiandetailcontroller extends Controller
         $datakriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
         // dd($kriteriadetail,$dataakhir);
 
-        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail','dataakhir','jmlposisi','jmlpemain','kriteriadetail','datakriteria'));
+        return view('pages.admin.tahunpenilaiandetail.index',compact('datas','request','pages','tahunpenilaian','jmlkriteria','jmlkriteriadetail','dataakhir','jmlposisi','jmlpemain','kriteriadetail','datakriteria','jmprosespenilaian'));
     }
 
 

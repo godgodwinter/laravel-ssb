@@ -70,13 +70,17 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                   </div>
 
                   <div class="row">
-                      <div class="card-stats-item col-6">
+                    <div class="card-stats-item col-4">
+                      <div class="card-stats-item-count">{{$jmlposisi}}</div>
+                      <div class="card-stats-item-label"><a class="btn btn-sm btn-info" href="{{route('posisiseleksi',$tahunpenilaian->id)}}">Posisi</a></div>
+                    </div>
+                    <div class="card-stats-item col-4">
+                      <div class="card-stats-item-count">{{$jmprosespenilaian}}</div>
+                      <div class="card-stats-item-label"><a class="btn btn-sm btn-info" href="{{route('prosespenilaian',$tahunpenilaian->id)}}">Proses Penilaian</a></div>
+                    </div>
+                      <div class="card-stats-item col-4">
                         <div class="card-stats-item-count">{{$jmlpemain}}</div>
                         <div class="card-stats-item-label">Pemain</div>
-                      </div>
-                      <div class="card-stats-item col-6">
-                        <div class="card-stats-item-count">{{$jmlposisi}}</div>
-                        <div class="card-stats-item-label"><a class="btn btn-sm btn-info" href="{{route('posisiseleksi',$tahunpenilaian->id)}}">Posisi</a></div>
                       </div>
                     </div>
                   </div>
@@ -449,7 +453,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
           <div class="modal-header">
             <h5 class="modal-title" >Lanjutkan Proses</h5>
           </div>
-          <form action="#" method="POST" id="formLanjutProses">
+          <form action="{{route('prosespenilaian',$tahunpenilaian->id)}}" method="GET" id="formLanjutProses">
               @csrf
           <div class="modal-body">
                 <div class="row" id="divKriteria">
