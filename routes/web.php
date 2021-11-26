@@ -210,5 +210,12 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/pemain/prosesperhitungan/{tahunpenilaian}/grafikhasilpenilaian', [pemaintahunpenilaiancontroller::class, 'grafikhasilpenilaian'])->name('pemain.prosesperhitungan.grafikhasilpenilaian');
 
 
+
 });
 
+
+
+    //menulanding
+    Route::get('/about', [landingcontroller::class, 'about'])->name('landing.about');
+    Route::get('/pemain', [landingcontroller::class, 'pemain'])->name('landing.pemain');
+    Route::get('/pelatih', [landingcontroller::class, 'pelatih'])->name('landing.pelatih');

@@ -19,4 +19,18 @@ class landingcontroller extends Controller
     return view('landing.pages.index',compact('pages'));
     }
 
+    public function pemain(){
+        $pages='pemain';
+    return view('landing.pages.pemain',compact('pages'));
+    }
+
+    public function pelatih(){
+        $pages='pelatih';
+    return view('landing.pages.pelatih',compact('pages'));
+    }
+
+    public function about(){
+        $pages='about';
+    return view('landing.pages.about',compact('pages'));
+    }
 }
