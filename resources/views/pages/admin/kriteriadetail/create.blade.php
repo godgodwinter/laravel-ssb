@@ -18,6 +18,9 @@ Sub kriteria
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('dashboard')}}">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="{{route('tahunpenilaian')}}">Tahun Penilaian</a></div>
+            <div class="breadcrumb-item"><a href="{{route('tahunpenilaian.detail',$kriteria->tahunpenilaian->id)}}">Detail</a></div>
+            <div class="breadcrumb-item"><a href="{{route('kriteria',$kriteria->tahunpenilaian->id)}}">Kriteria</a></div>
             <div class="breadcrumb-item"><a href="{{route('kriteriadetail',$kriteria->id)}}">@yield('title')</a></div>
             <div class="breadcrumb-item">Tambah</div>
         </div>

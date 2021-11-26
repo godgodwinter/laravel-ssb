@@ -18,6 +18,8 @@ Pemain Seleksi
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{route('dashboard')}}">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="{{route('tahunpenilaian')}}">Tahun Penilaian</a></div>
+            <div class="breadcrumb-item"><a href="{{route('tahunpenilaian.detail',$tahunpenilaian->id)}}">Detail</a></div>
             {{-- <div class="breadcrumb-item"><a href="#">Layout</a></div> --}}
             <div class="breadcrumb-item">@yield('title')</div>
         </div>
