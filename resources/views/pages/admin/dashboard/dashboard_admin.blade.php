@@ -19,12 +19,12 @@
                         </div>
                         <div class="card-wrap">
                           <div class="card-header">
-                            <h4>Jumlah Produk</h4>
+                            <h4>Jumlah Pemain</h4>
                           </div>
                           <div class="card-body">
 
-                            {{$produkJml}} Produk
-                            <div class="text-muted text-small"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 1Kelas</div>
+                            {{$jmlpemain}} Pemain
+                            {{-- <div class="text-muted text-small"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 1Kelas</div> --}}
 
                           </div>
                         </div>
@@ -37,11 +37,11 @@
                         </div>
                         <div class="card-wrap">
                           <div class="card-header">
-                            <h4>Jumlah Treatment</h4>
+                            <h4>Jumlah Pelatih</h4>
                           </div>
                           <div class="card-body">
 
-                            {{$treatmentJml}} Treatment
+                            {{$jmlpelatih}} Pelatih
                           </div>
                         </div>
                       </div>
@@ -53,12 +53,12 @@
                         </div>
                         <div class="card-wrap">
                           <div class="card-header">
-                            <h4>Jumlah Transaksi</h4>
+                            <h4>Jumlah Posisi Pemain</h4>
                           </div>
                           <div class="card-body">
 
-                            {{$transaksiSuccessJml}} Transaksi
-                            <div class="text-muted text-small"><span class="text-primary"><i class="fas fa-caret-up"></i></span> Total {{$transaksiTotalJml}} Total</div>
+                            {{$jmlposisi}} Posisi
+                            {{-- <div class="text-muted text-small"><span class="text-primary"><i class="fas fa-caret-up"></i></span> Total {{$transaksiTotalJml}} Total</div> --}}
                           </div>
                         </div>
                       </div>
@@ -70,11 +70,13 @@
                         </div>
                         <div class="card-wrap">
                           <div class="card-header">
-                            <h4>Jumlah Perawatan</h4>
+                            <h4>Jumlah Proses Penilaian</h4>
                           </div>
                           <div class="card-body">
 
-                                {{$perawatanJml}} Perawatan
+                                {{$jmlproses}} Proses
+                                <div class="text-muted text-small"><span class="text-primary"><i class="fas fa-caret-up"></i></span> Total {{$jmlprosesselesai}} Selesai</div>
+
 
                           </div>
                         </div>
@@ -84,7 +86,7 @@
 
 
 
-              <div class="row">
+              {{-- <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                   <div class="card">
                     <div class="card-header">
@@ -96,7 +98,7 @@
                   </div>
                 </div>
 
-              </div>
+              </div> --}}
 
 
 
@@ -104,7 +106,7 @@
         </section>
 
 
-@push('after-style')
+{{-- @push('after-style')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script>
@@ -147,5 +149,5 @@
 });
 
     </script>
-@endpush
+@endpush --}}
 @endsection
