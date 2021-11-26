@@ -54,6 +54,15 @@ Beranda
         </div>
         <div class="col-lg-7 z-index-2 mb-5"><img class="w-100" src="{{url('/')}}/assets/img/undraw_junior_soccer.svg" alt="..." /></div>
 
+        <div class="col-lg-5 z-index-2">
+
+            <div class="col-md-12">
+                <h5>Demo : </h5>
+                <label  for="inputPhone">Username : admin</label>
+                <br>
+                <label  for="inputPhone">Password : admin</label>
+            </div>
+        </div>
       </div>
     </div>
   </section>
