@@ -55,14 +55,33 @@ Beranda
         <div class="col-lg-7 z-index-2 mb-5"><img class="w-100" src="{{url('/')}}/assets/img/undraw_junior_soccer.svg" alt="..." /></div>
 
         <div class="col-lg-5 z-index-2">
+            <div class="row">
+                <h3>Demo : </h3>
 
-            <div class="col-md-12">
-                <h5>Demo : </h5>
+            <div class="col-md-4">
+                <h5>Sebagai : Admin</h5>
                 <label  for="inputPhone">Username : admin</label>
                 <br>
                 <label  for="inputPhone">Password : admin</label>
             </div>
+
+            <div class="col-md-4">
+                <h5>Sebagai : Pemain</h5>
+                <label  for="inputPhone">Username : pemain</label>
+                <br>
+                <label  for="inputPhone">Password : pemain</label>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Sebagai : Pelatih</h5>
+                <label  for="inputPhone">Username : pelatih</label>
+                <br>
+                <label  for="inputPhone">Password : pelatih</label>
+            </div>
+
         </div>
+
+    </div>
       </div>
     </div>
   </section>
