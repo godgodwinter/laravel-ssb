@@ -26,11 +26,13 @@
 
         <li {{ $pages == 'users' ? 'class=active' : '' }}><a class="nav-link" href="{{ route('users') }}"><i class="fas fa-user"></i> <span>User</span></a></li>
 
-        <li {{ $pages == 'tipepemain' ? 'class=active' : '' }}><a class="nav-link" href="#"><i class="fas fa-text-height"></i> <span>Tipe Penilaian</span></a></li>
+        {{-- <li {{ $pages == 'tipepemain' ? 'class=active' : '' }}><a class="nav-link" href="#"><i class="fas fa-text-height"></i> <span>Tipe Penilaian</span></a></li> --}}
 
     </ul>
 
+<li {{ $pages == 'tahunpenilaian' ? 'class=active' : '' }}><a class="nav-link" href="{{route('tahunpenilaian')}}"><i class="fas fa-flag-checkered"></i><span>Penilaian </span></a></li>
+{{--
 <li {{ $pages == 'tahunpenilaian' ? 'class=active' : '' }}><a class="nav-link" href="{{route('tahunpenilaian')}}"><i class="fas fa-id-card-alt"></i><span>Penilaian </span></a></li>
 
 
-<li {{ $pages == 'penilaian' ? 'class=active' : '' }}><a class="nav-link" href="#"><i class="fas fa-flag-checkered"></i><span>Hasil Penilaian </span></a></li>
+<li {{ $pages == 'penilaian' ? 'class=active' : '' }}><a class="nav-link" href="#"><i class="fas fa-flag-checkered"></i><span>Hasil Penilaian </span></a></li> --}}

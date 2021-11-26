@@ -56,7 +56,7 @@ Tahun Penilaian
                                 @endif
                             @endif
                             <option>Proses</option>
-                            <option>Selesai</option>
+                            {{-- <option>Selesai</option> --}}
                             </select>
                             @error('status')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror

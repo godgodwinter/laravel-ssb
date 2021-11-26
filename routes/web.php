@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 //prosesperhitungan
     Route::get('/admin/prosesperhitungan/{tahunpenilaian}', [adminprosesperhitungancontroller::class, 'index'])->name('prosesperhitungan');
     Route::get('/admin/prosesperhitungan/{tahunpenilaian}/tampil', [adminprosesperhitungancontroller::class, 'tampil'])->name('prosesperhitungan.tampil');
+    Route::get('/admin/prosesperhitungan/{tahunpenilaian}/selesai', [adminprosesperhitungancontroller::class, 'selesai'])->name('prosesperhitungan.selesai');
 
 
     Route::get('/admin/prosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'prosespenilaian'])->name('prosespenilaian');

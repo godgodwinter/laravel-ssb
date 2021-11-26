@@ -26,7 +26,12 @@ Proses Perhitungan
     </div>
 
     <div class="section-body">
+        <div class="card">
 
+            <div class="text-right">
+                <a href="{{route('prosesperhitungan.selesai',$tahunpenilaian->id)}}" class="btn btn-round btn-warning">Proses Selesai</a>
+            </div>
+        </div>
 
         <div class="card">
             <div class="card-body" id="babengcardDate">

@@ -48,7 +48,7 @@ Tahun Penilaian
 
                         <select class="form-control  @error('status') is-invalid @enderror" name="status" required>
                             <option>Proses</option>
-                            <option>Selesai</option>
+                            {{-- <option>Selesai</option> --}}
                         </select>
                         @error('status')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror

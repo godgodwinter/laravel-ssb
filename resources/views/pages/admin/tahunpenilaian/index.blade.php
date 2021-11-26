@@ -62,33 +62,54 @@ Tahun Penilaian
                         <tr style="background-color: #F1F1F1">
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
-                            <th >Status </th>
-                            <th >Kuota </th>
+                            <th class="text-center" >Status </th>
+                            <th  class="text-center">Kuota </th>
                             <th >Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($datas as $data)
+
+                        @php
+                        $status='Proses';
+                        $warna='info';
+                        if($data->status=='Selesai'){
+                            $status='Selesai';
+                            $warna='success';
+                        }
+                    @endphp
                         <tr id="sid{{ $data->id }}">
                                 <td class="text-center">
+                                    @if ($status=='Selesai')
+                                    @else
                                     <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
+                                    @endif
+
                                     {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
                                 <td>
                                     {{$data->nama}}
                                 </td>
-                                <td>
-                                    {{$data->status}}
+                                <td class="text-center">
+                                    <button class="btn btn-{{$warna}} btn-round btn-sm">{{$status}}</button>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{$data->jml}}
                                 </td>
                                 <td class="text-center babeng-min-row">
-                                    <a class="btn btn-info btn-sm" href="{{route('tahunpenilaian.detail',$data->id)}}">
+                                    <a class="btn btn-info btn-sm" href="{{route('tahunpenilaian.detail',$data->id)}}"  data-toggle="tooltip" data-placement="top" title="Lihat Detail Proses Penilaian!">
                                         <i class="fas fa-angle-double-right"></i>
                                     </a>
                                     {{-- <x-button-reset-pass link="/admin/{{ $pages }}/{{$data->id}}/reset" /> --}}
                                     <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
+
+                                    @if ($status=='Selesai')
+                                    <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
+                                    <button class="btn btn-icon btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Proses Selesai tidak dapat dihapus!"><span
+            class="pcoded-micon"> <i class="fas fa-trash"></i></span></button>
+                                    @else
+                                    <a href="#" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Selesaikan Proses dahulu untuk Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
                                     <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
+                                    @endif
                                 </td>
 
 

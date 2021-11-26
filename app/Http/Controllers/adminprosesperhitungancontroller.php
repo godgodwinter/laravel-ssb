@@ -516,4 +516,14 @@ class adminprosesperhitungancontroller extends Controller
         ,'request','pages','tahunpenilaian','ambildatapemainseleksi'));
         // dd($koleksipemain,$ambildatapemainseleksi);
     }
+    public function selesai(tahunpenilaian $tahunpenilaian){
+
+
+            tahunpenilaian::where('id',$tahunpenilaian->id)
+            ->update([
+                'status'     =>   'Selesai',
+            'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+        return redirect()->route('tahunpenilaian')->with('status','Proses Perhitungan berhasil diselesaikan!')->with('tipe','success');
+    }
 }
