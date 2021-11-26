@@ -21,6 +21,7 @@ use App\Http\Controllers\admintahunpenilaiancontroller;
 use App\Http\Controllers\admintahunpenilaiandetailcontroller;
 use App\Http\Controllers\adminuserscontroller;
 use App\Http\Controllers\landingcontroller;
+use App\Http\Controllers\pemaintahunpenilaiancontroller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 // use Facades\Yugo\SMSGateway\Interfaces\SMS;
@@ -199,6 +200,15 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
     //proseslainlain
     Route::post('/admin/proses/cleartemp', [adminprosescontroller::class, 'cleartemp'])->name('cleartemp');
+
+
+
+    //menupemain
+    //tahunpenilaian
+    Route::get('/pemain/tahunpenilaian', [pemaintahunpenilaiancontroller::class, 'index'])->name('pemain.tahunpenilaian');
+    Route::get('/pemain/prosesperhitungan/{tahunpenilaian}/cetakhasilpenilaian', [pemaintahunpenilaiancontroller::class, 'cetakhasilpenilaian'])->name('pemain.prosesperhitungan.cetakhasilpenilaian');
+    Route::get('/pemain/prosesperhitungan/{tahunpenilaian}/grafikhasilpenilaian', [pemaintahunpenilaiancontroller::class, 'grafikhasilpenilaian'])->name('pemain.prosesperhitungan.grafikhasilpenilaian');
+
 
 });
 
