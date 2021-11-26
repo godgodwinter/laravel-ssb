@@ -49,7 +49,7 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                   </div>
                 </div>
               <div class="text-right pt-4 pb-1 mr-2 mb-2">
-                <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round">
+                <a href="{{route('seeder.kriteria.th',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round">
                   Seeder Kriteria dan Sub
                 </a>
                 <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
@@ -88,15 +88,18 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                     </div>
                   </div>
                 <div class="text-right pt-4 pb-1 mr-2 mb-2">
-                    <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                    <a href="{{route('seeder.posisi.th',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
                       Seeder Posisi
                     </a>
 
-                    <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                    <a href="{{route('seeder.prosespenilaian.th',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
                     Seeder Proses Penilaian
                   </a>
 
-                <a href="{{route('kriteria',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                  <a href="{{route('seeder.pemain.th',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round mb-2">
+                    Seeder  Pemain
+                  </a>
+                  <a href="{{route('seeder.randomnilaipemain.th',$tahunpenilaian->id)}}" class="btn btn-danger btn-sm btn-round">
                     Seeder Random nilai Pemain
                   </a>
                   <a href="{{route('pemainseleksi',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
@@ -247,6 +250,9 @@ Proses Penilaian {{$tahunpenilaian->nama}}
         <div class="card">
             <div class="card-body"  id="babengcardDate" >
 
+                <a href="{{route('seeder.parameter.th',$tahunpenilaian->id)}}" class="btn btn-dark btn-sm btn-round">
+                    Seeder Parameter Posisi
+                  </a>
 
 
 

@@ -191,15 +191,15 @@ Pengaturan
 
 
 
-                    <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
+                    {{-- <form action="{{route('seeder.kriteria')}}" method="post" class="d-inline">
                         @csrf
                         <button class="btn btn-info">Seeder Kriteria</button>
-                    </form>
+                    </form> --}}
 
-                    <form action="{{route('seeder.kriteriadetail')}}" method="post" class="d-inline">
+                    {{-- <form action="{{route('seeder.kriteriadetail')}}" method="post" class="d-inline">
                         @csrf
                         <button class="btn btn-info">Seeder Kriteria detail</button>
-                    </form>
+                    </form> --}}
 
                     <form action="{{route('seeder.posisi')}}" method="post" class="d-inline">
                         @csrf

@@ -37,7 +37,8 @@ class adminpemainseleksicontroller extends Controller
         #WAJIB
         $pages='pemain';
         $datapemainseleksi=pemainseleksi
-        ::with('pemain')->where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
+        ::with('pemain')->where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+        // ::with('pemain')->where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
         $datakriteriadetail=kriteriadetail::whereIn('kriteria_id',function($query){
                 $query->select('id')->from('kriteria')->where('tahunpenilaian_id',$this->th);

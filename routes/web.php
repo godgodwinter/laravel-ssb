@@ -13,6 +13,7 @@ use App\Http\Controllers\adminposisipemaincontroller;
 use App\Http\Controllers\adminposisiseleksicontroller;
 use App\Http\Controllers\adminprosesperhitungancontroller;
 use App\Http\Controllers\adminseedercontroller;
+use App\Http\Controllers\adminseederthcontroller;
 use App\Http\Controllers\adminsettingscontroller;
 use App\Http\Controllers\admintahunpenilaiancontroller;
 use App\Http\Controllers\admintahunpenilaiandetailcontroller;
@@ -180,6 +181,17 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::post('/admin/seeder/kriteriadetail', [adminseedercontroller::class, 'kriteriadetail'])->name('seeder.kriteriadetail');
     Route::post('/admin/seeder/posisi', [adminseedercontroller::class, 'posisi'])->name('seeder.posisi');
     Route::post('/admin/seeder/hard', [adminseedercontroller::class, 'hard'])->name('seeder.hard');
+
+
+    //seder dalam tahunpenilaian
+    Route::get('/admin/seeder/th/{tahunpenilaian}/pemain', [adminseederthcontroller::class, 'pemain'])->name('seeder.pemain.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/kriteria', [adminseederthcontroller::class, 'kriteria'])->name('seeder.kriteria.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/kriteriadetail', [adminseederthcontroller::class, 'kriteriadetail'])->name('seeder.kriteriadetail.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/posisi', [adminseederthcontroller::class, 'posisi'])->name('seeder.posisi.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/prosespenilaian', [adminseederthcontroller::class, 'prosespenilaian'])->name('seeder.prosespenilaian.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/randomnilaipemain', [adminseederthcontroller::class, 'randomnilaipemain'])->name('seeder.randomnilaipemain.th');
+    Route::get('/admin/seeder/th/{tahunpenilaian}/parameter', [adminseederthcontroller::class, 'parameter'])->name('seeder.parameter.th');
+
     //proseslainlain
     Route::post('/admin/proses/cleartemp', [adminprosescontroller::class, 'cleartemp'])->name('cleartemp');
 
