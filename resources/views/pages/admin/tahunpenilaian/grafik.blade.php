@@ -36,10 +36,10 @@ Grafik Hasil Penilaian
 
 <div class="section-body">
     <h2 class="section-title">Hasil 1. Posisi Terbaik Setiap Pemain</h2>
+    <div class="row">
 @forelse ($datas as $data)
 
-    <div class="row">
-      <div class="col-12 col-md-8 col-lg-8">
+      <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
             <h4>{{$data->nama}}</h4>
@@ -49,7 +49,6 @@ Grafik Hasil Penilaian
           </div>
         </div>
       </div>
-    </div>
 
 
     {{-- @php
@@ -135,6 +134,7 @@ options: {
 @empty
 
 @endforelse
+    </div>
 </section>
 
 
@@ -142,10 +142,10 @@ options: {
 
 <div class="section-body">
     <h2 class="section-title">Hasil 2. Pemain Terbaik Setiap Posisi</h2>
+    <div class="row">
 @forelse ($hasil2 as $data)
 
-    <div class="row">
-      <div class="col-12 col-md-8 col-lg-8">
+        <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
             <h4>{{$data->nama}}</h4>
@@ -155,7 +155,6 @@ options: {
           </div>
         </div>
       </div>
-    </div>
 
 
     {{-- @php
@@ -241,6 +240,7 @@ options: {
 @empty
 
 @endforelse
+</div>
 </section>
 @endsection
 
