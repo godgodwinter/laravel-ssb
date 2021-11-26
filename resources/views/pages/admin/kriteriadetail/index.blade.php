@@ -65,8 +65,8 @@ Sub kriteria
                         <tr style="background-color: #F1F1F1">
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
-                            <th >Kode </th>
-                            <th >Bobot</th>
+                            {{-- <th >Kode </th> --}}
+                            {{-- <th >Bobot</th> --}}
                             {{-- <th >Tipe</th> --}}
                             <th >Aksi</th>
                         </tr>
@@ -80,12 +80,12 @@ Sub kriteria
                                 <td>
                                     {{$data->nama}}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{$data->kode}}
                                 </td>
                                 <td>
                                     {{$data->bobot}}
-                                </td>
+                                </td> --}}
                                 {{-- <td>
                                     {{$data->tipe}}
                                 </td> --}}

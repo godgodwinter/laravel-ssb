@@ -25,7 +25,7 @@ class adminkriteriadetailcontroller extends Controller
     public function index(kriteria $kriteria,Request $request)
     {
         #WAJIB
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         $datas=kriteriadetail
         ::where('kriteria_id',$kriteria->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
@@ -37,7 +37,7 @@ class adminkriteriadetailcontroller extends Controller
 
         $cari=$request->cari;
         #WAJIB
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         $datas=kriteriadetail::where('nama','like',"%".$cari."%")
         ->paginate(Fungsi::paginationjml());
 
@@ -45,7 +45,7 @@ class adminkriteriadetailcontroller extends Controller
     }
     public function create(kriteria $kriteria)
     {
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         return view('pages.admin.kriteriadetail.create',compact('pages','kriteria'));
     }
 
@@ -86,7 +86,7 @@ class adminkriteriadetailcontroller extends Controller
             $data_id=DB::table('kriteriadetail')->insertGetId(
                 array(
                     'nama'     =>   $request->nama,
-                    'bobot'     =>   $request->bobot,
+                    'bobot'     =>   $request->bobot?$request->bobot:'0',
                     'kode'     =>   $request->kode,
                     'kriteria_id'     =>   $kriteria->id,
                        'created_at'=>date("Y-m-d H:i:s"),
@@ -104,7 +104,7 @@ class adminkriteriadetailcontroller extends Controller
 
     public function edit(kriteria $kriteria,kriteriadetail $id)
     {
-        $pages='kriteria';
+        $pages='tahunpenilaian';
 
         return view('pages.admin.kriteriadetail.edit',compact('pages','id','kriteria'));
     }
@@ -135,7 +135,7 @@ class adminkriteriadetailcontroller extends Controller
         kriteriadetail::where('id',$id->id)
         ->update([
             'nama'     =>   $request->nama,
-            'bobot'     =>   $request->bobot,
+            'bobot'     =>   $request->bobot?$request->bobot:'0',
             'kode'     =>   $request->kode,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
@@ -158,7 +158,7 @@ class adminkriteriadetailcontroller extends Controller
 
         // load ulang
         #WAJIB
-        $pages='kriteriadetail';
+        $pages='tahunpenilaian';
         $datas=kriteriadetail
         ::where('kriteria_id',$kriteria->id)->paginate(Fungsi::paginationjml());
         // dd($datas);

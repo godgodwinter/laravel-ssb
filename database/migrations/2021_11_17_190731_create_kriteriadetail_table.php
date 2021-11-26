@@ -17,7 +17,7 @@ class CreateKriteriadetailTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('kriteria_id');
-            $table->string('bobot');
+            $table->string('bobot')->nullable();
             $table->string('kode')->nullable();
             $table->string('tipe')->nullable();
             $table->string('ket')->nullable();

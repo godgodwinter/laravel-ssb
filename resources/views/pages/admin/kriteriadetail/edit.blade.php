@@ -47,7 +47,7 @@ kriteriadetail
                         </div>
 
 
-                        <div class="form-group col-md-5 col-5 mt-0 ml-5">
+                        {{-- <div class="form-group col-md-5 col-5 mt-0 ml-5">
                             <label for="kode">Kode <code>*)</code></label>
                             <input type="text" name="kode" id="kode" class="form-control @error('kode') is-invalid @enderror" value="{{old('kode')!=null?old('kode'):$id->kode}}" required>
                             @error('kode')<div class="invalid-feedback"> {{$message}}</div>
@@ -59,7 +59,7 @@ kriteriadetail
                             <input type="number" name="bobot" id="bobot" class="form-control @error('bobot') is-invalid @enderror" value="{{old('bobot')!=null?old('bobot'):$id->bobot}}" required min="1" max="100">
                             @error('bobot')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
-                        </div>
+                        </div> --}}
 
 
                         </div>

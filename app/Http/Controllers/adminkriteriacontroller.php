@@ -27,7 +27,7 @@ class adminkriteriacontroller extends Controller
     public function index(tahunpenilaian $tahunpenilaian,Request $request)
     {
         #WAJIB
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         $datas=kriteria
         ::where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);
@@ -39,7 +39,7 @@ class adminkriteriacontroller extends Controller
 
         $cari=$request->cari;
         #WAJIB
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         $datas=kriteria::where('nama','like',"%".$cari."%")
         ->paginate(Fungsi::paginationjml());
 
@@ -47,7 +47,7 @@ class adminkriteriacontroller extends Controller
     }
     public function create(tahunpenilaian $tahunpenilaian)
     {
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         return view('pages.admin.kriteria.create',compact('pages','tahunpenilaian'));
     }
 
@@ -107,7 +107,7 @@ class adminkriteriacontroller extends Controller
 
     public function edit(tahunpenilaian $tahunpenilaian,kriteria $id)
     {
-        $pages='kriteria';
+        $pages='tahunpenilaian';
 
         return view('pages.admin.kriteria.edit',compact('pages','id','tahunpenilaian'));
     }
@@ -162,7 +162,7 @@ class adminkriteriacontroller extends Controller
 
         // load ulang
         #WAJIB
-        $pages='kriteria';
+        $pages='tahunpenilaian';
         $datas=kriteria
         ::where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
         // dd($datas);

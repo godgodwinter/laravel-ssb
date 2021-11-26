@@ -64,7 +64,7 @@ Kriteria
                         <tr style="background-color: #F1F1F1">
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
-                            <th >Kode </th>
+                            {{-- <th >Kode </th> --}}
                             <th >Bobot</th>
                             {{-- <th >Tipe</th> --}}
                             <th >Aksi</th>
@@ -79,9 +79,9 @@ Kriteria
                                 <td>
                                     {{$data->nama}}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{$data->kode}}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{$data->bobot}}
                                 </td>
