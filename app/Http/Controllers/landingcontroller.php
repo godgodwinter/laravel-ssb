@@ -6,6 +6,8 @@ use App\Helpers\Fungsi;
 use App\Models\dokter;
 use App\Models\kategori;
 use App\Models\member;
+use App\Models\pelatih;
+use App\Models\pemain;
 use App\Models\produk;
 use App\Models\testimoni;
 use App\Models\treatment;
@@ -21,12 +23,14 @@ class landingcontroller extends Controller
 
     public function pemain(){
         $pages='pemain';
-    return view('landing.pages.pemain',compact('pages'));
+        $datas=pemain::paginate(12);
+    return view('landing.pages.pemain',compact('pages','datas'));
     }
 
     public function pelatih(){
         $pages='pelatih';
-    return view('landing.pages.pelatih',compact('pages'));
+        $datas=pelatih::paginate(12);
+    return view('landing.pages.pelatih',compact('pages','datas'));
     }
 
     public function about(){
