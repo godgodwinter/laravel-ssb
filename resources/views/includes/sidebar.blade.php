@@ -14,11 +14,12 @@
 
 @include('includes.sidebar_admin')
 
-@elseif((Auth::user()->tipeuser)=='member')
+@elseif((Auth::user()->tipeuser)=='pemain')
 
-@include('includes.sidebar_member')
+@include('includes.sidebar_pemain')
 
 @else
+@include('includes.sidebar_pelatih')
 @endif
         </ul>
 

@@ -14,7 +14,8 @@ Beranda
 @if((Auth::user()->tipeuser)=='admin')
 
 @include('pages.admin.dashboard.dashboard_admin')
-
+@elseif ((Auth::user()->tipeuser)=='pemain')
+@include('pages.admin.dashboard.dashboard_admin')
 @else
-{{-- @include('pages.admin.dashboard.dashboard_member') --}}
+@include('pages.admin.dashboard.dashboard_admin')
 @endif

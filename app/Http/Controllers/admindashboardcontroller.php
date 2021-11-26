@@ -34,9 +34,25 @@ class admindashboardcontroller extends Controller
             $jmlprosesselesai=tahunpenilaian::where('status','Selesai')->count();
             return view('pages.admin.dashboard.index',compact('pages','jmlpemain','jmlpelatih','jmlposisi','jmlproses','jmlprosesselesai'));
         }
-        if((Auth::user()->tipeuser)=='member'){
+        if((Auth::user()->tipeuser)=='pemain'){
 
-            return view('pages.admin.dashboard.index',compact('pages','produkJml','laki','perempuan','treatmentJml','transaksiSuccessJml','transaksiTotalJml','perawatanJml'));
+            $jmlpemain=pemain::count();
+            $jmlpelatih=pelatih::count();
+            $jmlposisi=posisipemain::count();
+            $jmlproses=tahunpenilaian::count();
+            $jmlprosesselesai=tahunpenilaian::where('status','Selesai')->count();
+            return view('pages.admin.dashboard.index',compact('pages','jmlpemain','jmlpelatih','jmlposisi','jmlproses','jmlprosesselesai'));
+        }
+
+
+        if((Auth::user()->tipeuser)=='pelatih'){
+
+            $jmlpemain=pemain::count();
+            $jmlpelatih=pelatih::count();
+            $jmlposisi=posisipemain::count();
+            $jmlproses=tahunpenilaian::count();
+            $jmlprosesselesai=tahunpenilaian::where('status','Selesai')->count();
+            return view('pages.admin.dashboard.index',compact('pages','jmlpemain','jmlpelatih','jmlposisi','jmlproses','jmlprosesselesai'));
         }
     }
 
