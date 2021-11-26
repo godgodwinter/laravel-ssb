@@ -78,7 +78,8 @@ Proses Perhitungan
                                 No</th>
                             <th rowspan="2"  class="text-center" style="vertical-align: middle">Nama </th>
                             @forelse ($ambildatakriteriadetail as $item)
-                                <th colspan="5"  class="text-center" >{{$item->nama}}</th>
+                            {{-- {{$item->count()}} --}}
+                                <th colspan="{{$ambilprosespenilaian->count()+2}}"  class="text-center" >{{$item->nama}}</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
                             @endforelse
@@ -90,12 +91,12 @@ Proses Perhitungan
                                     <th >{{$p->nama}}</th>
                                 @empty
 
-                                <th rowspan="5">Proses Penilaia ntidak ditemukan</th>
+                                <th >Proses Penilaia ntidak ditemukan</th>
 
                                 @endforelse
 
-                            <th rowspan="2">AVG </th>
-                            <th rowspan="2">Bobot</th>
+                            <th >AVG </th>
+                            <th >Bobot</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
                             @endforelse
@@ -163,7 +164,9 @@ Proses Perhitungan
                                 $jmlkriteria=\App\Models\kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
                                 $jmlposisiseleksi=\App\Models\posisiseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
                             @endphp
-                                <th colspan="{{$kolom+(($jmlkriteria)*2)}}"  class="text-center" >{{$item->posisipemain->nama}}</th>
+
+
+                                <th colspan="{{$kolom+2}}"  class="text-center" >{{$item->posisipemain->nama}}</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
                             @endforelse
@@ -265,7 +268,13 @@ Proses Perhitungan
                                 No</th>
                             <th rowspan="2"  class="text-center" style="vertical-align: middle">Nama </th>
                             @forelse ($ambildataposisiseleksi as $item)
-                                <th colspan="3"  class="text-center" >{{$item->posisipemain->nama}}</th>
+                            @php
+                                $kolom=\App\Models\posisiseleksidetail::where('posisiseleksi_id',$item->id)->count();
+                                $jmlkriteria=\App\Models\kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+                                $jmlposisiseleksi=\App\Models\posisiseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+                            @endphp
+
+                                <th colspan="{{$jmlkriteria}}"  class="text-center" >{{$item->posisipemain->nama}}</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
                             @endforelse
@@ -334,7 +343,13 @@ Proses Perhitungan
                                 No</th>
                             <th rowspan="2"  class="text-center" style="vertical-align: middle">Nama </th>
                             @forelse ($ambildataposisiseleksi as $item)
-                                <th colspan="4"  class="text-center" >{{$item->posisipemain->nama}}</th>
+                            @php
+                                $kolom=\App\Models\posisiseleksidetail::where('posisiseleksi_id',$item->id)->count();
+                                $jmlkriteria=\App\Models\kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+                                $jmlposisiseleksi=\App\Models\posisiseleksi::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
+                            @endphp
+
+                                <th colspan="{{$jmlkriteria+1}}"  class="text-center" >{{$item->posisipemain->nama}}</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
                             @endforelse
