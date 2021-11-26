@@ -377,12 +377,17 @@ class adminprosesperhitungancontroller extends Controller
                     }
                 }
 
+                if($jmldata>0){
+                    $avg=$total/$jmldata;
+                }else{
+                    $avg=0;
+                }
                 $datakrit->push((object)[
                     'id' => $item->id,
                     'nama' => $item->nama!=null?$item->nama:'Data tidak ditemukan',
                     'posisiseleksidetail' => $posisiseleksidetail,
                     'total'=>$total,
-                    'avg'=>$total/$jmldata,
+                    'avg'=>$avg,
                 ]);
             }
             // dd($datakrit);
@@ -466,7 +471,7 @@ class adminprosesperhitungancontroller extends Controller
                 $posisiterbaik->push((object)[
                     'id' => $h->id,
                     // 'nama' => $pemain->pemain!=null?$pemain->pemain->nama:'Data tidak ditemukan',
-                    'nama' => $h->posisiseleksi->posisipemain->nama,
+                    'nama' => $h->posisiseleksi?$h->posisiseleksi->posisipemain->nama:'Data tidak ditemukan',
                     'total' => $h->total,
                 ]);
 
