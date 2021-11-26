@@ -103,7 +103,7 @@ Tahun Penilaian
                                     <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
 
                                     @if ($status=='Selesai')
-                                    <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
+                                    <a href="{{route('prosesperhitungan.cetakhasilpenilaian',$data->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
                                     <button class="btn btn-icon btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Proses Selesai tidak dapat dihapus!"><span
             class="pcoded-micon"> <i class="fas fa-trash"></i></span></button>
                                     @else
