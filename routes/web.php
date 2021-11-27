@@ -6,6 +6,7 @@ use App\Http\Controllers\admindashboardcontroller;
 use App\Http\Controllers\admingrafikcontroller;
 use App\Http\Controllers\adminkriteriacontroller;
 use App\Http\Controllers\adminkriteriadetailcontroller;
+use App\Http\Controllers\adminnotifcontroller;
 use App\Http\Controllers\adminpelatihcontroller;
 use App\Http\Controllers\adminpemaincontroller;
 use App\Http\Controllers\adminpemainseleksicontroller;
@@ -83,6 +84,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/admin/prosesperhitungan/{tahunpenilaian}/selesai', [adminprosesperhitungancontroller::class, 'selesai'])->name('prosesperhitungan.selesai');
     Route::get('/admin/prosesperhitungan/{tahunpenilaian}/cetakhasilpenilaian', [admincetakcontroller::class, 'cetakhasilpenilaian'])->name('prosesperhitungan.cetakhasilpenilaian');
     Route::get('/admin/prosesperhitungan/{tahunpenilaian}/grafikhasilpenilaian', [admingrafikcontroller::class, 'grafikhasilpenilaian'])->name('prosesperhitungan.grafikhasilpenilaian');
+    Route::get('/admin/prosesperhitungan/{tahunpenilaian}/notif', [adminnotifcontroller::class, 'notif'])->name('prosesperhitungan.notif');
 
 
     Route::get('/admin/prosespenilaian/{tahunpenilaian}', [adminpenilaiancontroller::class, 'prosespenilaian'])->name('prosespenilaian');

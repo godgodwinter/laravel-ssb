@@ -36,6 +36,10 @@ class pemain extends Model
     {
         return $this->hasMany('App\Models\penilaian');
     }
+    public function pemainseleksi()
+    {
+        return $this->hasMany('App\Models\pemainseleksi');
+    }
     public function users()
     {
         return $this->belongsTo('App\Models\User');
@@ -44,5 +48,6 @@ class pemain extends Model
     {
         return $this->belongsTo('App\Models\tahunpenilaian');
     }
+
 
 }

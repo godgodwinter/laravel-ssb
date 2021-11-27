@@ -103,12 +103,17 @@ Tahun Penilaian
                                     <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
 
                                     @if ($status=='Selesai')
+                                    <a href="{{route('prosesperhitungan.notif',$data->id)}}"
+                                        onclick="return  confirm('Anda yakin mengirim notifikasi hasil penilaian ini? Y/N')"  class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim Hasil Penilaian!"><i class="fab fa-whatsapp"></i></a>
                                     <a href="{{route('prosesperhitungan.grafikhasilpenilaian',$data->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Grafik!"><i class="fas fa-chart-bar"></i></a>
 
                                     <a href="{{route('prosesperhitungan.cetakhasilpenilaian',$data->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
                                     <button class="btn btn-icon btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Proses Selesai tidak dapat dihapus!"><span
             class="pcoded-micon"> <i class="fas fa-trash"></i></span></button>
+
                                     @else
+
+                                    <a href="#" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Kirim Hasil Penilaian!"><i class="fab fa-whatsapp"></i></a>
                                     <a href="#" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title=" Selesaikan Proses dahulu untuk Lihat Grafik!"><i class="fas fa-chart-bar"></i></a>
 
                                     <a href="#" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Selesaikan Proses dahulu untuk Cetak PDF!"><i class="fas fa-file-pdf"></i></a>
