@@ -21,6 +21,7 @@ use App\Http\Controllers\admintahunpenilaiancontroller;
 use App\Http\Controllers\admintahunpenilaiandetailcontroller;
 use App\Http\Controllers\adminuserscontroller;
 use App\Http\Controllers\landingcontroller;
+use App\Http\Controllers\pelatihtahunpenilaiancontroller;
 use App\Http\Controllers\pemaintahunpenilaiancontroller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -209,6 +210,15 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/pemain/prosesperhitungan/{tahunpenilaian}/cetakhasilpenilaian', [pemaintahunpenilaiancontroller::class, 'cetakhasilpenilaian'])->name('pemain.prosesperhitungan.cetakhasilpenilaian');
     Route::get('/pemain/prosesperhitungan/{tahunpenilaian}/grafikhasilpenilaian', [pemaintahunpenilaiancontroller::class, 'grafikhasilpenilaian'])->name('pemain.prosesperhitungan.grafikhasilpenilaian');
 
+
+
+    //menupelatih
+    //tahunpenilaian
+    Route::get('/pelatih/tahunpenilaian', [pelatihtahunpenilaiancontroller::class, 'index'])->name('pelatih.tahunpenilaian');
+    Route::get('/pelatih/prosesperhitungan/{tahunpenilaian}/cetakhasilpenilaian', [pelatihtahunpenilaiancontroller::class, 'cetakhasilpenilaian'])->name('pelatih.prosesperhitungan.cetakhasilpenilaian');
+    Route::get('/pelatih/prosesperhitungan/{tahunpenilaian}/grafikhasilpenilaian', [pelatihtahunpenilaiancontroller::class, 'grafikhasilpenilaian'])->name('pelatih.prosesperhitungan.grafikhasilpenilaian');
+
+    Route::get('/pelatih/datatahunpenilaian/{tahunpenilaian}', [pelatihtahunpenilaiancontroller::class, 'detail'])->name('pelatih.tahunpenilaian.detail');
 
 
 });
