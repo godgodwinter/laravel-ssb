@@ -158,7 +158,28 @@ Proses Perhitungan
                             <th class="text-center py-2 babeng-min-row"  rowspan="3"  class="text-center"  style="vertical-align: middle">
                                 No</th>
                             <th rowspan="3"  class="text-center" style="vertical-align: middle">Nama </th>
-                            @forelse ($ambildataposisiseleksi as $item)
+
+                            @forelse ($dataakhir as $item)
+                            @php
+                                $kolom=0;
+                            @endphp
+                                @forelse ($item->kriteria as $item2)
+                                    {{-- <th class="text-center" colspan="{{$item2->posisiseleksidetail->count()+2}}" data-toggle="tooltip" data-placement="top" title="{{$item->nama}}">{{$item2->nama}}</th> --}}
+                                @php
+                                    $kolom+=$item2->posisiseleksidetail->count()+2;
+                                @endphp
+                                @empty
+
+                                <th class="text-center" >Data tidak ditemukan</th>
+
+                                @endforelse
+                                {{-- {{dd($item2->posisiseleksidetail,$kolom)}} --}}
+                                <th colspan="{{$kolom}}"  class="text-center" >{{$item->nama}}</th>
+
+                            @empty
+                                <th>Data tidak ditemukan</th>
+                            @endforelse
+                            {{-- @forelse ($ambildataposisiseleksi as $item)
                             @php
                                 $kolom=\App\Models\posisiseleksidetail::where('posisiseleksi_id',$item->id)->count();
                                 $jmlkriteria=\App\Models\kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->count();
@@ -169,12 +190,12 @@ Proses Perhitungan
                                 <th colspan="{{$kolom+2}}"  class="text-center" >{{$item->posisipemain->nama}}</th>
                             @empty
                                 <th>Data tidak ditemukan</th>
-                            @endforelse
+                            @endforelse --}}
                         </tr>
                         <tr style="background-color: #F1F1F1">
                             @forelse ($dataakhir as $item)
                                 @forelse ($item->kriteria as $item2)
-                                    <th class="text-center" colspan="{{$item2->posisiseleksidetail->count()+2}}">{{$item2->nama}}</th>
+                                    <th class="text-center" colspan="{{$item2->posisiseleksidetail->count()+2}}" data-toggle="tooltip" data-placement="top" title="{{$item->nama}}">{{$item2->nama}}</th>
 
                                 @empty
 
@@ -192,7 +213,7 @@ Proses Perhitungan
                             @forelse ($dataakhir as $item)
                                 @forelse ($item->kriteria as $item2)
                                     @forelse ($item2->posisiseleksidetail as $krit)
-                                    <th class="text-center" >{{$krit->nama}}</th>
+                                    <th class="text-center" data-toggle="tooltip" data-placement="top" title="{{$item->nama}} - {{$item2->nama}}">{{$krit->nama}}</th>
 
                                     @empty
                                     <th class="text-center" >Data tidak ditemukan</th>
