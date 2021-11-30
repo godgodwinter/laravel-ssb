@@ -14,7 +14,25 @@ class Fungsi {
     //     $user = DB::table('users')->where('userid', $user_id)->first();
     //     return (isset($user->username) ? $user->username : '');
     // }
+    public static function wa_status(){
 
+        $settings = DB::table('settings')->first();
+        $data=$settings->wa_status;
+        return $data;
+    }
+    public static function wa_linkoff(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->wa_linkoff;
+        return $data;
+    }
+
+    public static function wa_linkon(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->wa_linkon;
+        return $data;
+    }
     public static  function isWeekend($date) {
         $weekDay = date('w', strtotime($date));
         return ($weekDay == 0 || $weekDay == 6 );

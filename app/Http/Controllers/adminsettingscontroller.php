@@ -49,6 +49,9 @@ class adminsettingscontroller extends Controller
             'lembaga_kota' => $request->lembaga_kota,
             'lembaga_telp' => $request->lembaga_telp,
             'sekolahttd' => $request->sekolahttd,
+            'wa_status' => $request->wa_status,
+            'wa_linkoff' => $request->wa_linkoff,
+            'wa_linkon' => $request->wa_linkon,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 

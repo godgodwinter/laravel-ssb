@@ -71,7 +71,15 @@ class adminnotifcontroller extends Controller
                     $hasil.=$item->nama.' Skor '.$item->total.' ,';
                 }
             }
-            $endpoint = "http://localhost:8081/send-message";
+            $wa_status=Fungsi::wa_status();
+            $linkserver='http://localhost:8081/';
+            if($wa_status!='Online'){
+                $linkserver=Fungsi::wa_linkoff();
+            }else{
+                $linkserver=Fungsi::wa_linkon();
+            }
+            $endpoint = $linkserver."send-message";
+            // dd($endpoint);
             $client = new \GuzzleHttp\Client();
             $number = $kirimpesan->number;
             $message = 'Yth Sdra/Sdri '.$kirimpesan->nama .'

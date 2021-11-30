@@ -42,6 +42,16 @@ Tahun Penilaian
                         </div>
 
                         <div class="ml-auto p-2 bd-highlight">
+                            @php
+                            $wa_status=Fungsi::wa_status()?Fungsi::wa_status():'Online';
+                            $linkserver='http://localhost:8081/';
+                                if($wa_status!='Online'){
+                                    $linkserver=Fungsi::wa_linkoff()?Fungsi::wa_linkoff():'http://localhost:8081/';
+                                }else{
+                                    $linkserver=Fungsi::wa_linkon()?Fungsi::wa_linkon():'http://localhost:8081/';
+                                }
+                            @endphp
+                            <a class="btn btn-sm btn-success" href="{{$linkserver}}" target="_blank">Scan WA</a>
                             <x-button-create link="{{route('tahunpenilaian.create')}}"></x-button-create>
                         </form>
 

@@ -43,6 +43,9 @@ class oneseeder extends Seeder
             'lembaga_kota' => 'Malang',
             'lembaga_logo' => 'assets/upload/logo.png',
             'sekolahttd' => 'Nama Kepala Sekolah M.Pd',
+            'wa_status' => 'Offline',
+            'wa_linkoff' => 'http://localhost:8081/',
+            'wa_linkon' => 'http://localhost:8081/',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
