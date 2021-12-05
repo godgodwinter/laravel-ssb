@@ -494,7 +494,7 @@ class adminprosesperhitungancontroller extends Controller
                 $pemainterbaik->push((object)[
                     'id' => $h->id,
                     // 'nama' => $pemain->pemain!=null?$pemain->pemain->nama:'Data tidak ditemukan',
-                    'nama' => $h->pemainseleksi->pemain->nama,
+                    'nama' => $h->pemainseleksi?$h->pemainseleksi->pemain->nama:'Data tidak ditemukan',
                     'total' => $h->total,
                 ]);
 
