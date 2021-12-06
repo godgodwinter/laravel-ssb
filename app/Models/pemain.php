@@ -21,6 +21,7 @@ class pemain extends Model
             'tgllahir',
             'tgldaftar',
             'ket',
+            'angkatan',
             'photo',
             'users_id',
             'tahunpenilaian_id',

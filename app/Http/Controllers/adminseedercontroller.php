@@ -277,6 +277,7 @@ class adminseedercontroller extends Controller
                 'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                 'alamat' => $faker->unique()->address,
                 'telp' => $faker->unique()->phoneNumber,
+                'angkatan' => $faker->numberBetween(2020,2022),
                 'tgllahir' => $faker->numberBetween(1990,2020).'-0'.$faker->numberBetween(1,9).'-'.$faker->numberBetween(10,29),
                 'tgldaftar' => $faker->numberBetween(1990,2020).'-0'.$faker->numberBetween(1,9).'-'.$faker->numberBetween(10,29),
                 'users_id' => $users_id,

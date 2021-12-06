@@ -83,7 +83,9 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::delete('/admin/pemainseleksi/{tahunpenilaian}/{id}', [adminpemainseleksicontroller::class, 'destroy'])->name('pemainseleksi.destroy');
     Route::get('/admin/datapemainseleksi/{tahunpenilaian}/cari', [adminpemainseleksicontroller::class, 'cari'])->name('pemainseleksi.cari');
     Route::get('/admin/datapemainseleksi/{tahunpenilaian}/create', [adminpemainseleksicontroller::class, 'create'])->name('pemainseleksi.create');
+    Route::get('/admin/datapemainseleksi/{tahunpenilaian}/createangkatan', [adminpemainseleksicontroller::class, 'createangkatan'])->name('pemainseleksi.createangkatan');
     Route::post('/admin/datapemainseleksi/{tahunpenilaian}', [adminpemainseleksicontroller::class, 'store'])->name('pemainseleksi.store');
+    Route::post('/admin/datapemainseleksi/{tahunpenilaian}/storeangkatan', [adminpemainseleksicontroller::class, 'storeangkatan'])->name('pemainseleksi.storeangkatan');
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/multidel', [adminpemainseleksicontroller::class, 'multidel'])->name('pemainseleksi.multidel');
     Route::delete('/admin/datapemainseleksi/{tahunpenilaian}/detail/{id}', [adminpemainseleksicontroller::class, 'detail'])->name('pemainseleksi.detail
     detail');

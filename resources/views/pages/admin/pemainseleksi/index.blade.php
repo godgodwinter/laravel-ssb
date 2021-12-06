@@ -43,7 +43,14 @@ Pemain Seleksi (Rata-rata dari Proses Penilaian)
                         </div>
 
                         <div class="ml-auto p-2 bd-highlight">
-                            <x-button-create link="{{route('pemainseleksi.create',$tahunpenilaian->id)}}"></x-button-create>
+                            <a href="{{route('pemainseleksi.create',$tahunpenilaian->id)}}" type="submit"
+                            class="btn btn-icon btn-primary  ml-0 btn-sm" data-toggle="tooltip" data-placement="top" title="Tambah data!"><span class="pcoded-micon"> <i class="fas fa-feather"></i> Tambah Pemain</span></a>
+
+
+                            <a href="{{route('pemainseleksi.createangkatan',$tahunpenilaian->id)}}" type="submit"
+                                class="btn btn-icon btn-primary  ml-0 btn-sm" data-toggle="tooltip" data-placement="top" title="Tambah data!"><span class="pcoded-micon"> <i class="fas fa-feather"></i> Tambah Angkatan Pemain</span></a>
+
+                            {{-- <x-button-create link="{{route('pemainseleksi.create',$tahunpenilaian->id)}}"></x-button-create> --}}
                         </form>
 
                     </div>

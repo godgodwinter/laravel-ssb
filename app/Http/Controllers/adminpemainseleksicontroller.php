@@ -150,6 +150,60 @@ class adminpemainseleksicontroller extends Controller
 
     }
 
+
+    public function createangkatan(tahunpenilaian $tahunpenilaian)
+    {
+        $this->th=$tahunpenilaian->id;
+        $pages='pemainseleksi';
+        $pemain=pemain::get();
+
+        $pemain=pemain::select('angkatan')->distinct()->get();
+        // dd($pemain);
+        return view('pages.admin.pemainseleksi.createangkatan',compact('pages','tahunpenilaian','pemain'));
+    }
+
+    public function storeangkatan(tahunpenilaian $tahunpenilaian,Request $request)
+    {
+
+            $request->validate([
+                'angkatan'=>'required',
+
+            ],
+            [
+                'angkatan.nama'=>'angkatan harus diisi',
+            ]);
+
+
+            // dd($request->angkatan);
+
+            //ambil data pemain dengan angakta = request angkatan
+            $ambildatapemain=pemain::where('angkatan',$request->angkatan)->get();
+            foreach($ambildatapemain as $item){
+                $pemainid=$item->id;
+                //peiksa jika belum ada maka insert
+                $periksa=pemainseleksi::where('pemain_id',$pemainid)->count();
+                    if($periksa<1){
+                        $data_id=DB::table('pemainseleksi')->insertGetId(
+                            array(
+                                'pemain_id'     =>   $pemainid,
+                                'tahunpenilaian_id'     =>   $tahunpenilaian->id,
+                                   'created_at'=>date("Y-m-d H:i:s"),
+                                   'updated_at'=>date("Y-m-d H:i:s")
+                            ));
+
+                    }
+            }
+
+
+
+
+
+
+
+    return redirect()->route('pemainseleksi',$tahunpenilaian->id)->with('status','Data berhasil tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
+
+    }
+
     public function edit(tahunpenilaian $tahunpenilaian,pemainseleksi $id)
     {
         $pages='pemainseleksi';
