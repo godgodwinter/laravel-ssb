@@ -82,18 +82,82 @@ class adminsettingscontroller extends Controller
         return redirect()->route('settings')->with('status','Data berhasil diubah!')->with('tipe','success');
     }
 
-    public function updatereminder(settings $id,Request $request){
-        $jam=date("H:i:s", strtotime($request->reminderjam));
-        // dd($request,$id,$jam);
-        settings::where('id','1')
-        ->update([
-            'reminderjam' => $jam,
-            'reminderidmesin' => $request->reminderidmesin,
-            'reminderpin' => $request->reminderpin,
-            'reminderotomatis' => $request->reminderotomatis,
-            'reminderhari' => $request->reminderhari,
-           'updated_at'=>date("Y-m-d H:i:s")
+    // public function updatereminder(settings $id,Request $request){
+    //     $jam=date("H:i:s", strtotime($request->reminderjam));
+    //     // dd($request,$id,$jam);
+    //     settings::where('id','1')
+    //     ->update([
+    //         'reminderjam' => $jam,
+    //         'reminderidmesin' => $request->reminderidmesin,
+    //         'reminderpin' => $request->reminderpin,
+    //         'reminderotomatis' => $request->reminderotomatis,
+    //         'reminderhari' => $request->reminderhari,
+    //        'updated_at'=>date("Y-m-d H:i:s")
+    //     ]);
+    //     return redirect()->back()->with('status','Data berhasil diubah!')->with('tipe','success');
+    // }
+    public function profile(){
+
+        $pages='profile';
+
+
+
+        $datas=DB::table('users')->where('id',Auth::user()->id)->first();
+        return view('pages.admin.settings.profile',compact('datas','pages'));
+    }
+    public function profileupdate(Request $request)
+    {
+        $myprofile=Auth::user();
+        // dd($myprofile,$request->username);
+
+        if($myprofile->username!==$request->username){
+
+            $request->validate([
+                'username' => "required|unique:users,username",
+            ],
+            [
+            ]);
+        }
+
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'username'=>'required',
+        ],
+        [
+            'nama.required'=>'nama harus diisi',
         ]);
-        return redirect()->back()->with('status','Data berhasil diubah!')->with('tipe','success');
+
+
+        if($request->password!=null OR $request->password!=''){
+
+        $request->validate([
+            'password' => 'min:3|required_with:password2|same:password2',
+            'password2' => 'min:3',
+        ],
+        [
+            'nama.required'=>'nama harus diisi',
+        ]);
+            User::where('id',$myprofile->id)
+            ->update([
+                'name'     =>   $request->name,
+                'email'     =>   $request->email,
+                'username'     =>   $request->username,
+                'password' => Hash::make($request->password),
+               'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+        }else{
+            User::where('id',$myprofile->id)
+            ->update([
+                'name'     =>   $request->name,
+                'username'     =>   $request->username,
+                'email'     =>   $request->email,
+               'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+
+        }
+
+
+    return redirect()->route('profile')->with('status','Data berhasil diubah!')->with('tipe','success')->with('icon','fas fa-feather');
     }
 }

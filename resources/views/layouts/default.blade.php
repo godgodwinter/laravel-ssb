@@ -47,9 +47,19 @@
                 <i class="fas fa-house-damage"></i> Beranda Luar
               </a>
 
-              {{-- <a href="#" class="dropdown-item has-icon">
-                <i class="fas fa-cog"></i> Settings
-              </a> --}}
+            @if(Auth::user()->tipeuser=='admin')
+                <a href="{{route('profile')}}" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Profile
+                </a>
+            @elseif(Auth::user()->tipeuser=='pelatih')
+                <a href="{{route('pelatih.profile')}}" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Profile
+                </a>
+            @else
+                <a href="{{route('pemain.profile')}}" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Profile
+                </a>
+            @endif
               <div class="dropdown-divider"></div>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf

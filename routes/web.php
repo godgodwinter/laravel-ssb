@@ -24,6 +24,7 @@ use App\Http\Controllers\adminuserscontroller;
 use App\Http\Controllers\landingcontroller;
 use App\Http\Controllers\pelatihtahunpenilaiancontroller;
 use App\Http\Controllers\pemaintahunpenilaiancontroller;
+use App\Http\Controllers\profilecontroller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 // use Facades\Yugo\SMSGateway\Interfaces\SMS;
@@ -41,6 +42,16 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     //settings
     Route::get('/admin/settings', [adminsettingscontroller::class, 'index'])->name('settings');
     Route::put('/admin/settings/{id}', [adminsettingscontroller::class, 'update'])->name('settings.update');
+
+
+    Route::get('/admin/profile', [adminsettingscontroller::class, 'profile'])->name('profile');
+    Route::put('/admin/profile/admin/update', [adminsettingscontroller::class, 'profileupdate'])->name('profileupdate');
+
+    Route::get('/pelatih/profile/', [profilecontroller::class, 'pelatih'])->name('pelatih.profile');
+    Route::put('/pelatih/profile/update', [profilecontroller::class, 'pelatihupdate'])->name('pelatih.profileupdate');
+
+    Route::get('/pemain/profile/', [profilecontroller::class, 'pemain'])->name('pemain.profile');
+    Route::put('/pemain/profile/update', [profilecontroller::class, 'pemainupdate'])->name('pemain.profileupdate');
 
     //MASTERING
     //USER
