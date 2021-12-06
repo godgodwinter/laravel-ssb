@@ -125,6 +125,7 @@ class adminpemaincontroller extends Controller
                        'nama'     =>   $request->nama,
                        'jk'     =>   $request->jk,
                        'telp'     =>   $request->telp,
+                       'angkatan'     =>   $request->angkatan,
                        'tgllahir'     =>   $request->tgllahir,
                        'alamat'     =>   $request->alamat,
                        'users_id'     =>   $users_id,
@@ -237,6 +238,7 @@ class adminpemaincontroller extends Controller
         ->update([
             'nama'     =>   $request->nama,
             'jk'     =>   $request->jk,
+            'angkatan'     =>   $request->angkatan,
             'telp'     =>   $request->telp,
             'tgllahir'     =>   $request->tgllahir,
             'alamat'     =>   $request->alamat,

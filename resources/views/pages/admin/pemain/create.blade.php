@@ -80,6 +80,12 @@ Pemain
                         @enderror
                     </div>
 
+                    <div class="form-group col-md-5 col-5 mt-0 ml-5">
+                        <label for="angkatan">Angkatan <code>*)</code></label>
+                        <input type="text" name="angkatan" id="angkatan" class="form-control @error('angkatan') is-invalid @enderror" value="{{old('angkatan')}}" required>
+                        @error('angkatan')<div class="invalid-feedback"> {{$message}}</div>
+                        @enderror
+                    </div>
 
                     <div class="form-group col-md-5 col-5 mt-0 ml-5">
                         <label for="username">Username<code>*)</code></label>
