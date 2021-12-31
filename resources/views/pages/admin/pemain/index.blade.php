@@ -63,9 +63,9 @@ Pemain
                             <th class="text-center py-2 babeng-min-row"> <input type="checkbox" id="chkCheckAll"> All</th>
                             <th >Nama </th>
                             <th >Username </th>
-                            <th >Jenis Kelamin</th>
-                            <th >Telp</th>
-                            <th >Photo</th>
+                            <th >Angkatan</th>
+                            <th >No WA</th>
+                            <th >Foto</th>
                             <th >Aksi</th>
                         </tr>
                     </thead>
@@ -82,7 +82,7 @@ Pemain
                                     {{$data->users?$data->users->username:'Data tidak ditemukan'}}
                                 </td>
                                 <td>
-                                    {{$data->jk}}
+                                    {{$data->angkatan}}
                                 </td>
                                 <td>
                                     {{$data->telp}}
