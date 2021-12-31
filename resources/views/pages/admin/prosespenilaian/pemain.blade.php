@@ -94,7 +94,7 @@ Penilaian Pemain
 
                             @forelse ($prosespenilaian as $proses)
                             <td class="text-center">
-                                <a href="{{route('penilaian.pemain.input',[$tahunpenilaian->id,$data->id])}}" class="btn btn-primary btn-sm">
+                                <a href="{{route('penilaian.pemain.input',[$tahunpenilaian->id,$data->id,$proses->id])}}" class="btn btn-primary btn-sm">
                                     Input Nilai
                                 </a>
                             </td>

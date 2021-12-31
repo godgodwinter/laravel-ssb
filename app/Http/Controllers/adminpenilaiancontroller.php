@@ -38,6 +38,17 @@ class adminpenilaiancontroller extends Controller
 
         return view('pages.admin.prosespenilaian.pemain',compact('datas','request','pages','prosespenilaian','tahunpenilaian'));
     }
+    public function penilaianpemaininput(tahunpenilaian $tahunpenilaian,pemainseleksi $pemain,prosespenilaian $prosespenilaian, Request $request){
+
+        $pages='tahunpenilaian';
+        // dd($pemain->pemain_id);
+        $id=pemain::where('id',$pemain->pemain_id)->first();
+        $prosesid=$prosespenilaian;
+        $prosespenilaian=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+        // dd($id);
+
+        return view('pages.admin.prosespenilaian.inputpenilaianpemain',compact('id','request','pages','tahunpenilaian','prosespenilaian','prosesid'));
+    }
 
     public function prosespenilaian (tahunpenilaian $tahunpenilaian, Request $request)
     {

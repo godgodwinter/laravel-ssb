@@ -170,7 +170,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
     //penilaianpemainv2
     Route::get('/admin/penilaianpemain/{tahunpenilaian}', [adminpenilaiancontroller::class, 'penilaianpemain'])->name('penilaian.pemain');
-    Route::get('/admin/penilaianpemain/{tahunpenilaian}/input/{pemain}', [adminpenilaiancontroller::class, 'penilaianpemaininput'])->name('penilaian.pemain.input');
+    Route::get('/admin/penilaianpemain/{tahunpenilaian}/input/{pemain}/proses/{prosespenilaian}', [adminpenilaiancontroller::class, 'penilaianpemaininput'])->name('penilaian.pemain.input');
 
     //API
     Route::get('/admin/api/kriteriadetail/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'apikriteriadetail'])->name('api.kriteriadetail');
