@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::get('/admin/api/penilaiandetail/inputnilai/{tahunpenilaian}/{prosespenilaian}', [adminapicontroller::class, 'penilaiandetail_inputnilai'])->name('api.penilaiandetail.inputnilai');
 
 
+
     //posisiseleksi
     Route::get('/admin/posisiseleksi/{tahunpenilaian}', [adminposisiseleksicontroller::class, 'index'])->name('posisiseleksi');
     // Route::get('/admin/posisiseleksi/{tahunpenilaian}/{id}', [adminposisiseleksicontroller::class, 'edit'])->name('posisiseleksi.edit');
@@ -166,6 +167,10 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
     Route::post('/admin/datatahunpenilaian/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'store'])->name('tahunpenilaian.detail.store');
     Route::post('/admin/datatahunpenilaian/{tahunpenilaian}/updatekuota', [admintahunpenilaiandetailcontroller::class, 'updatekuota'])->name('tahunpenilaiandetail.updatekuota');
     Route::delete('/admin/datatahunpenilaian/{tahunpenilaian}/{id}', [admintahunpenilaiandetailcontroller::class, 'destroy'])->name('tahunpenilaian.detail.destroy');
+
+    //penilaianpemainv2
+    Route::get('/admin/penilaianpemain/{tahunpenilaian}', [adminpenilaiancontroller::class, 'penilaianpemain'])->name('penilaian.pemain');
+    Route::get('/admin/penilaianpemain/{tahunpenilaian}/input/{pemain}', [adminpenilaiancontroller::class, 'penilaianpemaininput'])->name('penilaian.pemain.input');
 
     //API
     Route::get('/admin/api/kriteriadetail/{tahunpenilaian}', [admintahunpenilaiandetailcontroller::class, 'apikriteriadetail'])->name('api.kriteriadetail');

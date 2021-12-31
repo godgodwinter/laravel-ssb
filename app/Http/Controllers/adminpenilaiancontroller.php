@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\pemain;
+use App\Models\pemainseleksi;
 use App\Models\prosespenilaian;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
@@ -22,6 +24,21 @@ class adminpenilaiancontroller extends Controller
 
         });
     }
+
+    public function penilaianpemain (tahunpenilaian $tahunpenilaian, Request $request)
+    {
+        // dd($tahunpenilaian);
+
+            #WAJIB
+        $pages='pemain';
+        $datas=pemainseleksi
+        ::with('pemain')->where('tahunpenilaian_id',$tahunpenilaian->id)->paginate(Fungsi::paginationjml());
+        // dd($datas);
+        $prosespenilaian=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+
+        return view('pages.admin.prosespenilaian.pemain',compact('datas','request','pages','prosespenilaian','tahunpenilaian'));
+    }
+
     public function prosespenilaian (tahunpenilaian $tahunpenilaian, Request $request)
     {
 

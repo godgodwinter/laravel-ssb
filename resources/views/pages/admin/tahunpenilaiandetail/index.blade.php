@@ -109,6 +109,9 @@ Proses Penilaian {{$tahunpenilaian->nama}}
                   <a href="{{route('pemainseleksi',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round">
                     Lihat Selengkapnya
                   </a>
+                  <a href="{{route('penilaian.pemain',$tahunpenilaian->id)}}" class="btn btn-primary btn-lg btn-round mt-2">
+                    Penilaian Pemain
+                  </a>
                 </div>
 
               </div>
