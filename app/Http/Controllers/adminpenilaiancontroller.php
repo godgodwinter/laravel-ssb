@@ -47,7 +47,7 @@ class adminpenilaiancontroller extends Controller
         $prosespenilaian=prosespenilaian::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
         // dd($id);
 
-        return view('pages.admin.prosespenilaian.inputpenilaianpemain',compact('id','request','pages','tahunpenilaian','prosespenilaian','prosesid'));
+        return view('pages.admin.prosespenilaian.inputpenilaianpemain',compact('id','request','pages','tahunpenilaian','prosespenilaian','prosesid','pemain'));
     }
     public function penilaianpemaininputstore(tahunpenilaian $tahunpenilaian,pemainseleksi $pemain,prosespenilaian $prosespenilaian, Request $request){
         //proses input penilaian pemain

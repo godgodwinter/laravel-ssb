@@ -22,6 +22,34 @@ Pemain
             <div class="breadcrumb-item">Edit</div>
         </div>
     </div>
+    @push('before-script')
+        <script>
+            let ele=null;
+            function getData(link=null,pemain=null,dkd=null){
+(async()=>{
+const requestOptions={
+    method : 'GET',
+    headers:{
+        "Content-Type":"application/json",
+        "Accept": "application/json",
+        "X-Requested-with": "XMLHttpRequest",
+        "X-CSRF-Token": $('input[name="_token"]').val()
+    },
+};
+const response = await fetch(link, requestOptions);
+let data = await response.json();
+if(response.ok){
+    // console.log(data.data);
+    $(`#isi${pemain}-${dkd}`).val(data.data);
+        // ele.value=data.data;
+}else{
+    console.log('Eror');
+}
+})();
+                // console.log(dkd);
+            }
+        </script>
+    @endpush
 
     <div class="section-body">
         <div class="card">
@@ -33,7 +61,7 @@ Pemain
                         $warna='success';
                     }
                 @endphp
-                <a href="{{route('penilaian.pemain.input',[$tahunpenilaian->id,$id->id,$proses->id])}}" class="btn btn-{{$warna}} btn-sm ml-2">
+                <a href="{{route('penilaian.pemain.input',[$tahunpenilaian->id,$pemain->id,$proses->id])}}" class="btn btn-{{$warna}} btn-sm ml-2">
                     {{$proses->nama}}
                 </a>
 
@@ -83,10 +111,23 @@ Pemain
                         @forelse ($datakriteriadetail as $dkd)
 
                         <div class="form-group col-md-5 col-5 mt-0">
-                            <label for="telp">{{$dkd->nama}}<code>*)</code></label>
-                            <input type="number" name="isi" min="0" max="100" id="isi" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
+                            <label for="telp">{{$dkd->nama}}<code>*)</code>
+                                {{-- {{$prosesid->id}} - {{$pemain->id}} -  {{$dkd->id}} --}}
+                            {{-- @php
+                                $getpenilaian_id=\App\Models\penilaian::where('pemainseleksi_id',$pemain->id)->where('kriteriadetail_id',$dkd->id)->first();
+                            @endphp
+                            {{$getpenilaian_id}} --}}
+                            </label>
+                            <input type="number" name="isi" min="0" max="100" id="isi{{$pemain->id}}-{{$dkd->id}}" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
                             @error('isi')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
+@push('before-script')
+<script>
+$(function () {
+getData("{{route('api.nilaipersiswa',[$prosesid->id,$pemain->id,$dkd->id])}}",{{$pemain->id}},{{$dkd->id}});
+});
+</script>
+@endpush
                         </div>
 
                         @empty

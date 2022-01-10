@@ -6,6 +6,8 @@ use App\Helpers\Fungsi;
 use App\Models\dataajar;
 use App\Models\inputnilai;
 use App\Models\kelas;
+use App\Models\kriteriadetail;
+use App\Models\pemainseleksi;
 use App\Models\penilaian;
 use App\Models\penilaiandetail;
 use App\Models\prosespenilaian;
@@ -139,6 +141,24 @@ class adminapicontroller extends Controller
             'success' => true,
             'message' => 'success',
             'output' => $output,
+        ], 200);
+    }
+    public function nilaipersiswa(prosespenilaian $prosespenilaian,pemainseleksi $pemainseleksi,kriteriadetail $kriteriadetail,Request $request){
+        // dd($pemainseleksi,$kriteriadetail);
+        $penilaian_id=null;
+        $getpenilaian_id=penilaian::where('pemainseleksi_id',$pemainseleksi->id)->where('kriteriadetail_id',$kriteriadetail->id)->first();
+        $periksa=penilaiandetail::where('prosespenilaian_id',$prosespenilaian->id)->where('penilaian_id',$getpenilaian_id)->count();
+
+        $data=0;
+        if($periksa>0){
+            $getdata=penilaiandetail::where('prosespenilaian_id',$prosespenilaian->id)->where('penilaian_id',$getpenilaian_id)->first();
+            $data=$getdata->nilai;
+        }
+        // dd($prosespenilaian->id,$getpenilaian_id,$periksa);
+        return response()->json([
+            'success' => true,
+            'message' => 'success',
+            'data' => $data,
         ], 200);
     }
 
