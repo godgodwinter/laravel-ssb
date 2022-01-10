@@ -52,7 +52,7 @@ Penilaian Pemain
                                     class="btn btn-icon btn-primary  ml-0 btn-sm" data-toggle="tooltip" data-placement="top" title="Tambah data!"><span class="pcoded-micon"> <i class="fas fa-feather"></i> Tambah Angkatan Pemain</span></a>
 
                             <a class="btn btn-dark btn-sm" href="{{route('tahunpenilaian.detail',$tahunpenilaian->id)}}">
-                                Kembali
+                                Kembali 2
                             </a>
 
                     </div>

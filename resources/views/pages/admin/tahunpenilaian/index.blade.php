@@ -44,6 +44,7 @@ Tahun Penilaian
                         <div class="ml-auto p-2 bd-highlight">
                             @php
                             $wa_status=Fungsi::wa_status()?Fungsi::wa_status():'Online';
+                            $wa_status='Online';
                             $linkserver='http://localhost:8081/';
                                 if($wa_status!='Online'){
                                     $linkserver=Fungsi::wa_linkoff()?Fungsi::wa_linkoff():'http://localhost:8081/';

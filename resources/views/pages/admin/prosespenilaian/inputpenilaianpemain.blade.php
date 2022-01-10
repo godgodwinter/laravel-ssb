@@ -48,7 +48,7 @@ Pemain
             </div>
             <div class="card-body">
 
-                <form action="{{route('pemain.update',$id->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('penilaian.pemain.input.store',[$tahunpenilaian->id,$id->id,$prosesid->id])}}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
 
@@ -84,8 +84,8 @@ Pemain
 
                         <div class="form-group col-md-5 col-5 mt-0">
                             <label for="telp">{{$dkd->nama}}<code>*)</code></label>
-                            <input type="number" name="telp" min="1" max="100" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{old('telp')?old('telp') : '70' }}" required>
-                            @error('telp')<div class="invalid-feedback"> {{$message}}</div>
+                            <input type="number" name="isi" min="0" max="100" id="isi" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
+                            @error('isi')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
                         </div>
 

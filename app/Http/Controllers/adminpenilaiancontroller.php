@@ -49,6 +49,11 @@ class adminpenilaiancontroller extends Controller
 
         return view('pages.admin.prosespenilaian.inputpenilaianpemain',compact('id','request','pages','tahunpenilaian','prosespenilaian','prosesid'));
     }
+    public function penilaianpemaininputstore(tahunpenilaian $tahunpenilaian,pemainseleksi $pemain,prosespenilaian $prosespenilaian, Request $request){
+        //proses input penilaian pemain
+        // dd($tahunpenilaian,$pemain,$prosespenilaian);
+        dd($request);
+    }
 
     public function prosespenilaian (tahunpenilaian $tahunpenilaian, Request $request)
     {
