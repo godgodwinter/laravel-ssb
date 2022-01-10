@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\kriteria;
+use App\Models\kriteriadetail;
 use App\Models\pemain;
 use App\Models\pemainseleksi;
+use App\Models\penilaian;
+use App\Models\penilaiandetail;
 use App\Models\prosespenilaian;
 use App\Models\tahunpenilaian;
 use Illuminate\Http\Request;
@@ -52,7 +56,43 @@ class adminpenilaiancontroller extends Controller
     public function penilaianpemaininputstore(tahunpenilaian $tahunpenilaian,pemainseleksi $pemain,prosespenilaian $prosespenilaian, Request $request){
         //proses input penilaian pemain
         // dd($tahunpenilaian,$pemain,$prosespenilaian);
-        dd($request);
+        // dd($request);
+        $datakriteria=kriteria::where('tahunpenilaian_id',$tahunpenilaian->id)->get();
+        foreach($datakriteria as $kriteria){
+            $datakriteriadetail=kriteriadetail::where('kriteria_id',$kriteria->id)->get();
+            foreach($datakriteriadetail as $dkd){
+                // dd($request[$dkd->id]);
+                if($request[$dkd->id]!=0){
+                    $getpenilaian_id=penilaian::where('pemainseleksi_id',$pemain->id)->where('kriteriadetail_id',$dkd->id)->first();
+                    // dd($getpenilaian_id,$pemain->id,$dkd->id);
+                    $periksa=penilaiandetail::where('prosespenilaian_id',$prosespenilaian->id)->where('penilaian_id',$getpenilaian_id)->count();
+                    // dd($periksa);
+                    if($periksa>0){
+                        //update
+                            penilaiandetail::where('penilaian_id',$getpenilaian_id)
+                            ->where('prosespenilaian_id',$prosespenilaian->id)
+                            ->update([
+                                'nilai'     =>   $request[$dkd->id],
+                            'updated_at'=>date("Y-m-d H:i:s")
+                            ]);
+
+                    }else{
+                        // insert
+                        DB::table('penilaiandetail')->insert(
+                            array(
+                                    'nilai'     =>   $request[$dkd->id],
+                                    'penilaian_id'     =>   $getpenilaian_id,
+                                    'prosespenilaian_id'     =>   $prosespenilaian->id,
+                                'created_at'=>date("Y-m-d H:i:s"),
+                                'updated_at'=>date("Y-m-d H:i:s")
+                            ));
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('status','Data berhasil tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
+
     }
 
     public function prosespenilaian (tahunpenilaian $tahunpenilaian, Request $request)

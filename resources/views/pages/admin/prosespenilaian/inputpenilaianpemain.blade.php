@@ -76,7 +76,7 @@ if(response.ok){
             </div>
             <div class="card-body">
 
-                <form action="{{route('penilaian.pemain.input.store',[$tahunpenilaian->id,$id->id,$prosesid->id])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('penilaian.pemain.input.store',[$tahunpenilaian->id,$pemain->id,$prosesid->id])}}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
 
@@ -118,7 +118,7 @@ if(response.ok){
                             @endphp
                             {{$getpenilaian_id}} --}}
                             </label>
-                            <input type="number" name="isi" min="0" max="100" id="isi{{$pemain->id}}-{{$dkd->id}}" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
+                            <input type="number" name="{{$dkd->id}}" min="0" max="100" id="isi{{$pemain->id}}-{{$dkd->id}}" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
                             @error('isi')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
 @push('before-script')
