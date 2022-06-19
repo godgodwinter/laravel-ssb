@@ -8,23 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class penilaiandetail extends Model
 {
-        public $table = "penilaiandetail";
+    public $table = "penilaiandetail";
 
-        use SoftDeletes;
-        use HasFactory;
+    use SoftDeletes;
+    use HasFactory;
 
-        protected $fillable = [
-            'penilaian_id',
-            'nama',
-            'nilai',
-        ];
-
-
-        public function penilaian()
-        {
-            return $this->belongsTo('App\Models\penilaian');
-        }
+    protected $fillable = [
+        'penilaian_id',
+        'prosespenilaian_id',
+        // 'nama',
+        'nilai',
+    ];
 
 
-
+    public function penilaian()
+    {
+        return $this->belongsTo('App\Models\penilaian');
+    }
 }

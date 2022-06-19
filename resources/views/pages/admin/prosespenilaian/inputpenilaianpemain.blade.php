@@ -70,7 +70,7 @@ if(response.ok){
                 @endforelse
 
                 <a href="{{route('penilaian.pemain',[$tahunpenilaian->id])}}" class="btn btn-dark btn-sm ml-2">
-                    Kembali
+                    Kembali 2
                 </a>
 
             </div>
@@ -113,20 +113,29 @@ if(response.ok){
                         <div class="form-group col-md-5 col-5 mt-0">
                             <label for="telp">{{$dkd->nama}}<code>*)</code>
                                 {{-- {{$prosesid->id}} - {{$pemain->id}} -  {{$dkd->id}} --}}
-                            {{-- @php
+                            @php
+                             $nilai=0;
                                 $getpenilaian_id=\App\Models\penilaian::where('pemainseleksi_id',$pemain->id)->where('kriteriadetail_id',$dkd->id)->first();
+                                if($getpenilaian_id){
+
+                                $getPenilaianDetail=\App\Models\penilaiandetail::where('penilaian_id',$getpenilaian_id->id)
+                                    ->where('prosespenilaian_id',$prosesid->id)
+                                    ->whereNull('deleted_at')
+                                ->first();
+                                // dd($getpenilaian_id->nilai);
+                                $nilai=$getPenilaianDetail?$getPenilaianDetail->nilai:0;
+                                }
                             @endphp
-                            {{$getpenilaian_id}} --}}
                             </label>
-                            <input type="number" name="{{$dkd->id}}" min="0" max="100" id="isi{{$pemain->id}}-{{$dkd->id}}" class="form-control @error('isi') is-invalid @enderror" value="{{old('isi')?old('isi') : '0' }}" required>
+                            <input type="number" name="{{$dkd->id}}" min="0" max="100" id="isi{{$pemain->id}}-{{$dkd->id}}" class="form-control @error('isi') is-invalid @enderror" value="{{ $nilai }}" required>
                             @error('isi')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
 @push('before-script')
-<script>
+{{-- <script>
 $(function () {
 getData("{{route('api.nilaipersiswa',[$prosesid->id,$pemain->id,$dkd->id])}}",{{$pemain->id}},{{$dkd->id}});
 });
-</script>
+</script> --}}
 @endpush
                         </div>
 
