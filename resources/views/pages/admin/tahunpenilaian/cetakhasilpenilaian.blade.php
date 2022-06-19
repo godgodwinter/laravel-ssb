@@ -18,10 +18,10 @@
     <br>
     <table width="100%" id="tableBiasa">
         <tr>
-            <th>
+            <th rowspan="2">
                 No
             </th>
-            <th>
+            <th rowspan="2">
                 Nama Pemain
             </th>
             <th colspan="{{$tahunpenilaian->jml}}">
@@ -29,6 +29,11 @@
             </th>
 
 
+        </tr>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
         </tr>
         @forelse ($datas as $data)
         <tr>
@@ -72,17 +77,22 @@
     <br>
     <table width="100%" id="tableBiasa">
         <tr>
-            <th>
+            <th rowspan="2">
                 No
             </th>
-            <th>
-                Nama Posisi
+            <th rowspan="2">
+                Nama Pemain
             </th>
             <th colspan="{{$tahunpenilaian->jml}}">
                 Pemain Terbaik
             </th>
 
 
+        </tr>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
         </tr>
         @forelse ($hasil2 as $data)
         <tr>
